@@ -5,23 +5,21 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class LoginScreen extends JFrame{
-
+    private  MyPanel panel = new MyPanel();
     public LoginScreen() {
         setTitle("로그인 화면");
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container c = getContentPane();
-        c.setLayout(new FlowLayout());
+        setContentPane(panel);
+        setSize(500,500);
+
         String str[] = {"로그인","회원가입"};
         JButton bt[] = new JButton[2];
         for(int i = 0; i < 2; i++) {
             bt[i]=new JButton(str[i]);
         }
 
-
-
         for(int i = 0; i < 2; i++)
-            c.add(bt[i]);
+            add(bt[i]);
         setSize(500,500);
 		/*
 
@@ -53,24 +51,15 @@ public class LoginScreen extends JFrame{
             }
         });
 
-        /*
-        bt[3].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new SettingScreen();
-                setVisible(false); // 창 안보이게 하기
-            }
-        });/*
-        bt[4].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ProfileScreen();
-                setVisible(false); // 창 안보이게 하기
-            }
-        });*/
 
-
-
+    }
+    class MyPanel extends JPanel{
+        private ImageIcon icon = new ImageIcon("C:\\Users\\SeongByeongseok\\Desktop\\img.png");
+        private Image img = icon.getImage();
+        public void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
+        }
     }
     public static void main(String[] agrs) {
         new LoginScreen();

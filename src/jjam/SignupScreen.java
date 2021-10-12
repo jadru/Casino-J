@@ -8,20 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SignupScreen extends JFrame {
-
+    private MyPanel panel = new MyPanel();
     SignupScreen(){
         super("회원가입"); //타이틀
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Container c = getContentPane();
-        c.setLayout(new FlowLayout());
+        setContentPane(panel);
         JButton mainButton = new JButton("회원가입 완료");
         add(mainButton);
 
 
         setSize(500,500);
-        JPanel jPanel = new JPanel();
-        add(jPanel);
+
 
 
         Dimension frameSize = getSize();
@@ -38,6 +36,14 @@ public class SignupScreen extends JFrame {
                 setVisible(false); // 창 안보이게 하기
             }
         });
+    }
+    class MyPanel extends JPanel{
+        private ImageIcon icon = new ImageIcon("C:\\Users\\SeongByeongseok\\Desktop\\img.png");
+        private Image img = icon.getImage();
+        public void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
+        }
     }
 }
 
