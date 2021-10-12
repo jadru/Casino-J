@@ -5,13 +5,11 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class MainScreen extends JFrame{
-	
+    private MyPanel panel = new MyPanel();
 	public MainScreen() {
 		setTitle("Main화면");
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Container c = getContentPane();
-		c.setLayout(new FlowLayout());
+        setContentPane(panel);
 		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
 		JButton bt[] = new JButton[5];
 		for(int i = 0; i < 5; i++) {
@@ -21,7 +19,7 @@ public class MainScreen extends JFrame{
 		
 		
 		for(int i = 0; i < 5; i++)
-			c.add(bt[i]);
+			add(bt[i]);
 		setSize(500,500);
 		/*
 		
@@ -74,6 +72,14 @@ public class MainScreen extends JFrame{
 		
 		
 	}
+    class MyPanel extends JPanel{
+        private ImageIcon icon = new ImageIcon("C:\\Users\\SeongByeongseok\\Desktop\\img.png");
+        private Image img = icon.getImage();
+        public void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
+        }
+    }
 	public static void main(String[] agrs) {
 		new MainScreen();
 	}

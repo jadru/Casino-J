@@ -10,8 +10,6 @@ public class ExchangeScreen extends  JFrame{
     private MyPanel panel = new MyPanel();
 	ExchangeScreen(){
         super("상점"); //타이틀
-        JPanel jPanel = new JPanel();
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         JButton mainButton = new JButton("메인 화면으로");

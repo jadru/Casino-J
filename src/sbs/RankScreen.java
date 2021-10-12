@@ -5,19 +5,18 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class RankScreen extends  JFrame{
+    private MyPanel panel = new MyPanel();
 	RankScreen(){
         super("랭킹"); //타이틀
-        JPanel jPanel = new JPanel();
+
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Container c = getContentPane();
-		c.setLayout(new FlowLayout());
+        setContentPane(panel);
         JButton mainButton = new JButton("메인 화면으로");
         add(mainButton);
 
         setSize(500,500);
 
-        add(jPanel);
 
         Dimension frameSize = getSize();
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -33,6 +32,14 @@ public class RankScreen extends  JFrame{
                 setVisible(false); // 창 안보이게 하기 
             }
         });
+    }
+    class MyPanel extends JPanel{
+        private ImageIcon icon = new ImageIcon("C:\\Users\\SeongByeongseok\\Desktop\\img.png");
+        private Image img = icon.getImage();
+        public void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
+        }
     }
 
 }
