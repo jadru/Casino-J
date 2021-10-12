@@ -53,21 +53,6 @@ public class LoginScreen extends JFrame{
             }
         });
 
-        /*
-        bt[3].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new SettingScreen();
-                setVisible(false); // 창 안보이게 하기
-            }
-        });/*
-        bt[4].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ProfileScreen();
-                setVisible(false); // 창 안보이게 하기
-            }
-        });*/
 
 
 
