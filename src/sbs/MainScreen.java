@@ -8,7 +8,7 @@ public class MainScreen extends JFrame{
 	
 	public MainScreen() {
 		setTitle("Main화면");
-        // g
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container c = getContentPane();
 		c.setLayout(new FlowLayout());
