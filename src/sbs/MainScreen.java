@@ -60,14 +60,14 @@ public class MainScreen extends JFrame{
                 new SettingScreen();
                 setVisible(false); // 창 안보이게 하기 
             }
-        });/*
+        });
         bt[4].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ProfileScreen();
-                setVisible(false); // 창 안보이게 하기 
+                new jadru.GameScreen();
+                setVisible(false); // 창 안보이게 하기
             }
-        });*/
+        });
 		
 		
 		
