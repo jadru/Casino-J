@@ -6,20 +6,43 @@ import java.awt.*;
 
 public class MainScreen extends JFrame{
     private MyPanel panel = new MyPanel();
+    JPanel panel1 = new JPanel();
+    JPanel panel2 = new JPanel();
+    JPanel panel3 = new JPanel();
 	public MainScreen() {
 		setTitle("Main화면");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
+        setLayout(null);
 		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
 		JButton bt[] = new JButton[5];
 		for(int i = 0; i < 5; i++) {
 			bt[i]=new JButton(str[i]);
 		}
-		
-		
-		
-		for(int i = 0; i < 5; i++)
-			add(bt[i]);
+
+
+        bt[0].setBounds(50,550,100,100);
+        bt[1].setBounds(50,20,100,100);
+        bt[2].setBounds(190,550,100,100);
+        bt[3].setBounds(1100,20,100,100);
+        bt[4].setBounds(280,170,700,300);
+
+
+        for(int i = 0 ; i < 5; i++){
+            add(bt[i]);
+        }
+        /*
+		panel1.add(bt[1]);
+        panel1.add(bt[3]);
+        add(panel1);
+        panel2.add(bt[4]);
+        add(panel2);
+        panel3.add(bt[0]);
+        panel3.add(bt[2]);
+        add(panel3);
+        setLayout(new GridLayout(3,0));
+		*/
+
 		setSize(1280,720);
 		/*
 		
