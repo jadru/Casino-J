@@ -6,9 +6,7 @@ import java.awt.*;
 
 public class MainScreen extends JFrame{
     private MyPanel panel = new MyPanel();
-    JPanel panel1 = new JPanel();
-    JPanel panel2 = new JPanel();
-    JPanel panel3 = new JPanel();
+   
 	public MainScreen() {
 		setTitle("Main화면");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
