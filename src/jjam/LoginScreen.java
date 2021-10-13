@@ -20,7 +20,7 @@ public class LoginScreen extends JFrame{
 
         for(int i = 0; i < 2; i++)
             add(bt[i]);
-        setSize(500,500);
+        setSize(1280,720);
 		/*
 
 		setVisible(true);*/

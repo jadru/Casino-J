@@ -16,7 +16,7 @@ public class ExchangeScreen extends  JFrame{
         add(mainButton);
         
 
-        setSize(500,500);
+        setSize(1280,720);
 
         Dimension frameSize = getSize();
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -34,7 +34,7 @@ public class ExchangeScreen extends  JFrame{
         });
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("asset/img.png");
+        private ImageIcon icon = new ImageIcon("asset/exchangeImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

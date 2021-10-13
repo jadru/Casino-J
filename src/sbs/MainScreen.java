@@ -20,7 +20,7 @@ public class MainScreen extends JFrame{
 		
 		for(int i = 0; i < 5; i++)
 			add(bt[i]);
-		setSize(500,500);
+		setSize(1280,720);
 		/*
 		
 		setVisible(true);*/
@@ -73,7 +73,7 @@ public class MainScreen extends JFrame{
 		
 	}
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("asset/img.png");
+        private ImageIcon icon = new ImageIcon("asset/mainImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

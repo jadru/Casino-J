@@ -18,7 +18,7 @@ public class SignupScreen extends JFrame {
         add(mainButton);
 
 
-        setSize(500,500);
+        setSize(1280,720);
 
 
 

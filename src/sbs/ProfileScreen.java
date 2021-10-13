@@ -15,7 +15,7 @@ public class ProfileScreen extends JFrame{
         add(mainButton);
         
         
-        setSize(500,500);
+        setSize(1280,720);
 
         
 
@@ -35,7 +35,7 @@ public class ProfileScreen extends JFrame{
         });
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("C:\\Users\\SeongByeongseok\\Desktop\\img.png");
+        private ImageIcon icon = new ImageIcon("asset/profileImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

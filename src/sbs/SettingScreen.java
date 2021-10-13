@@ -14,7 +14,7 @@ public class SettingScreen extends  JFrame{
         JButton mainButton = new JButton("메인 화면으로");
         add(mainButton);
 
-        setSize(500,500);
+        setSize(1280,720);
 
 
         Dimension frameSize = getSize();
@@ -33,7 +33,7 @@ public class SettingScreen extends  JFrame{
         });
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("C:\\Users\\SeongByeongseok\\Desktop\\img.png");
+        private ImageIcon icon = new ImageIcon("asset/settingImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);
