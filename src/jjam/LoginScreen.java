@@ -58,7 +58,7 @@ public class LoginScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new SignupScreen();
-                setVisible(false); // 창 안보이게 하기
+                //setVisible(false); // 창 안보이게 하기
             }
         });
 
