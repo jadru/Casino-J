@@ -6,11 +6,12 @@ import java.awt.*;
 
 public class MainScreen extends JFrame{
     private MyPanel panel = new MyPanel();
-   
+
 	public MainScreen() {
 		setTitle("Main화면");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
+
         setLayout(null);
 		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
 		JButton bt[] = new JButton[5];
