@@ -1,12 +1,9 @@
 package jadru;
 
-import jjam.LoginScreen;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 public class GameScreen extends JFrame {
     private MyPanel panel = new MyPanel();
     public GameScreen(){
@@ -17,7 +14,7 @@ public class GameScreen extends JFrame {
         JButton mainButton = new JButton("게임1하기");
         add(mainButton);
 
-        setSize(1280,720);
+        setSize(1080, 720);
 
         Dimension frameSize = getSize();
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
