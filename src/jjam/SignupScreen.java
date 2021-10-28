@@ -1,7 +1,6 @@
 package jjam;
 
 import sbs.MainScreen;
-import java.sql.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -73,7 +72,7 @@ public class SignupScreen extends JFrame {
         idCheck.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String a = new String (tf[1].toString());
             }
         });
         pwCheck.addActionListener(new ActionListener() {
@@ -103,6 +102,8 @@ public class SignupScreen extends JFrame {
 
                 JOptionPane.showMessageDialog(null, "회원가입이 완료 되었습니다",
                         "회원가입 완료!", JOptionPane.INFORMATION_MESSAGE);
+                SQLiteManager text = new SQLiteManager(450,tf[1].getText(),new String(pf2.getPassword()));
+                text.insert();
                 setVisible(false); // 창 안보이게 하기
             }
         });

@@ -1,25 +1,37 @@
 package jjam;
 import java.sql.*;
 public class SQLiteManager{
-    public static void main(String[]args)throws Exception{
 
-        Connection connection = null;
+    int id;
+    String nickname;
+    String password;
+    String sql;
+    Connection con = null;
 
+    SQLiteManager(int id,String nickname,String password){
+        this.id=id;
+        this.nickname=nickname;
+        this.password=password;
+
+    }
+
+
+    void insert(){
+
+        this.sql="insert into users (id,nickname,password)" ;
+        sql+= "VALUES ("+ id +",'"+ nickname +"','"+ password +"')";
         try{
-            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Project\\Casino-J\\src\\jjam\\userdb");
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from users");
-            while(rs.next()){
-                System.out.print("id = " + rs.getInt("id") + " ");
-                System.out.print("nickname = " + rs.getString("nickname") + " ");
-                System.out.println("password = "+ rs.getString("password"));
-            }
-            rs.close();
-            connection.close();
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:C:\\Project\\Casino-J\\src\\jjam\\userdb");
+            Statement statement = con.createStatement();
+            statement.execute(sql);
 
         }
-        catch(SQLException e){
+        catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());
         }
+    }
+    public static void main(String[]args)throws Exception{
+
     }
 }
