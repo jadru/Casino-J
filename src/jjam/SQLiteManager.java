@@ -22,7 +22,7 @@ public class SQLiteManager{
         sql+= "VALUES ("+ id +",'"+ nickname +"','"+ password +"')";
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:\\Project\\Casino-J\\src\\jjam\\userdb");
+            con = DriverManager.getConnection("jdbc:sqlite:../userdb");
             Statement statement = con.createStatement();
             statement.execute(sql);
 
