@@ -50,8 +50,18 @@ public class LoginScreen extends JFrame{
         bt[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new sbs.MainScreen();
-                setVisible(false); // 창 안보이게 하기
+                String id = ID.getText();
+                String pw = PW.getText();
+                SQLiteManager b = new SQLiteManager("","","");
+                if(b.login(id,pw)==true){
+                    new sbs.MainScreen(id);
+                    setVisible(false); // 창 안보이게 하기
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.\n아이디와 패스워드를 다시 확인해주세요",
+                            "로그인 실패", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
         bt[1].addActionListener(new ActionListener() {

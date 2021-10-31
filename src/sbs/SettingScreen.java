@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.awt.*;
 public class SettingScreen extends  JFrame{
     private MyPanel panel = new MyPanel();
-	SettingScreen(){
+	SettingScreen(String id){
         super("설정"); //타이틀
 
 
@@ -27,7 +27,7 @@ public class SettingScreen extends  JFrame{
         mainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MainScreen();
+                new MainScreen(id);
                 setVisible(false); // 창 안보이게 하기 
             }
         });

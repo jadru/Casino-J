@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class RankScreen extends  JFrame{
     private MyPanel panel = new MyPanel();
-	RankScreen(){
+	RankScreen(String id){
         super("랭킹"); //타이틀
 
 
@@ -28,7 +28,7 @@ public class RankScreen extends  JFrame{
         mainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MainScreen();
+                new MainScreen(id);
                 setVisible(false); // 창 안보이게 하기 
             }
         });

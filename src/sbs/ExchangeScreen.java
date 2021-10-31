@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class ExchangeScreen extends  JFrame{
     private MyPanel panel = new MyPanel();
-	ExchangeScreen(){
+	ExchangeScreen(String id){
         super("상점"); //타이틀
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
@@ -28,7 +28,7 @@ public class ExchangeScreen extends  JFrame{
         mainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MainScreen();
+                new MainScreen(id);
                 setVisible(false); // 창 안보이게 하기 
             }
         });

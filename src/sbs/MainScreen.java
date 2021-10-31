@@ -1,4 +1,6 @@
 package sbs;
+import  jjam.SQLiteManager;
+
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -6,19 +8,21 @@ import java.awt.*;
 
 public class MainScreen extends JFrame{
     private MyPanel panel = new MyPanel();
-
-	public MainScreen() {
+	public MainScreen(String id) {
 		setTitle("Main화면");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
-
+        SQLiteManager b = new SQLiteManager("","","");
+        String username = b.getNickname(id);
+        JLabel usertext = new JLabel(username+"님 환영합니다.");
         setLayout(null);
 		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
 		JButton bt[] = new JButton[5];
 		for(int i = 0; i < 5; i++) {
 			bt[i]=new JButton(str[i]);
 		}
-
+        usertext.setBounds(50,100,150,100);
+        add(usertext);
 
         bt[0].setBounds(50,550,100,100);
         bt[1].setBounds(50,20,100,100);
@@ -58,35 +62,35 @@ public class MainScreen extends JFrame{
         bt[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ExchangeScreen();
+                new ExchangeScreen(id);
                 setVisible(false); // 창 안보이게 하기 
             }
         });
         bt[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ProfileScreen();
+                new ProfileScreen(id);
                 setVisible(false); // 창 안보이게 하기 
             }
         });
         bt[2].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new RankScreen();
+                new RankScreen(id);
                 setVisible(false); // 창 안보이게 하기 
             }
         });
         bt[3].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SettingScreen();
+                new SettingScreen(id);
                 setVisible(false); // 창 안보이게 하기 
             }
         });
         bt[4].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new jadru.GameScreen();
+                new jadru.GameScreen(id);
                 setVisible(false); // 창 안보이게 하기
             }
         });
@@ -103,6 +107,5 @@ public class MainScreen extends JFrame{
         }
     }
 	public static void main(String[] agrs) {
-		new MainScreen();
 	}
 }

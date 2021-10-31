@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class ProfileScreen extends JFrame{
     private MyPanel panel = new MyPanel();
-	ProfileScreen(){
+	ProfileScreen(String id){
         super("프로필"); //타이틀
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +29,7 @@ public class ProfileScreen extends JFrame{
         mainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MainScreen();
+                new MainScreen(id);
                 setVisible(false); // 창 안보이게 하기 
             }
         });

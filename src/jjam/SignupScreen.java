@@ -46,8 +46,8 @@ public class SignupScreen extends JFrame {
 
         idc.setBounds(280,120,30,30);
         pwc.setBounds(280,220,30,30);
-        idCheck.setBounds(300,120,100,30);
-        pwCheck.setBounds(300,220,100,30);
+        idCheck.setBounds(300,120,110,30);
+        pwCheck.setBounds(300,220,110,30);
 
 
         for(int i = 0; i < 4; i++)
@@ -110,8 +110,9 @@ public class SignupScreen extends JFrame {
                 }
                 String pwc1 = pwc.getText();
                 Character pwc2 = pwc1.charAt(0);
-
-                if(pwc2.equals('√')) {
+                String idc1 = idc.getText();
+                Character idc2 = idc1.charAt(0);
+                if(pwc2.equals('√')&&idc2.equals('√')) {
                     JOptionPane.showMessageDialog(null, "회원가입이 완료 되었습니다",
                             "회원가입 완료!", JOptionPane.INFORMATION_MESSAGE);
                     SQLiteManager text = new SQLiteManager(tf[0].getText(), tf[1].getText(), new String(pf2.getPassword()));
@@ -119,14 +120,14 @@ public class SignupScreen extends JFrame {
                     setVisible(false); // 창 안보이게 하기
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "회원 가입에 실패하였습니다. 입력부분을 다시 확인해주세요",
+                    JOptionPane.showMessageDialog(null, "회원 가입에 실패하였습니다.\n입력부분을 다시 확인해주세요",
                             "회원가입 실패", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("C:\\Users\\SeongByeongseok\\Desktop\\img.png");
+        private ImageIcon icon = new ImageIcon("asset/mainimg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);
