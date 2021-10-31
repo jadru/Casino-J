@@ -20,7 +20,7 @@ public class SQLiteManager{
     public String getNickname(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:src/jjam/userdb");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -37,7 +37,7 @@ public class SQLiteManager{
     public int getLevel(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:src/jjam/userdb");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -51,7 +51,7 @@ public class SQLiteManager{
     public int getSkin(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:src/jjam/userdb");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -65,7 +65,7 @@ public class SQLiteManager{
     public int getPoint(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:src/jjam/userdb");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -81,7 +81,7 @@ public class SQLiteManager{
     boolean login(String iid,String ppw){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:src/jjam/userdb");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
             Statement stmt = con.createStatement();
             sql="select * from player where id ='"+iid+"' "+"and password = '"+ppw+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -98,7 +98,7 @@ public class SQLiteManager{
     boolean idCheck(String iid){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:src/jjam/userdb");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
             Statement stmt = con.createStatement();
             sql="select * from player where id ='"+iid+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -117,7 +117,7 @@ public class SQLiteManager{
         sql+= "VALUES ('"+ id +"','"+ nickname +"','"+ password +"')";
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:C:src/jjam/userdb");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
             Statement statement = con.createStatement();
             statement.execute(sql);
 
