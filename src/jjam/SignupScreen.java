@@ -115,7 +115,7 @@ public class SignupScreen extends JFrame {
                 if(pwc2.equals('√')&&idc2.equals('√')) {
                     JOptionPane.showMessageDialog(null, "회원가입이 완료 되었습니다",
                             "회원가입 완료!", JOptionPane.INFORMATION_MESSAGE);
-                    SQLiteManager text = new SQLiteManager(tf[0].getText(), tf[1].getText(), new String(pf2.getPassword()));
+                    SQLiteManager text = new SQLiteManager(tf[1].getText(), tf[0].getText(), new String(pf2.getPassword()));
                     text.insert();
                     setVisible(false); // 창 안보이게 하기
                 }
