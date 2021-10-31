@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class SignupScreen extends JFrame {
     private MyPanel panel = new MyPanel();
@@ -14,18 +15,16 @@ public class SignupScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         JButton backLogin = new JButton("회원가입 완료");
-
         setLayout(null);
 
         String str[] = {"닉네임","ID","PW","PW확인"};
-        JLabel idc = new JLabel("중복확인이 완료되었습니다.");
+        JLabel idc = new JLabel();
         JLabel pwc = new JLabel();
 
         JLabel la[] = new JLabel[4];
         JTextField tf[] = new JTextField[2];
         JPasswordField pf1 = new JPasswordField();
         JPasswordField pf2 = new JPasswordField();
-
         JButton idCheck = new JButton("ID중복확인");
         JButton pwCheck = new JButton("PW중복확인");
         setSize(500,500);
@@ -45,9 +44,8 @@ public class SignupScreen extends JFrame {
         pf1.setBounds(120,170,150,30);
         pf2.setBounds(120,220,150,30);
 
-
+        idc.setBounds(280,120,30,30);
         pwc.setBounds(280,220,30,30);
-
         idCheck.setBounds(300,120,100,30);
         pwCheck.setBounds(300,220,100,30);
 
@@ -62,6 +60,7 @@ public class SignupScreen extends JFrame {
         add(backLogin);
         add(idCheck);
         add(pwCheck);
+        add(idc);
         add(pwc);
         Dimension frameSize = getSize();
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -72,7 +71,16 @@ public class SignupScreen extends JFrame {
         idCheck.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String a = new String (tf[1].toString());
+                String a = tf[1].getText();
+                SQLiteManager b = new SQLiteManager("","","");
+                if(b.idCheck(a)==true){
+                    idc.setText("X");
+                }
+                else{
+                    idc.setText("√");
+                }
+
+
             }
         });
         pwCheck.addActionListener(new ActionListener() {
@@ -95,16 +103,25 @@ public class SignupScreen extends JFrame {
         backLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /* 회원가입 실패
-                JOptionPane.showMessageDialog(null, "회원 가입에 실패하였습니다. 입력부분을 다시 확인해주세요",
-                        "회원가입 실패", JOptionPane.WARNING_MESSAGE);
-                */
+                if(pwc.getText().equals("")){
+                    JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요",
+                            "비밀번호 오류", JOptionPane.WARNING_MESSAGE);
+                    return ;
+                }
+                String pwc1 = pwc.getText();
+                Character pwc2 = pwc1.charAt(0);
 
-                JOptionPane.showMessageDialog(null, "회원가입이 완료 되었습니다",
-                        "회원가입 완료!", JOptionPane.INFORMATION_MESSAGE);
-                SQLiteManager text = new SQLiteManager(450,tf[1].getText(),new String(pf2.getPassword()));
-                text.insert();
-                setVisible(false); // 창 안보이게 하기
+                if(pwc2.equals('√')) {
+                    JOptionPane.showMessageDialog(null, "회원가입이 완료 되었습니다",
+                            "회원가입 완료!", JOptionPane.INFORMATION_MESSAGE);
+                    SQLiteManager text = new SQLiteManager(tf[0].getText(), tf[1].getText(), new String(pf2.getPassword()));
+                    text.insert();
+                    setVisible(false); // 창 안보이게 하기
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "회원 가입에 실패하였습니다. 입력부분을 다시 확인해주세요",
+                            "회원가입 실패", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
     }

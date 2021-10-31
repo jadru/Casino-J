@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="userdb" uuid="7770015a-b69a-418c-9f5b-cb832a4f89ea">
+    <data-source source="LOCAL" name="userdb" uuid="39f3e263-5ec3-41f1-a77f-dd39442494cf">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Project\Casino-J\src\jjam\userdb</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\gun24\IdeaProjects\Casino-J\src\jjam\userdb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
