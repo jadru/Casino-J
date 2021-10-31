@@ -36,7 +36,7 @@ public class Game_1 extends JFrame {
 
         JLabel com_profile_img = new JLabel("문자열", new ImageIcon("asset/icons8-bot-96.png"), SwingConstants.CENTER);
         com_profile.add(com_profile_img);
-        JLabel user_profile_img = new JLabel("문자열", new ImageIcon("asset/icons8-text-account-96.png"), SwingConstants.CENTER);
+        JLabel user_profile_img = new JLabel("문자열", new ImageIcon("asset/icons8-test-account-96.png"), SwingConstants.CENTER);
         user_profile.add(user_profile_img);
 
         com_profile.setLocation(0, 0);
