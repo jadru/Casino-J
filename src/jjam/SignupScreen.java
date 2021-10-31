@@ -80,7 +80,6 @@ public class SignupScreen extends JFrame {
                     idc.setText("√");
                 }
 
-
             }
         });
         pwCheck.addActionListener(new ActionListener() {

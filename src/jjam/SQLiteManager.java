@@ -48,6 +48,7 @@ public class SQLiteManager{
         }
         return this.level;
     }
+
     public int getSkin(String id){
         try{
             Class.forName("org.sqlite.JDBC");
