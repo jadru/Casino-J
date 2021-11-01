@@ -25,8 +25,6 @@ public class ProfileScreen extends JFrame{
         setContentPane(panel);
         setLayout(null);
         JPanel jp = new JPanel(){
-
-
             @Override
             public void paint(Graphics g) {
                 if (checkFrontBack == true) {
@@ -47,12 +45,8 @@ public class ProfileScreen extends JFrame{
         };
         jp.setBackground(Color.white);
         jp.setBounds(650,150,450,450);
-        JButton mainButton = new JButton("<");
+        JButton mainButton = new JButton("메인");
         mainButton.setBounds(30,30,70,70);
-
-
-
-
 
         String[] title = {"ID","이름","전적","레벨","순위","보유 포인트"};
         JLabel[] gridTitle = new JLabel[6];
