@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class ProfileScreen extends JFrame{
     private MyPanel panel = new MyPanel();
+    private Image card1_back,card2_back,card3_back,card4_back,card5_back;
+
 	ProfileScreen(String id){
         super("프로필"); //타이틀
         SQLiteManager b = new SQLiteManager("","","");
@@ -23,16 +25,33 @@ public class ProfileScreen extends JFrame{
         setLayout(null);
         JPanel jp = new JPanel();
         jp.setBackground(Color.white);
-        jp.setBounds(750,150,400,400);
+        jp.setBounds(650,150,400,400);
         JButton mainButton = new JButton("<");
         mainButton.setBounds(30,30,70,70);
+
+
+
 
 
         String[] title = {"ID","이름","전적","레벨","순위","보유 포인트"};
         JLabel[] gridTitle = new JLabel[6];
         JLabel[] gridElement = new JLabel[6];
         JLabel CardText = new JLabel("보유중인 카드");
+        JButton CardFrontBack = new JButton("카드 앞/뒷면 보기");
+        ImageIcon card1_backside = new ImageIcon("asset/card1_back_side.png");
+        ImageIcon card2_backside = new ImageIcon("asset/card2_back_side.png");
+        ImageIcon card3_backside = new ImageIcon("asset/card3_back_side.png");
+        ImageIcon card4_backside = new ImageIcon("asset/card4_back_side.png");
+        ImageIcon card5_backside = new ImageIcon("asset/card5_back_side.png");
+
+        card1_back = card1_backside.getImage();
+        card2_back = card2_backside.getImage();
+        card3_back = card3_backside.getImage();
+        card4_back = card4_backside.getImage();
+        card5_back = card5_backside.getImage();
+
         CardText.setFont(new Font("Gothic",Font.BOLD,20));
+        CardFrontBack.setFont(new Font("Gothic",Font.BOLD,15));
 
         for(int i = 0; i < 6; i++) {
             gridTitle[i] = new JLabel(title[i]);
@@ -53,10 +72,12 @@ public class ProfileScreen extends JFrame{
             gridElement[i].setFont(new Font("Gothic",Font.BOLD,20));
             add(gridElement[i]);
         }
-        CardText.setBounds(750, 50,150,100);
-
+        CardText.setBounds(650, 50,150,100);
+        CardFrontBack.setBounds(850, 75,200,50);
         add(jp);
+        
         add(CardText);
+        add(CardFrontBack);
         add(mainButton);
         setSize(1280,720);
 
