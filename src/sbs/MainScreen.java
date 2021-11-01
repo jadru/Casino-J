@@ -35,7 +35,7 @@ public class MainScreen extends JFrame{
         }
         /*
 		panel1.add(bt[1]);
-        panel1.add(bt[3]);
+        panel1.add(bt[3]);v
         add(panel1);
         panel2.add(bt[4]);
         add(panel2);
@@ -57,7 +57,6 @@ public class MainScreen extends JFrame{
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
- 
         bt[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
