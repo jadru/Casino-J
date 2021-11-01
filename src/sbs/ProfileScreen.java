@@ -75,7 +75,7 @@ public class ProfileScreen extends JFrame{
         CardText.setBounds(650, 50,150,100);
         CardFrontBack.setBounds(850, 75,200,50);
         add(jp);
-        
+
         add(CardText);
         add(CardFrontBack);
         add(mainButton);
