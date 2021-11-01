@@ -9,7 +9,8 @@ import java.awt.*;
 public class ProfileScreen extends JFrame{
     private MyPanel panel = new MyPanel();
     private Image card1_back,card2_back,card3_back,card4_back,card5_back;
-
+    private Image card1_front,card2_front,card3_front,card4_front,card5_front;
+    public boolean checkFrontBack = true;
 	ProfileScreen(String id){
         super("프로필"); //타이틀
         SQLiteManager b = new SQLiteManager("","","");
@@ -23,9 +24,29 @@ public class ProfileScreen extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         setLayout(null);
-        JPanel jp = new JPanel();
+        JPanel jp = new JPanel(){
+
+
+            @Override
+            public void paint(Graphics g) {
+                if (checkFrontBack == true) {
+                    g.drawImage(card1_back, 0, 0, 130, 200, this);
+                    g.drawImage(card2_back, 150, 0, 130, 200, this);
+                    g.drawImage(card3_back, 300, 0, 130, 200, this);
+                    g.drawImage(card4_back, 0, 250, 130, 200, this);
+                    g.drawImage(card5_back, 150, 250, 130, 200, this);
+                }
+                else{
+                    g.drawImage(card1_front, 0, 0, 130, 200, this);
+                    g.drawImage(card2_front, 150, 0, 130, 200, this);
+                    g.drawImage(card3_front, 300, 0, 130, 200, this);
+                    g.drawImage(card4_front, 0, 250, 130, 200, this);
+                    g.drawImage(card5_front, 150, 250, 130, 200, this);
+                }
+            }
+        };
         jp.setBackground(Color.white);
-        jp.setBounds(650,150,400,400);
+        jp.setBounds(650,150,450,450);
         JButton mainButton = new JButton("<");
         mainButton.setBounds(30,30,70,70);
 
@@ -38,17 +59,46 @@ public class ProfileScreen extends JFrame{
         JLabel[] gridElement = new JLabel[6];
         JLabel CardText = new JLabel("보유중인 카드");
         JButton CardFrontBack = new JButton("카드 앞/뒷면 보기");
+
+        CardFrontBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(checkFrontBack == true)
+                    checkFrontBack = false;
+                else
+                    checkFrontBack = true;
+                revalidate();
+                repaint();
+            }
+        });
+
+
+
         ImageIcon card1_backside = new ImageIcon("asset/card1_back_side.png");
         ImageIcon card2_backside = new ImageIcon("asset/card2_back_side.png");
         ImageIcon card3_backside = new ImageIcon("asset/card3_back_side.png");
         ImageIcon card4_backside = new ImageIcon("asset/card4_back_side.png");
         ImageIcon card5_backside = new ImageIcon("asset/card5_back_side.png");
 
+        ImageIcon card1_frontside = new ImageIcon("asset/card1_front_side.jpeg");
+        ImageIcon card2_frontside = new ImageIcon("asset/card2_front_side.jpeg");
+        ImageIcon card3_frontside = new ImageIcon("asset/card3_front_side.jpeg");
+        ImageIcon card4_frontside = new ImageIcon("asset/card4_front_side.jpeg");
+        ImageIcon card5_frontside = new ImageIcon("asset/card5_front_side.jpeg");
+
         card1_back = card1_backside.getImage();
         card2_back = card2_backside.getImage();
         card3_back = card3_backside.getImage();
         card4_back = card4_backside.getImage();
         card5_back = card5_backside.getImage();
+
+        card1_front = card1_frontside.getImage();
+        card2_front = card2_frontside.getImage();
+        card3_front = card3_frontside.getImage();
+        card4_front = card4_frontside.getImage();
+        card5_front = card5_frontside.getImage();
+
+
 
         CardText.setFont(new Font("Gothic",Font.BOLD,20));
         CardFrontBack.setFont(new Font("Gothic",Font.BOLD,15));
@@ -81,6 +131,7 @@ public class ProfileScreen extends JFrame{
         add(mainButton);
         setSize(1280,720);
 
+
         
 
         Dimension frameSize = getSize();
@@ -104,7 +155,7 @@ public class ProfileScreen extends JFrame{
         public void paintComponent(Graphics g){
             super.paintComponent(g);
             g.drawImage(img, 0,0,getWidth(),getHeight(),this);
+
         }
     }
 }
-
