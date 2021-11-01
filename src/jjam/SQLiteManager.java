@@ -28,9 +28,18 @@ public class SQLiteManager{
             this.level = rs.getInt("level");
             this.skin = rs.getInt("skin");
             this.point = rs.getInt("point");
+
         }
         catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
         }
         return this.nickname;
     }
@@ -42,9 +51,18 @@ public class SQLiteManager{
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
             this.level = rs.getInt("level");
+
         }
         catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
         }
         return this.level;
     }
@@ -57,9 +75,18 @@ public class SQLiteManager{
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
             this.skin = rs.getInt("skin");
+
         }
         catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
         }
         return this.skin;
     }
@@ -71,10 +98,20 @@ public class SQLiteManager{
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
             this.point = rs.getInt("point");
+
         }
         catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());
         }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+
         return this.point;
     }
 
@@ -90,9 +127,18 @@ public class SQLiteManager{
                 return true;
             }
 
+
         }
         catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
         }
         return false;
     }
@@ -106,9 +152,18 @@ public class SQLiteManager{
             if(rs.next()==true){
                 return true;
             }
+
         }
         catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
         }
         return false;
     }
@@ -119,13 +174,43 @@ public class SQLiteManager{
         try{
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
-            Statement statement = con.createStatement();
-            statement.execute(sql);
+            Statement stmt = con.createStatement();
+            stmt.execute(sql);
 
         }
         catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());
         }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+    }
+    void givePoint(String id){
+        int point = getPoint(id);
+        point+=10;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            Statement stmt = con.createStatement();
+            stmt.execute("update player set point = "+point+" where id = '"+id+"'");
+        }
+        catch(SQLException | ClassNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+
     }
     public static void main(String[]args)throws Exception{
 
