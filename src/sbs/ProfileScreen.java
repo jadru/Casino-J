@@ -12,14 +12,18 @@ public class ProfileScreen extends JFrame{
         super("프로필"); //타이틀
         SQLiteManager b = new SQLiteManager("","","");
         String username = b.getNickname(id);
-        int userwin;
+        int userwinLose;
         int userLevel = b.getLevel(id);
+        int userRank;
         int userPoint = b.getPoint(id);
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         setLayout(null);
+        JPanel jp = new JPanel();
+        jp.setBackground(Color.white);
+        jp.setBounds(750,150,400,400);
         JButton mainButton = new JButton("<");
         mainButton.setBounds(30,30,70,70);
 
@@ -51,6 +55,7 @@ public class ProfileScreen extends JFrame{
         }
         CardText.setBounds(750, 50,150,100);
 
+        add(jp);
         add(CardText);
         add(mainButton);
         setSize(1280,720);
