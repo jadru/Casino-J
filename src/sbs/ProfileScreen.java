@@ -1,5 +1,7 @@
 package sbs;
 
+import jjam.SQLiteManager;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -8,13 +10,49 @@ public class ProfileScreen extends JFrame{
     private MyPanel panel = new MyPanel();
 	ProfileScreen(String id){
         super("프로필"); //타이틀
-        
+        SQLiteManager b = new SQLiteManager("","","");
+        String username = b.getNickname(id);
+        int userwin;
+        int userLevel = b.getLevel(id);
+        int userPoint = b.getPoint(id);
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
-        JButton mainButton = new JButton("메인 화면으로");
+        setLayout(null);
+        JButton mainButton = new JButton("<");
+        mainButton.setBounds(30,30,70,70);
+
+
+        String[] title = {"ID","이름","전적","레벨","순위","보유 포인트"};
+        JLabel[] gridTitle = new JLabel[6];
+        JLabel[] gridElement = new JLabel[6];
+        JLabel CardText = new JLabel("보유중인 카드");
+        CardText.setFont(new Font("Gothic",Font.BOLD,20));
+
+        for(int i = 0; i < 6; i++) {
+            gridTitle[i] = new JLabel(title[i]);
+            gridTitle[i].setBounds(300,100+i*70, 150,100);
+            gridTitle[i].setFont(new Font("Gothic",Font.BOLD,20));
+            add(gridTitle[i]);
+        }
+
+        gridElement[0] = new JLabel(id);
+        gridElement[1] = new JLabel(username);
+        gridElement[2] = new JLabel("-");//전적들어가야함
+        gridElement[3] = new JLabel(String.valueOf(userLevel));
+        gridElement[4] = new JLabel("-");//랭킹 들어가야함
+        gridElement[5] = new JLabel(String.valueOf(userPoint));
+
+        for(int i = 0; i < 6; i++) {
+            gridElement[i].setBounds(450,100+i*70, 100,100);
+            gridElement[i].setFont(new Font("Gothic",Font.BOLD,20));
+            add(gridElement[i]);
+        }
+        CardText.setBounds(750, 50,150,100);
+
+        add(CardText);
         add(mainButton);
-        
-        
         setSize(1280,720);
 
         
