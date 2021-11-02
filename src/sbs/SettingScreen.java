@@ -11,7 +11,9 @@ public class SettingScreen extends  JFrame{
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
-        JButton mainButton = new JButton("메인 화면으로");
+        setLayout(null);
+        JButton mainButton = new JButton("메인");
+        mainButton.setBounds(30,30,70,70);
         add(mainButton);
 
         setSize(1280,720);
