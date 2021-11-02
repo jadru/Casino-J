@@ -13,7 +13,7 @@ public class LoginScreen extends JFrame{
         setLayout(null);
 
         JTextField ID = new JTextField();
-        JTextField PW = new JTextField();
+        JPasswordField PW = new JPasswordField();
         JLabel id = new JLabel("ID : ");
         JLabel pw = new JLabel("PW : ");
 
