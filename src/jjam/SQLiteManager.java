@@ -9,6 +9,8 @@ public class SQLiteManager{
     int level;
     int skin;
     int point;
+    int win;
+    int lose;
     Connection con = null;
 
     public SQLiteManager(String id, String nickname, String password){
@@ -114,7 +116,54 @@ public class SQLiteManager{
 
         return this.point;
     }
+    public int getWin(String id){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            Statement stmt = con.createStatement();
+            sql="select * from player where id = '"+id+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            this.point = rs.getInt("win");
 
+        }
+        catch(SQLException | ClassNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+
+        return this.win;
+    }
+    public int getLose(String id){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            Statement stmt = con.createStatement();
+            sql="select * from player where id = '"+id+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            this.point = rs.getInt("lose");
+
+        }
+        catch(SQLException | ClassNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+
+        return this.lose;
+    }
 
     boolean login(String iid,String ppw){
         try{
