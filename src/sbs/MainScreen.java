@@ -13,18 +13,24 @@ public class MainScreen extends JFrame{
         setContentPane(panel);
         SQLiteManager b = new SQLiteManager("","","");
         String username = b.getNickname(id);
-        JLabel usertext = new JLabel(username+"님 환영합니다.");
+        int userpoint = b.getPoint(id);
+        JLabel usertext = new JLabel(username);
+        JLabel userPoint = new JLabel("❤"+String.valueOf(userpoint));
+        usertext.setFont(new Font("Gothic",Font.BOLD,30));
+        userPoint.setFont(new Font("Gothic",Font.BOLD,30));
         setLayout(null);
 		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
 		JButton bt[] = new JButton[5];
 		for(int i = 0; i < 5; i++) {
 			bt[i]=new JButton(str[i]);
 		}
-        usertext.setBounds(50,100,150,100);
+        usertext.setBounds(190,12,150,100);
+        userPoint.setBounds(340,12,350,100);
         add(usertext);
+        add(userPoint);
 
         bt[0].setBounds(50,550,100,100);
-        bt[1].setBounds(50,20,100,100);
+        bt[1].setBounds(100,30,70,70);
         bt[2].setBounds(190,550,100,100);
         bt[3].setBounds(1100,20,100,100);
         bt[4].setBounds(280,170,700,300);

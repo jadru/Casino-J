@@ -54,7 +54,10 @@ public class LoginScreen extends JFrame{
                 String pw = PW.getText();
                 SQLiteManager b = new SQLiteManager("","","");
                 if(b.login(id,pw)==true){
+                    JOptionPane.showMessageDialog(null, "로그인시 10point가 지급됩니다.",
+                            "포인트 지급", JOptionPane.WARNING_MESSAGE);
                     new sbs.MainScreen(id);
+                    b.givePoint(id);
                     setVisible(false); // 창 안보이게 하기
 
                 }
