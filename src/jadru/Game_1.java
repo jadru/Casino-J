@@ -1,5 +1,9 @@
 package jadru;
 
+import jjam.SQLiteManager;
+import sbs.ExchangeScreen;
+import sbs.MainScreen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,7 +16,9 @@ public class Game_1 extends JFrame {
     private GamePanel main = new GamePanel("");
     private static final int PADDING = 20;
     String[][] cards;
-    Game_1() {
+    int[] user_card = pickCards(7);
+    int[] com_card = pickCards(7);
+    Game_1(String id) {
         setTitle("게임1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(main);
@@ -22,8 +28,6 @@ public class Game_1 extends JFrame {
         setResizable(false);
 
         cards = makeCard();
-        int[] user_card = pickCards(7);
-        int[] com_card = pickCards(7);
 
         JPanel com_profile = new JPanel(new CardLayout());
         JPanel user_profile = new JPanel(new CardLayout());
@@ -35,9 +39,10 @@ public class Game_1 extends JFrame {
         com_cards.setSize(1280, 200);
         user_cards.setSize(1280, 200);
 
-        JLabel com_profile_img = new JLabel("문자열", new ImageIcon("asset/icons8-bot-96.png"), SwingConstants.CENTER);
+        JLabel com_profile_img = new JLabel("COMPUTER", new ImageIcon("asset/icons8-bot-96.png"), SwingConstants.CENTER);
         com_profile.add(com_profile_img);
-        JLabel user_profile_img = new JLabel("문자열", new ImageIcon("asset/icons8-test-account-96.png"), SwingConstants.CENTER);
+        SQLiteManager b = new SQLiteManager("","","");
+        JLabel user_profile_img = new JLabel(b.getNickname(id), new ImageIcon("asset/icons8-test-account-96.png"), SwingConstants.CENTER);
         user_profile.add(user_profile_img);
 
         com_profile.setLocation(0, 0);
@@ -53,13 +58,46 @@ public class Game_1 extends JFrame {
         add(com_cards);
         add(user_cards);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 7; i++) {
             MakeCardGUI(user_card, i, user_cards);
         }
 
-        for (int i = 4; i < 7; i++){
-            addCardBack(user_cards);
+        for (int i = 0; i < 7; i++){
+            MakeCardGUI(com_card, i, com_cards);
         }
+
+        JButton reset = new JButton("Shuffle");
+        reset.setSize(100, 100);
+        reset.setLocation(200, 30);
+        reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                user_card = pickCards(7);
+                com_card = pickCards(7);
+                user_cards.removeAll();
+                com_cards.removeAll();
+                for (int i = 0; i < 7; i++) {
+                    MakeCardGUI(user_card, i, user_cards);
+                }
+
+                for (int i = 0; i < 7; i++){
+                    MakeCardGUI(com_card, i, com_cards);
+                }
+                revalidate();
+            }
+        });
+        JButton mainButton = new JButton("메인");
+        mainButton.setBounds(300,30,70,70);
+        mainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainScreen(id);
+                setVisible(false); // 창 안보이게 하기
+            }
+        });
+        add(mainButton);
+
+        add(reset);
 
         setVisible(true);
         com_profile.setVisible(true);
@@ -93,10 +131,11 @@ public class Game_1 extends JFrame {
     private void MakeCardGUI(int[] card, int i, JPanel cardPanel){
         JButton btn = new JButton();
         btn.setText(cards[card[i] / 13][card[i] % 13]);
+        System.out.println(cards[card[i] / 13][card[i] % 13]);
         btn.setBackground(Color.WHITE);
         btn.setPreferredSize(new Dimension(120, 160));
         btn.setMargin(new Insets(0, 0, 0, 0));
-        btn.setFont(new Font(null, Font.BOLD, 30));
+        btn.setFont(new Font("Arial", Font.BOLD, 30));
         switch((card[i] / 13)){
             case 1: btn.setForeground(Color.RED);
             case 3: btn.setForeground(Color.RED); break;
@@ -113,9 +152,5 @@ public class Game_1 extends JFrame {
         btn.setPreferredSize(new Dimension(120, 160));
         btn.setMargin(new Insets(0, 0, 0, 0));
         cardPanel.add(btn);
-    }
-
-    public static void main (String [] args){
-        new Game_1();
     }
 }

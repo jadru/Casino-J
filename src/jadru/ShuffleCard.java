@@ -21,8 +21,10 @@ public class ShuffleCard{
                         break;
                     case 12:
                         cards[i][j] = marks[i] + " J";
+                        break;
                     default:
-                        cards[i][j] = marks[i] + " " + (j+1);
+                        int k = j + 1;
+                        cards[i][j] = marks[i] + " " + k;
                 }
 
             }
@@ -32,7 +34,7 @@ public class ShuffleCard{
     protected static int[] pickCards(int size){
         Set<Integer> set = new HashSet<>();
         while (set.size() < size)
-        { double d = Math.random() * 52 + 1;
+        { double d = Math.random() * 52;
             set.add((int) d);
         }
         return set.stream()

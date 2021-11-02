@@ -14,23 +14,24 @@ public class LoginScreen extends JFrame{
 
         JTextField ID = new JTextField();
         JPasswordField PW = new JPasswordField();
-        JLabel id = new JLabel("ID : ");
-        JLabel pw = new JLabel("PW : ");
+        JLabel id_label = new JLabel("ID : ");
+        JLabel pw_label = new JLabel("PW : ");
 
         String str[] = {"로그인","회원가입"};
         JButton bt[] = new JButton[2];
         for(int i = 0; i < 2; i++) {
             bt[i]=new JButton(str[i]);
+            bt[i].setFocusable(false);
         }
         bt[0].setBounds(740,525,100,80);
         bt[1].setBounds(840,525,100,80);
         ID.setBounds(600,530,130,30);
         PW.setBounds(600,570,130,30);
-        id.setBounds(570,530,130,30);
-        pw.setBounds(570,570,130,30);
+        id_label.setBounds(570,530,130,30);
+        pw_label.setBounds(570,570,130,30);
         for(int i = 0; i < 2; i++)
             add(bt[i]);
-        add(ID);add(PW);add(id);add(pw);
+        add(ID);add(PW);add(id_label);add(pw_label);
         setSize(1280,720);
 		/*
 
@@ -44,27 +45,20 @@ public class LoginScreen extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-
+        PW.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if(e.getKeyCode()==KeyEvent.VK_ENTER)
+                    loginPerformed(ID.getText(), PW.getText());
+            }
+        });
 
 
         bt[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = ID.getText();
-                String pw = PW.getText();
-                SQLiteManager b = new SQLiteManager("","","");
-                if(b.login(id,pw)==true){
-                    JOptionPane.showMessageDialog(null, "로그인시 10point가 지급됩니다.",
-                            "포인트 지급", JOptionPane.WARNING_MESSAGE);
-                    new sbs.MainScreen(id);
-                    b.givePoint(id);
-                    setVisible(false); // 창 안보이게 하기
-
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.\n아이디와 패스워드를 다시 확인해주세요",
-                            "로그인 실패", JOptionPane.WARNING_MESSAGE);
-                }
+                loginPerformed(ID.getText(), PW.getText());
             }
         });
         bt[1].addActionListener(new ActionListener() {
@@ -74,10 +68,24 @@ public class LoginScreen extends JFrame{
                 //setVisible(false); // 창 안보이게 하기
             }
         });
-
-
-
     }
+    private void loginPerformed(String id, String pw){
+        SQLiteManager b = new SQLiteManager("","","");
+        if(b.login(id,pw)==true){
+            JOptionPane.showMessageDialog(null, "로그인시 10point가 지급됩니다.",
+                    "포인트 지급", JOptionPane.WARNING_MESSAGE);
+            new sbs.MainScreen(id);
+            b.givePoint(id);
+            setVisible(false); // 창 안보이게 하기
+
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.\n아이디와 패스워드를 다시 확인해주세요",
+                    "로그인 실패", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+
     class MyPanel extends JPanel{
         private ImageIcon icon = new ImageIcon("asset/background.png");
         private Image img = icon.getImage();

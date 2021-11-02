@@ -69,11 +69,11 @@ public class ProfileScreen extends JFrame{
 
 
 
-        ImageIcon card1_backside = new ImageIcon("asset/card1_back_side.png");
-        ImageIcon card2_backside = new ImageIcon("asset/card2_back_side.png");
-        ImageIcon card3_backside = new ImageIcon("asset/card3_back_side.png");
-        ImageIcon card4_backside = new ImageIcon("asset/card4_back_side.png");
-        ImageIcon card5_backside = new ImageIcon("asset/card5_back_side.png");
+        ImageIcon card1_backside = new ImageIcon("asset/card_back_1.png");
+        ImageIcon card2_backside = new ImageIcon("asset/card_back_2.png");
+        ImageIcon card3_backside = new ImageIcon("asset/card_back_3.png");
+        ImageIcon card4_backside = new ImageIcon("asset/card_back_4.png");
+        ImageIcon card5_backside = new ImageIcon("asset/card_back_5.png");
 
         ImageIcon card1_frontside = new ImageIcon("asset/card1_front_side.jpeg");
         ImageIcon card2_frontside = new ImageIcon("asset/card2_front_side.jpeg");
