@@ -131,7 +131,6 @@ public class Game_1 extends JFrame {
     private void MakeCardGUI(int[] card, int i, JPanel cardPanel){
         JButton btn = new JButton();
         btn.setText(cards[card[i] / 13][card[i] % 13]);
-        System.out.println(cards[card[i] / 13][card[i] % 13]);
         btn.setBackground(Color.WHITE);
         btn.setPreferredSize(new Dimension(120, 160));
         btn.setMargin(new Insets(0, 0, 0, 0));
