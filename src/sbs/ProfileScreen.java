@@ -21,8 +21,7 @@ public class ProfileScreen extends JFrame{
         int userRank;
         int userPoint = b.getPoint(id);
         double all=userWin+userLose;
-        double winpass=userWin;
-        double pow = (winpass/all)*100;
+        double pow = (userWin/all)*100;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         setLayout(null);

@@ -123,7 +123,7 @@ public class SQLiteManager{
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
-            this.point = rs.getInt("win");
+            this.win = rs.getInt("win");
 
         }
         catch(SQLException | ClassNotFoundException e){
@@ -147,7 +147,7 @@ public class SQLiteManager{
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
-            this.point = rs.getInt("lose");
+            this.lose = rs.getInt("lose");
 
         }
         catch(SQLException | ClassNotFoundException e){
