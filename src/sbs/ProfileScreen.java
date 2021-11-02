@@ -15,12 +15,13 @@ public class ProfileScreen extends JFrame{
         super("프로필"); //타이틀
         SQLiteManager b = new SQLiteManager("","","");
         String username = b.getNickname(id);
-        int userwinLose;
+        int userWin=b.getWin(id);
+        int userLose=b.getLose(id);
         int userLevel = b.getLevel(id);
         int userRank;
         int userPoint = b.getPoint(id);
-
-
+        double all=userWin+userLose;
+        double pow = (userWin/all)*100;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         setLayout(null);
@@ -99,20 +100,20 @@ public class ProfileScreen extends JFrame{
 
         for(int i = 0; i < 6; i++) {
             gridTitle[i] = new JLabel(title[i]);
-            gridTitle[i].setBounds(300,100+i*70, 150,100);
+            gridTitle[i].setBounds(300,100+i*70, 100,100);
             gridTitle[i].setFont(new Font("Gothic",Font.BOLD,20));
             add(gridTitle[i]);
         }
 
         gridElement[0] = new JLabel(id);
         gridElement[1] = new JLabel(username);
-        gridElement[2] = new JLabel("-");//전적들어가야함
+        gridElement[2] = new JLabel(userWin+"승 "+userLose+"패 승률:"+pow+"%");
         gridElement[3] = new JLabel(String.valueOf(userLevel));
         gridElement[4] = new JLabel("-");//랭킹 들어가야함
         gridElement[5] = new JLabel(String.valueOf(userPoint));
 
         for(int i = 0; i < 6; i++) {
-            gridElement[i].setBounds(450,100+i*70, 100,100);
+            gridElement[i].setBounds(450,100+i*70, 200,100);
             gridElement[i].setFont(new Font("Gothic",Font.BOLD,20));
             add(gridElement[i]);
         }
