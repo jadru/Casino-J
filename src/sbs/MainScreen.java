@@ -84,6 +84,9 @@ public class MainScreen extends JFrame{
                 setVisible(false); // 창 안보이게 하기 
             }
         });
+
+
+
         bt[3].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

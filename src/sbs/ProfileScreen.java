@@ -100,7 +100,7 @@ public class ProfileScreen extends JFrame{
 
         for(int i = 0; i < 6; i++) {
             gridTitle[i] = new JLabel(title[i]);
-            gridTitle[i].setBounds(300,100+i*70, 100,100);
+            gridTitle[i].setBounds(300,100+i*70, 200,100);
             gridTitle[i].setFont(new Font("Gothic",Font.BOLD,20));
             add(gridTitle[i]);
         }
