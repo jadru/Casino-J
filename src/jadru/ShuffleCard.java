@@ -5,7 +5,7 @@ import java.util.*;
 public class ShuffleCard{
 
     protected static String[][] makeCard(){
-        String[] marks = {"spade", "diamond", "club", "heart"};
+        String[] marks = {"♠", "◆", "♣", "♥"};
         String[][] cards = new String[4][13];
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 13; j++){
@@ -31,7 +31,7 @@ public class ShuffleCard{
     }
     protected static int[] pickCards(int size){
         Set<Integer> set = new HashSet<>();
-        while (set.size() <= size)
+        while (set.size() < size)
         { double d = Math.random() * 52 + 1;
             set.add((int) d);
         }

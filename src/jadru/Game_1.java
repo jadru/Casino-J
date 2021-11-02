@@ -26,7 +26,7 @@ public class Game_1 extends JFrame {
 
         JPanel com_profile = new JPanel(new CardLayout());
         JPanel user_profile = new JPanel(new CardLayout());
-        JPanel com_cards = new JPanel(null);
+        JPanel com_cards = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
         JPanel user_cards = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
 
         com_profile.setSize(160, 160);
@@ -54,14 +54,34 @@ public class Game_1 extends JFrame {
 
         for (int i = 0; i < 7; i++) {
             JButton btn = new JButton();
+            btn.setText(cards[com_card[i] / 13][com_card[i] % 13]);
+            btn.addActionListener(new cardActionListener());
+            btn.setBackground(Color.WHITE);
+            btn.setPreferredSize(new Dimension(120, 160));
+            btn.setMargin(new Insets(0, 0, 0, 0));
+            btn.setFont(new Font(null, Font.BOLD, 20));
+            com_cards.add(btn);
+        }
+
+        for (int i = 0; i < 7; i++) {
+            JButton btn = new JButton();
             btn.setText(cards[user_card[i] / 13][user_card[i] % 13]);
             btn.addActionListener(new cardActionListener());
             btn.setBackground(Color.WHITE);
             btn.setPreferredSize(new Dimension(120, 160));
             btn.setMargin(new Insets(0, 0, 0, 0));
-            btn.setFont(new Font(null, Font.BOLD, 30));
+            btn.setFont(new Font(null, Font.BOLD, 20));
             user_cards.add(btn);
         }
+
+        JButton btn = new JButton();
+        btn.setIcon(new ImageIcon("asset/card_back_1.png"));
+        btn.addActionListener(new cardActionListener());
+        btn.setBackground(Color.WHITE);
+        btn.setPreferredSize(new Dimension(120, 160));
+        btn.setMargin(new Insets(0, 0, 0, 0));
+        btn.setFont(new Font(null, Font.BOLD, 20));
+        user_cards.add(btn);
 
         setVisible(true);
         com_profile.setVisible(true);
