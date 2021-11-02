@@ -11,6 +11,7 @@ import static jadru.ShuffleCard.pickCards;
 public class Game_1 extends JFrame {
     private GamePanel main = new GamePanel("");
     private static final int PADDING = 20;
+    String[][] cards;
     Game_1() {
         setTitle("게임1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,7 +21,7 @@ public class Game_1 extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        String[][] cards = makeCard();
+        cards = makeCard();
         int[] user_card = pickCards(7);
         int[] com_card = pickCards(7);
 
@@ -52,36 +53,13 @@ public class Game_1 extends JFrame {
         add(com_cards);
         add(user_cards);
 
-        for (int i = 0; i < 7; i++) {
-            JButton btn = new JButton();
-            btn.setText(cards[com_card[i] / 13][com_card[i] % 13]);
-            btn.addActionListener(new cardActionListener());
-            btn.setBackground(Color.WHITE);
-            btn.setPreferredSize(new Dimension(120, 160));
-            btn.setMargin(new Insets(0, 0, 0, 0));
-            btn.setFont(new Font(null, Font.BOLD, 20));
-            com_cards.add(btn);
+        for (int i = 0; i < 4; i++) {
+            MakeCardGUI(user_card, i, user_cards);
         }
 
-        for (int i = 0; i < 7; i++) {
-            JButton btn = new JButton();
-            btn.setText(cards[user_card[i] / 13][user_card[i] % 13]);
-            btn.addActionListener(new cardActionListener());
-            btn.setBackground(Color.WHITE);
-            btn.setPreferredSize(new Dimension(120, 160));
-            btn.setMargin(new Insets(0, 0, 0, 0));
-            btn.setFont(new Font(null, Font.BOLD, 20));
-            user_cards.add(btn);
+        for (int i = 4; i < 7; i++){
+            addCardBack(user_cards);
         }
-
-        JButton btn = new JButton();
-        btn.setIcon(new ImageIcon("asset/card_back_1.png"));
-        btn.addActionListener(new cardActionListener());
-        btn.setBackground(Color.WHITE);
-        btn.setPreferredSize(new Dimension(120, 160));
-        btn.setMargin(new Insets(0, 0, 0, 0));
-        btn.setFont(new Font(null, Font.BOLD, 20));
-        user_cards.add(btn);
 
         setVisible(true);
         com_profile.setVisible(true);
@@ -110,6 +88,31 @@ public class Game_1 extends JFrame {
             g.drawImage(img, 0,0,getWidth(),getHeight(),this);
         }
 
+    }
+
+    private void MakeCardGUI(int[] card, int i, JPanel cardPanel){
+        JButton btn = new JButton();
+        btn.setText(cards[card[i] / 13][card[i] % 13]);
+        btn.setBackground(Color.WHITE);
+        btn.setPreferredSize(new Dimension(120, 160));
+        btn.setMargin(new Insets(0, 0, 0, 0));
+        btn.setFont(new Font(null, Font.BOLD, 30));
+        switch((card[i] / 13)){
+            case 1: btn.setForeground(Color.RED);
+            case 3: btn.setForeground(Color.RED); break;
+            default: btn.setForeground(Color.BLACK);
+        }
+        cardPanel.add(btn);
+    }
+
+    private void addCardBack(JPanel cardPanel){
+        JButton btn = new JButton();
+        btn.setIcon(new ImageIcon("asset/card_back_1.png"));
+        btn.addActionListener(new cardActionListener());
+        btn.setBackground(Color.WHITE);
+        btn.setPreferredSize(new Dimension(120, 160));
+        btn.setMargin(new Insets(0, 0, 0, 0));
+        cardPanel.add(btn);
     }
 
     public static void main (String [] args){

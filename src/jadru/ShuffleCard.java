@@ -5,7 +5,7 @@ import java.util.*;
 public class ShuffleCard{
 
     protected static String[][] makeCard(){
-        String[] marks = {"♠", "◆", "♣", "♥"};
+        String[] marks = {"♠", "♦", "♣", "♥"};
         String[][] cards = new String[4][13];
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 13; j++){
