@@ -169,6 +169,13 @@ public class SQLiteManager{
         try{
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            if (con != null){
+                System.out.println(" DB Connect Succese");
+            } else {
+                System.out.println(" DB Connect Fail!");
+                return false;
+            }
+
             Statement stmt = con.createStatement();
             sql="select * from player where id ='"+iid+"' "+"and password = '"+ppw+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -178,8 +185,12 @@ public class SQLiteManager{
 
 
         }
-        catch(SQLException | ClassNotFoundException e){
-            System.err.println(e.getMessage());
+        catch(ClassNotFoundException e){
+            System.out.println("Class Not Found Exception");
+            e.printStackTrace();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
         }
         finally {
             try{

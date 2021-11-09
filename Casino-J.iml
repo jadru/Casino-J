@@ -9,7 +9,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Library/Mobile Documents/com~apple~CloudDocs/다운로드/sqlite-jdbc-3.32.3.2.jar!/" />
@@ -18,7 +18,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="sqlite-jdbc-3.32.3.2" level="application" />
     <orderEntry type="library" name="sqlite-jdbc-3.32.3.2 " level="application" />
+    <orderEntry type="library" name="sqlite-jdbc-3.34.0" level="application" />
   </component>
 </module>
