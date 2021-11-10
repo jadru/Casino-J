@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import static jadru.ShuffleCard.makeCard;
 import static jadru.ShuffleCard.pickCards;
@@ -16,8 +17,10 @@ public class Game_1 extends JFrame {
     private GamePanel main = new GamePanel("");
     private static final int PADDING = 20;
     String[][] cards;
-    int[] user_card = pickCards(7);
-    int[] com_card = pickCards(7);
+    boolean [] used_card = new boolean[54];
+    int[] user_card;
+    int[] com_card;
+
     Game_1(String id) {
         setTitle("게임1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,8 +29,12 @@ public class Game_1 extends JFrame {
         setSize(1280, 740);
         setLocationRelativeTo(null);
         setResizable(false);
-
+        ShuffleCard.game = this;
         cards = makeCard();
+
+        Arrays.fill(used_card, false);
+        user_card = pickCards(7);
+        com_card = pickCards(7);
 
         JPanel com_profile = new JPanel(new CardLayout());
         JPanel user_profile = new JPanel(new CardLayout());
@@ -66,7 +73,7 @@ public class Game_1 extends JFrame {
             MakeCardGUI(com_card, i, com_cards);
         }
 
-        JButton reset = new JButton("Shuffle");
+        JButton reset = new JButton("로그인하기");
         reset.setSize(100, 100);
         reset.setLocation(200, 30);
         reset.addActionListener(new ActionListener() {
@@ -151,5 +158,12 @@ public class Game_1 extends JFrame {
         btn.setPreferredSize(new Dimension(120, 160));
         btn.setMargin(new Insets(0, 0, 0, 0));
         cardPanel.add(btn);
+    }
+
+    public void setAtUsedCard(boolean card, int index){
+        used_card[index] = card;
+    }
+    public boolean getAtUsedCard(int index){
+        return used_card[index];
     }
 }
