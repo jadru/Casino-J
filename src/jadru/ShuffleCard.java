@@ -3,6 +3,7 @@ package jadru;
 import java.util.*;
 
 public class ShuffleCard{
+    public static Game_1 game;
 
     protected static String[][] makeCard(){
         String[] marks = {"♠", "♦", "♣", "♥"};
@@ -26,7 +27,6 @@ public class ShuffleCard{
                         int k = j + 1;
                         cards[i][j] = marks[i] + " " + k;
                 }
-
             }
         }
         return cards;
@@ -35,11 +35,16 @@ public class ShuffleCard{
         Set<Integer> set = new HashSet<>();
         while (set.size() < size)
         { double d = Math.random() * 52;
-            set.add((int) d);
+            if (!game.used_card[(int) d])
+                set.add((int) d);
         }
-        return set.stream()
+        int[] pickedcards = set.stream()
                 .mapToInt(Integer::intValue)
                 .toArray();
+        for(int item:pickedcards){
+            game.setAtUsedCard(true, item);
+        }
+        return pickedcards;
     }
 
 }

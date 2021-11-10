@@ -18,6 +18,7 @@ public class GameScreen extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Game_1(id);
+
                 setVisible(false); // 창 안보이게 하기
             }
         });
