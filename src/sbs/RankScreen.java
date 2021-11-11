@@ -5,12 +5,13 @@ import jjam.SQLiteManager;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RankScreen extends  JFrame{
     private MyPanel panel = new MyPanel();
-    ArrayList<HashMap<String,Object>> users = new ArrayList<>();
+    ArrayList<ResultSet> users;
 
     RankScreen(String id){
         super("랭킹"); //타이틀
@@ -41,8 +42,8 @@ public class RankScreen extends  JFrame{
 
         JList<String> userRankingTable = new JList<>();
 
-        for (HashMap<String,Object> item : users ){
-            System.out.println(item.toString());
+        for (ResultSet rs : users ){
+            System.out.println(rs.toString());
         }
 //        userRankingTable.add()
 

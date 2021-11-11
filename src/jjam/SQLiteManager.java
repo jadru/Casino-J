@@ -1,5 +1,7 @@
 package jjam;
 import java.sql.*;
+import java.util.*;
+
 public class SQLiteManager{
 
     String id;
@@ -271,6 +273,39 @@ public class SQLiteManager{
             }
         }
 
+    }
+
+    public ArrayList<ResultSet> getOrderByDescPoint(){
+        Map<Integer, Object> map = new HashMap<Integer, Object>();
+        try{
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            Statement stmt = con.createStatement();
+            sql="select * from player";
+            ResultSet rs = stmt.executeQuery(sql);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+
+            while(rs.next()) {
+                for(int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+                    map.put(rs.getInt("point"), rs);
+                }
+            }
+
+            Object[] mapkey = map.keySet().toArray();
+            Arrays.sort(mapkey);
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+        return new ArrayList(map.values());
     }
     public static void main(String[]args)throws Exception{
 
