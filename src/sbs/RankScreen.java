@@ -1,7 +1,7 @@
 package sbs;
 
 import jjam.SQLiteManager;
-
+import java.sql.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
@@ -9,12 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
 
 public class RankScreen extends  JFrame{
     private MyPanel panel = new MyPanel();
     ArrayList<ResultSet> users;
 
-    RankScreen(String id){
+    RankScreen(String id) throws SQLException {
         super("랭킹"); //타이틀
 
 
@@ -27,14 +28,13 @@ public class RankScreen extends  JFrame{
         String Title[] = {"1등", "2등", "3등", "4등", "5등"};
         setSize(1280,720);
         SQLiteManager b = new SQLiteManager("","","");
-        users = b.getOrderByDescPoint();
-        System.out.println(users.get(0).toString());
         String  username[] = new String[5];
-        JList<String> userRankingTable = new JList<>();
-        int j = 0;
-        for (ResultSet rs : users ){
-            System.out.println(rs.toString());
+        Vector<String> userRankingTable = new Vector<>();
+        userRankingTable=b.getrank();
+        for(int i=0;i<5;i++){
+            System.out.println(userRankingTable.get(i));
         }
+        int j = 0;
         JLabel title[] = new JLabel[5];
         for(int i = 1 ; i < 5; i++){
             title[i] = new JLabel(Title[i]);
