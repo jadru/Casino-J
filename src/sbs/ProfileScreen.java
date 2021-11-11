@@ -45,11 +45,11 @@ public class ProfileScreen extends JFrame{
             }
         };
         jp.setBackground(Color.white);
-        jp.setBounds(650,150,450,450);
+        jp.setBounds(690,150,450,450);
         JButton mainButton = new JButton("메인");
         mainButton.setBounds(30,30,70,70);
 
-        String[] title = {"ID","이름","전적","레벨","순위","보유 포인트"};
+        String[] title = {"ID","이름","전적","레벨","순위"," ❤"};
         JLabel[] gridTitle = new JLabel[6];
         JLabel[] gridElement = new JLabel[6];
         JLabel CardText = new JLabel("보유중인 카드");
@@ -73,7 +73,7 @@ public class ProfileScreen extends JFrame{
         ImageIcon card2_backside = new ImageIcon("asset/card_back_2.png");
         ImageIcon card3_backside = new ImageIcon("asset/card_back_3.png");
         ImageIcon card4_backside = new ImageIcon("asset/card_back_4.png");
-        ImageIcon card5_backside = new ImageIcon("asset/card_back_5.png");
+        ImageIcon card5_backside = new ImageIcon("asset/card_back_0.png");
 
         ImageIcon card1_frontside = new ImageIcon("asset/card1_front_side.jpeg");
         ImageIcon card2_frontside = new ImageIcon("asset/card2_front_side.jpeg");
@@ -95,13 +95,13 @@ public class ProfileScreen extends JFrame{
 
 
 
-        CardText.setFont(new Font("Gothic",Font.BOLD,20));
-        CardFrontBack.setFont(new Font("Gothic",Font.BOLD,15));
+        CardText.setFont(new Font("Gothic",Font.BOLD,25));
+        CardFrontBack.setFont(new Font("Gothic",Font.BOLD,25));
 
         for(int i = 0; i < 6; i++) {
             gridTitle[i] = new JLabel(title[i]);
-            gridTitle[i].setBounds(300,100+i*70, 200,100);
-            gridTitle[i].setFont(new Font("Gothic",Font.BOLD,20));
+            gridTitle[i].setBounds(200,100+i*70, 300,100);
+            gridTitle[i].setFont(new Font("Gothic",Font.BOLD,35));
             add(gridTitle[i]);
         }
 
@@ -113,11 +113,11 @@ public class ProfileScreen extends JFrame{
         gridElement[5] = new JLabel(String.valueOf(userPoint));
 
         for(int i = 0; i < 6; i++) {
-            gridElement[i].setBounds(450,100+i*70, 200,100);
-            gridElement[i].setFont(new Font("Gothic",Font.BOLD,20));
+            gridElement[i].setBounds(300,100+i*70, 400,100);
+            gridElement[i].setFont(new Font("Gothic",Font.BOLD,35));
             add(gridElement[i]);
         }
-        CardText.setBounds(650, 50,150,100);
+        CardText.setBounds(690, 50,150,100);
         CardFrontBack.setBounds(850, 75,200,50);
         add(jp);
 
