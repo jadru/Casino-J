@@ -48,6 +48,7 @@ public class RankScreen extends  JFrame{
         title[0].setForeground(a);
 
 
+
         title[0].setBounds(480,198,100,100);
         title[1].setBounds(350,308,100,100);
         title[2].setBounds(750,308,100,100);
