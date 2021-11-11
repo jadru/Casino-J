@@ -54,16 +54,16 @@ public class ExchangeScreen extends  JFrame{
                 }
             }
         };
-        ImageIcon card1_backside = new ImageIcon("asset/card_back_1.png");
-        ImageIcon card2_backside = new ImageIcon("asset/card_back_2.png");
-        ImageIcon card3_backside = new ImageIcon("asset/card_back_3.png");
-        ImageIcon card4_backside = new ImageIcon("asset/card_back_4.png");
+        ImageIcon card1_backside = new ImageIcon("asset/card_back_2.png");
+        ImageIcon card2_backside = new ImageIcon("asset/card_back_3.png");
+        ImageIcon card3_backside = new ImageIcon("asset/card_back_4.png");
+        ImageIcon card4_backside = new ImageIcon("asset/card_back_0.png");
 
 
-        ImageIcon card1_frontside = new ImageIcon("asset/card1_front_side.jpeg");
-        ImageIcon card2_frontside = new ImageIcon("asset/card2_front_side.jpeg");
-        ImageIcon card3_frontside = new ImageIcon("asset/card3_front_side.jpeg");
-        ImageIcon card4_frontside = new ImageIcon("asset/card4_front_side.jpeg");
+        ImageIcon card1_frontside = new ImageIcon("asset/card2_front_side.jpeg");
+        ImageIcon card2_frontside = new ImageIcon("asset/card3_front_side.jpeg");
+        ImageIcon card3_frontside = new ImageIcon("asset/card4_front_side.jpeg");
+        ImageIcon card4_frontside = new ImageIcon("asset/card5_front_side.jpeg");
 
 
         card1_back = card1_backside.getImage();
