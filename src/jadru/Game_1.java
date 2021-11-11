@@ -20,8 +20,10 @@ public class Game_1 extends JFrame {
     boolean [] used_card = new boolean[54];
     int[] user_card;
     int[] com_card;
+    ThemeEngine theme;
 
     Game_1(String id) {
+        // jPanel 설정
         setTitle("게임1");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(main);
@@ -29,42 +31,44 @@ public class Game_1 extends JFrame {
         setSize(1280, 740);
         setLocationRelativeTo(null);
         setResizable(false);
+
+        // 테마엔진 연결
+        theme = new ThemeEngine(id);
+
+        // 카드돌리기
         ShuffleCard.game = this;
         cards = makeCard();
-
         Arrays.fill(used_card, false);
         user_card = pickCards(7);
         com_card = pickCards(7);
 
+        // JPanel 설정
         JPanel com_profile = new JPanel(new CardLayout());
         JPanel user_profile = new JPanel(new CardLayout());
         JPanel com_cards = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
         JPanel user_cards = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
 
-        com_profile.setSize(160, 160);
-        user_profile.setSize(160, 160);
-        com_cards.setSize(1280, 200);
-        user_cards.setSize(1280, 200);
+        // 사이즈 설정
+        com_profile.setBounds(0, 0, 160, 160);
+        user_profile.setBounds(1120, 560, 160, 160);
+        com_cards.setBounds(0, 160, 1280, 200);
+        user_cards.setBounds(0, 360, 1280, 200);
 
+        // 컴퓨터 아이콘과 유저 아이콘, 닉네임 설정
         JLabel com_profile_img = new JLabel("COMPUTER", new ImageIcon("asset/icons8-bot-96.png"), SwingConstants.CENTER);
         com_profile.add(com_profile_img);
         SQLiteManager b = new SQLiteManager("","","");
         JLabel user_profile_img = new JLabel(b.getNickname(id), new ImageIcon("asset/icons8-test-account-96.png"), SwingConstants.CENTER);
         user_profile.add(user_profile_img);
 
-        com_profile.setLocation(0, 0);
-        user_profile.setLocation(1120, 560);
-        com_cards.setLocation(0, 160);
-        user_cards.setLocation(0, 360);
+        // 백그라운드 설정
+        ThemeEngine theme = new ThemeEngine(id);
+        com_cards.setBackground(theme.getBackgroundColor());
+        user_cards.setBackground(theme.getBackgroundColor());
 
-        com_cards.setBackground(Color.black);
-        user_cards.setBackground(Color.darkGray);
+        add(com_profile); add(user_profile); add(com_cards); add(user_cards);
 
-        add(com_profile);
-        add(user_profile);
-        add(com_cards);
-        add(user_cards);
-
+        // 카드 GUI 구성
         for (int i = 0; i < 7; i++) {
             MakeCardGUI(user_card, i, user_cards);
         }
