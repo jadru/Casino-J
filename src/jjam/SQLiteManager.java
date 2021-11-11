@@ -185,7 +185,6 @@ public class SQLiteManager{
                 return true;
             }
 
-
         }
         catch(ClassNotFoundException e){
             System.out.println("Class Not Found Exception");
@@ -274,8 +273,33 @@ public class SQLiteManager{
         }
 
     }
+    public Vector<String> getrank(){
+        Vector<String> vec = new Vector<String>();
+        try{
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            Statement stmt = con.createStatement();
+            sql="select * from player order by point DESC";
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                vec.add(rs.getString("id"));
+            }
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
 
-    public ArrayList<ResultSet> getOrderByDescPoint(){
+            }
+        }
+
+        return vec;
+    }
+
+    /*public ArrayList<ResultSet> getOrderByDescPoint(){
         Map<Integer, Object> map = new HashMap<Integer, Object>();
         try{
             Class.forName("org.sqlite.JDBC");
@@ -289,7 +313,9 @@ public class SQLiteManager{
             while(rs.next()) {
                 for(int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
                     map.put(rs.getInt("point"), rs);
+
                 }
+                System.out.println(rs.getString("id"));
             }
 
             Object[] mapkey = map.keySet().toArray();
@@ -306,7 +332,7 @@ public class SQLiteManager{
             }
         }
         return new ArrayList(map.values());
-    }
+    }*/
     public static void main(String[]args)throws Exception{
 
     }

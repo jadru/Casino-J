@@ -4,6 +4,7 @@ import  jjam.SQLiteManager;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class MainScreen extends JFrame{
     private MyPanel panel = new MyPanel();
@@ -108,7 +109,11 @@ public class MainScreen extends JFrame{
         bt[2].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new RankScreen(id);
+                try {
+                    new RankScreen(id);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
                 setVisible(false); // 창 안보이게 하기 
             }
         });
