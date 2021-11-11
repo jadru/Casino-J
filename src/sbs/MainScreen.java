@@ -53,7 +53,8 @@ public class MainScreen extends JFrame{
         bt[2].setContentAreaFilled(false);
         bt[4].setBorderPainted(false);
         bt[4].setContentAreaFilled(false);
-
+        bt[3].setBorderPainted(false);
+        bt[3].setContentAreaFilled(false);
         topBar.setBounds(150,25,971,81);
 
 
