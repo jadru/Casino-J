@@ -25,7 +25,7 @@ public class RankScreen extends  JFrame{
         JButton mainButton = new JButton("메인");
         mainButton.setBounds(170,30,70,70);
         add(mainButton);
-        String Title[] = {"1등", "2등", "3등", "4등", "5등"};
+        String Title[] = new String[5];
         setSize(1280,720);
         SQLiteManager b = new SQLiteManager("","","");
         String  username[] = new String[5];
@@ -33,6 +33,7 @@ public class RankScreen extends  JFrame{
         userRankingTable=b.getrank();
         for(int i=0;i<5;i++){
             System.out.println(userRankingTable.get(i));
+            Title[i] = userRankingTable.get(i);
         }
         int j = 0;
         JLabel title[] = new JLabel[5];
@@ -49,11 +50,11 @@ public class RankScreen extends  JFrame{
 
 
 
-        title[0].setBounds(480,198,100,100);
-        title[1].setBounds(350,308,100,100);
-        title[2].setBounds(750,308,100,100);
-        title[3].setBounds(350,426,100,100);
-        title[4].setBounds(750,426,100,100);
+        title[0].setBounds(480,198,1000,100);
+        title[1].setBounds(350,308,1000,100);
+        title[2].setBounds(750,308,1000,100);
+        title[3].setBounds(350,426,1000,100);
+        title[4].setBounds(750,426,1000,100);
 
 
     for(int i = 0; i < 5; i++)
