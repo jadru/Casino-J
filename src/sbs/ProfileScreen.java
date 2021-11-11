@@ -102,6 +102,7 @@ public class ProfileScreen extends JFrame{
             gridTitle[i] = new JLabel(title[i]);
             gridTitle[i].setBounds(200,100+i*70, 300,100);
             gridTitle[i].setFont(new Font("Gothic",Font.BOLD,35));
+            gridTitle[i].setForeground(Color.WHITE);
             add(gridTitle[i]);
         }
 
@@ -115,6 +116,7 @@ public class ProfileScreen extends JFrame{
         for(int i = 0; i < 6; i++) {
             gridElement[i].setBounds(300,100+i*70, 400,100);
             gridElement[i].setFont(new Font("Gothic",Font.BOLD,35));
+            gridElement[i].setForeground(Color.WHITE);
             add(gridElement[i]);
         }
         CardText.setBounds(690, 50,150,100);

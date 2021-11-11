@@ -38,11 +38,20 @@ public class MainScreen extends JFrame{
         ImageIcon setting_bt_img = new ImageIcon("asset/setting_button.png");
         ImageIcon topbar_img = new ImageIcon("asset/topbar.png");
 
-        JLabel topBar = new JLabel(topbar_img);
+        //버튼 및 라벨 이미지 넣기
+       JLabel topBar = new JLabel(topbar_img);
         bt[0] = new JButton(exchange_bt_img);
         bt[2] = new JButton(ranking_bt_img);
         bt[3] = new JButton(setting_bt_img);
         bt[4] = new JButton(game_bt_img);
+
+        //버튼 투명하게 만들기
+        bt[0].setBorderPainted(false);
+        bt[0].setContentAreaFilled(false);
+        bt[2].setBorderPainted(false);
+        bt[2].setContentAreaFilled(false);
+        bt[4].setBorderPainted(false);
+        bt[4].setContentAreaFilled(false);
 
         topBar.setBounds(150,25,971,81);
 
