@@ -17,7 +17,7 @@ public class SQLiteManager{
     int lose;
     Connection con = null;
 
-    static String SQLURL = "jdbc:sqlite:src/jjam/userdb.db";
+    static String SQLURL = "jdbc:sqlite:src/database/userdb.db";
 
     public SQLiteManager(String id, String nickname, String password){
         this.id=id;
