@@ -1,5 +1,5 @@
-package sbs;
-import  jjam.SQLiteManager;
+package screen;
+import support.SQLiteManager;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -131,7 +131,7 @@ public class MainScreen extends JFrame{
         bt[4].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new jadru.GameScreen(id);
+                new GameScreen(id);
                 setVisible(false); // 창 안보이게 하기
             }
         });

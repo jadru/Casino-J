@@ -1,4 +1,4 @@
-package jjam;
+package support;
 import java.sql.*;
 import java.util.*;
 
@@ -15,16 +15,18 @@ public class SQLiteManager{
     int lose;
     Connection con = null;
 
+    static String SQLURL = "jdbc:sqlite:src/database/userdb.db";
+
     public SQLiteManager(String id, String nickname, String password){
         this.id=id;
         this.nickname=nickname;
         this.password=password;
-
     }
+
     public String getNickname(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -50,7 +52,7 @@ public class SQLiteManager{
     public int getLevel(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -74,7 +76,7 @@ public class SQLiteManager{
     public int getSkin(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -97,7 +99,7 @@ public class SQLiteManager{
     public int getPoint(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -121,7 +123,7 @@ public class SQLiteManager{
     public int getWin(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -145,7 +147,7 @@ public class SQLiteManager{
     public int getLose(String id){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -167,10 +169,10 @@ public class SQLiteManager{
         return this.lose;
     }
 
-    boolean login(String iid,String ppw){
+    public boolean login(String iid, String ppw){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             if (con != null){
                 System.out.println(" DB Connect Succese");
             } else {
@@ -203,10 +205,10 @@ public class SQLiteManager{
         }
         return false;
     }
-    boolean idCheck(String iid){
+    public boolean idCheck(String iid){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql="select * from player where id ='"+iid+"'";
             ResultSet rs = stmt.executeQuery(sql);
@@ -228,13 +230,13 @@ public class SQLiteManager{
         }
         return false;
     }
-    void insert(){
+   public void insert(){
 
         this.sql="insert into player (id,nickname,password)" ;
         sql+= "VALUES ('"+ id +"','"+ nickname +"','"+ password +"')";
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             stmt.execute(sql);
 
@@ -251,12 +253,12 @@ public class SQLiteManager{
             }
         }
     }
-    void givePoint(String id){
+    public void givePoint(String id){
         int point = getPoint(id);
         point+=10;
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             stmt.execute("update player set point = "+point+" where id = '"+id+"'");
         }
@@ -277,7 +279,7 @@ public class SQLiteManager{
         Vector<String> vec = new Vector<String>();
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
+            con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql="select * from player order by point DESC";
             ResultSet rs = stmt.executeQuery(sql);
@@ -333,8 +335,4 @@ public class SQLiteManager{
         }
         return new ArrayList(map.values());
     }*/
-
-    public static void main(String[]args)throws Exception{
-
-    }
 }

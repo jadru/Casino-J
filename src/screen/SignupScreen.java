@@ -1,11 +1,11 @@
-package jjam;
+package screen;
 
-import sbs.MainScreen;
+import support.SQLiteManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class SignupScreen extends JFrame {
     private MyPanel panel = new MyPanel();

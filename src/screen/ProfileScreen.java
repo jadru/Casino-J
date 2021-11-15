@@ -1,6 +1,6 @@
-package sbs;
+package screen;
 
-import jjam.SQLiteManager;
+import support.SQLiteManager;
 
 import javax.swing.*;
 import java.awt.event.*;

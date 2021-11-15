@@ -1,4 +1,6 @@
-package jjam;
+package screen;
+
+import support.SQLiteManager;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -71,10 +73,10 @@ public class LoginScreen extends JFrame{
     }
     private void loginPerformed(String id, String pw){
         SQLiteManager b = new SQLiteManager("","","");
-        if(b.login(id,pw)==true){
+        if(b.login(id,pw)){
             JOptionPane.showMessageDialog(null, "로그인시 10point가 지급됩니다.",
                     "포인트 지급", JOptionPane.WARNING_MESSAGE);
-            new sbs.MainScreen(id);
+            new MainScreen(id);
             b.givePoint(id);
             setVisible(false); // 창 안보이게 하기
 

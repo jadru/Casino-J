@@ -1,14 +1,13 @@
-package sbs;
+package screen;
 
-import jjam.SQLiteManager;
-import java.sql.*;
+import support.SQLiteManager;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Vector;
 
 public class RankScreen extends  JFrame{

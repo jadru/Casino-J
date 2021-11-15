@@ -1,11 +1,13 @@
-package jadru;
+package support;
+
+import screen.Game_1;
 
 import java.util.*;
 
 public class ShuffleCard{
     public static Game_1 game;
 
-    protected static String[][] makeCard(){
+    public static String[][] makeCardDeck(){
         String[] marks = {"♠", "♦", "♣", "♥"};
         String[][] cards = new String[4][13];
         for(int i = 0; i < 4; i++){
@@ -31,19 +33,26 @@ public class ShuffleCard{
         }
         return cards;
     }
-    protected static int[] pickCards(int size){
+    public static int[] getCardFromDeck(int size){
+        int cnt = 0;
         Set<Integer> set = new HashSet<>();
         while (set.size() < size)
-        { double d = Math.random() * 52;
-            if (!game.used_card[(int) d])
-                set.add((int) d);
+        { int d = (int)(Math.random() * 52);
+            if (!game.getAtUsedCard(d))
+                set.add(d);
+            else if(cnt > 100)
+                System.out.println("카드를 선택할 수 없습니다");
+            else
+                cnt++;
         }
         int[] pickedcards = set.stream()
                 .mapToInt(Integer::intValue)
                 .toArray();
+
         for(int item:pickedcards){
             game.setAtUsedCard(true, item);
         }
+
         return pickedcards;
     }
 

@@ -1,17 +1,14 @@
-package jadru;
-
-import jjam.SQLiteManager;
-import jjam.SQLiteManager.*;
+package support;
 
 import java.awt.*;
 
 import static java.lang.Integer.decode;
 
-public class ThemeEngine {
+public class ThemeManager {
     int skin = 0;
     String [] background_color = new String[]{"#FFFFFF", "#FFFFFF", "#FFFFFF", "#000000", "#000000"};
 
-    public ThemeEngine(String id){
+    public ThemeManager(String id){
         SQLiteManager b = new SQLiteManager("","","");
         skin = b.getSkin(id);
     }

@@ -1,6 +1,4 @@
-package jadru;
-
-import sbs.MainScreen;
+package screen;
 
 import javax.swing.*;
 import java.awt.*;
