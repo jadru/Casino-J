@@ -1,6 +1,8 @@
 package support;
 import java.sql.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SQLiteManager{
 
@@ -22,7 +24,19 @@ public class SQLiteManager{
         this.nickname=nickname;
         this.password=password;
     }
+    private final String GET_PLAYER_INFO_CMD="get_player_info";
 
+
+    private final static String UNSECURED_CHAR_REGULAR_EXPRESSION="[^\\p{Alnum}]|select|delete|update|insert|create|alter|drop";
+    private Pattern unsecuredCharPattern;
+    public void initialize(){
+        unsecuredCharPattern= Pattern.compile(UNSECURED_CHAR_REGULAR_EXPRESSION,Pattern.CASE_INSENSITIVE);
+    }
+    private String makeSecureString(final String str,int maxLength){
+        String secureStr = str.substring(0,maxLength);
+        Matcher matcher = unsecuredCharPattern.matcher(secureStr);
+        return matcher.replaceAll("");
+    }
     public String getNickname(String id){
         try{
             Class.forName("org.sqlite.JDBC");
@@ -179,9 +193,9 @@ public class SQLiteManager{
                 System.out.println(" DB Connect Fail!");
                 return false;
             }
-
+            initialize();
             Statement stmt = con.createStatement();
-            sql="select * from player where id ='"+iid+"' "+"and password = '"+ppw+"'";
+            sql="select * from player where id ='"+makeSecureString(iid,iid.length())+"' "+"and password = '"+makeSecureString(ppw,ppw.length())+"'";
             ResultSet rs = stmt.executeQuery(sql);
             if(rs.next()==true){
                 return true;
