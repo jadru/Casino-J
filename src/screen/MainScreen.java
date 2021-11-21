@@ -1,13 +1,121 @@
 package screen;
 import support.SQLiteManager;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+
+
+
+class MyModalDialog extends JDialog{
+    private ImageIcon settingbgImg = new ImageIcon("asset/settingScreen.png");
+     ImageIcon soundOn = new ImageIcon("asset/soundOn.png");
+     ImageIcon soundOff = new ImageIcon("asset/soundOff.png");
+     JButton okButton = new JButton("확인");
+     JButton bgSound = new JButton(soundOn);
+     JButton efSound = new JButton(soundOn);
+    static boolean bgCheck = false;
+    static boolean efCheck = false;
+
+    private JLabel bg = new JLabel(settingbgImg);
+    public MyModalDialog(JFrame frame, String title){
+        super(frame, title, true);
+        setLayout(null);
+
+        okButton.setBounds(700,320,100,50);
+        bgSound.setBounds(240,100,100,100);
+        efSound.setBounds(240,200,100,100);
+        bgSound.setBorderPainted(false);
+        bgSound.setContentAreaFilled(false);
+        efSound.setBorderPainted(false);
+        efSound.setContentAreaFilled(false);
+
+        add(okButton);
+        add(bgSound);
+        add(efSound);
+
+
+        bg.setBounds(0,0,844,400);
+        add(bg);
+
+
+        setSize(844,428);
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
+        bgSound.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(bgCheck == true){
+                    bgCheck = false;
+                    bgSound.setIcon(soundOn);
+                    MainScreen.Sound("asset/GameBackgroundMusic.mp3", true);
+                }
+                else{
+                    bgCheck = true;
+                    bgSound.setIcon(soundOff);
+                }
+                repaint();
+                revalidate();
+            }
+        });
+        efSound.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(efCheck == true){
+                    efCheck = false;
+                    efSound.setIcon(soundOn);
+                }
+                else{
+                    efCheck = true;
+                    efSound.setIcon(soundOff);
+                }
+                repaint();
+                revalidate();
+            }
+        });
+
+
+    }
+
+}
+
 
 public class MainScreen extends JFrame{
     private MyPanel panel = new MyPanel();
+    private MyModalDialog settingScreen;
+
+
+
+    public static void Sound(String file, boolean Loop){
+        Clip clip;
+        try {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(file)));
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+            if ( Loop) clip.loop(-1);//Loop 값이true면 사운드재생을무한반복시킵니다.//false면 한번만재생시킵니다.
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 	public MainScreen(String id) {
 		setTitle("Main화면");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,6 +128,14 @@ public class MainScreen extends JFrame{
         usertext.setFont(new Font("Gothic",Font.BOLD,30));
         userPoint.setFont(new Font("Gothic",Font.BOLD,30));
         setLayout(null);
+
+        //Sound("asset/GameBackgroundMusic.mp3", true);
+
+
+        settingScreen = new MyModalDialog(this, "설정");
+
+
+
 		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
 		JButton bt[] = new JButton[5];
 
@@ -68,6 +184,11 @@ public class MainScreen extends JFrame{
         for(int i = 0 ; i < 5; i++){
             add(bt[i]);
         }
+
+
+
+
+
         add(topBar);
         /*
 		panel1.add(bt[1]);
@@ -91,6 +212,8 @@ public class MainScreen extends JFrame{
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((windowSize.width - frameSize.width) / 2,
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
+        settingScreen.setLocation((windowSize.width - frameSize.width) / 2,
+                (windowSize.height - frameSize.height) / 2);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         bt[0].addActionListener(new ActionListener() {
@@ -124,8 +247,9 @@ public class MainScreen extends JFrame{
         bt[3].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SettingScreen(id);
-                setVisible(false); // 창 안보이게 하기 
+                /*new SettingScreen(id);
+                setVisible(false); // 창 안보이게 하기 */
+                settingScreen.setVisible(true);
             }
         });
         bt[4].addActionListener(new ActionListener() {
@@ -135,9 +259,8 @@ public class MainScreen extends JFrame{
                 setVisible(false); // 창 안보이게 하기
             }
         });
-		
-		
-		
+
+
 	}
     class MyPanel extends JPanel{
         private ImageIcon icon = new ImageIcon("asset/mainImg.jpg");
@@ -147,6 +270,10 @@ public class MainScreen extends JFrame{
             g.drawImage(img, 0,0,getWidth(),getHeight(),this);
         }
     }
+
+
+
 	public static void main(String[] agrs) {
+
 	}
 }

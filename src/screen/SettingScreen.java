@@ -16,7 +16,7 @@ public class SettingScreen extends  JFrame{
         mainButton.setBounds(30,30,70,70);
         add(mainButton);
 
-        setSize(1280,720);
+        setSize(700,500);
 
 
         Dimension frameSize = getSize();
