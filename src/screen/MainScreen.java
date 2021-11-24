@@ -175,7 +175,7 @@ public class MainScreen extends JFrame{
         bt[4].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new GameScreen(id);
+                new Game_1(id);
                 setVisible(false); // 창 안보이게 하기
             }
         });

@@ -13,9 +13,9 @@ import java.util.Arrays;
 import static support.ShuffleCard.makeCardDeck;
 import static support.ShuffleCard.getCardFromDeck;
 
-public class GameScreen extends JFrame {
+public class Game_1 extends JFrame {
 
-    private static final String COMPUTER_NAME = "카드고";
+    private static final String COMPUTER_NAME = "블랙잭 AI";
     private static final String COMPUTER_IMG_URL = "asset/icons8-bot-96.png";
     private static final String USER_IMG_URL = "asset/icons8-test-account-96.png";
     private static final String BG_IMG_URL = null;
@@ -35,15 +35,20 @@ public class GameScreen extends JFrame {
     JPanel user_profile_panel;
     JPanel com_card_panel;
     JPanel user_card_panel;
+    JPanel button_panel;
 
-    GameScreen(String id) {
+    JButton backtomain_button;
+    JButton addcard_button;
+    JButton finish_button;
+
+    Game_1(String id) {
         this.user_id = id;
         generateGUI();
         startGame();
     }
 
     private void generateGUI(){
-        setTitle("게임1");
+        setTitle(COMPUTER_NAME);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(main);
         setLayout(null);
@@ -60,11 +65,13 @@ public class GameScreen extends JFrame {
         user_profile_panel = new JPanel(new CardLayout());
         com_card_panel = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
         user_card_panel = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
+        button_panel = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
 
         com_profile_panel.setBounds(0, 0, 160, 160);
-        user_profile_panel.setBounds(1120, 560, 160, 160);
+        user_profile_panel.setBounds(1120, 0, 160, 160);
         com_card_panel.setBounds(0, 160, 1280, 200);
         user_card_panel.setBounds(0, 360, 1280, 200);
+        button_panel.setBounds(0, 560, 1280, 160);
 
         JLabel com_profile_img = new JLabel(COMPUTER_NAME,
                 new ImageIcon(COMPUTER_IMG_URL),
@@ -74,15 +81,15 @@ public class GameScreen extends JFrame {
                 new ImageIcon(USER_IMG_URL),
                 SwingConstants.CENTER);
 
-        com_card_panel.setBackground(theme.getBackgroundColor());
-        user_card_panel.setBackground(theme.getBackgroundColor());
         setBackground(theme.getBackgroundColor());
 
+        setButtonPanel();
+        
         add(com_profile_panel); add(user_profile_panel); add(com_card_panel); add(user_card_panel);
-        com_profile_panel.add(com_profile_img); user_profile_panel.add(user_profile_img);
+        com_profile_panel.add(com_profile_img); user_profile_panel.add(user_profile_img); add(button_panel);
 
         setVisible(true); com_profile_panel.setVisible(true); user_profile_panel.setVisible(true);
-        com_card_panel.setVisible(true); user_card_panel.setVisible(true);
+        com_card_panel.setVisible(true); user_card_panel.setVisible(true); button_panel.setVisible(true);
     }
 
     private void startGame(){
@@ -90,10 +97,13 @@ public class GameScreen extends JFrame {
         using_cards = new boolean[52];
         Arrays.fill(using_cards, false);
 
-        user_card_deck = getCardFromDeck(7);
-        com_cards_deck = getCardFromDeck(7);
+        user_card_deck = getCardFromDeck(2);
+        com_cards_deck = getCardFromDeck(2);
 
-        for (int card : user_card_deck){
+        for (int i = 0; i < 2; i++) {
+            addCardBack(com_card_panel);
+        }
+        for (int card : user_card_deck) {
             MakeCardGUI(user_card_deck, card, user_card_panel);
         }
     }
@@ -146,5 +156,18 @@ public class GameScreen extends JFrame {
     }
     public boolean getAtUsedCard(int index){
         return using_cards[index];
+    }
+    private void setButtonPanel(){
+        backtomain_button = new JButton("메인");
+        addcard_button = new JButton("카드 추가");
+        finish_button = new JButton("게임 종료");
+
+        backtomain_button.setSize(50,50);
+        addcard_button.setSize(50,50);
+        finish_button.setSize(50,50);
+
+        button_panel.add(backtomain_button);
+        button_panel.add(addcard_button);
+        button_panel.add(finish_button);
     }
 }
