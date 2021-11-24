@@ -1,11 +1,11 @@
 package support;
 
-import screen.Game_1;
+import screen.GameScreen;
 
 import java.util.*;
 
 public class ShuffleCard{
-    public static Game_1 game;
+    public static GameScreen game;
 
     public static String[][] makeCardDeck(){
         String[] marks = {"♠", "♦", "♣", "♥"};
