@@ -169,5 +169,31 @@ public class Game_1 extends JFrame {
         button_panel.add(backtomain_button);
         button_panel.add(addcard_button);
         button_panel.add(finish_button);
+
+        backtomain_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainScreen(user_id);
+                setVisible(false); // 창 안보이게 하기
+            }
+        });
+
+        addcard_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        finish_button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+
+    void gameFinished(){
+        
     }
 }
