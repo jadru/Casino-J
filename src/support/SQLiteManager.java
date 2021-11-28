@@ -267,14 +267,14 @@ public class SQLiteManager{
             }
         }
     }
-    public void givePoint(String id){
-        int point = getPoint(id);
-        point+=10;
+    public void givePoint(String id,int point){
+        int apoint = getPoint(id);
+        apoint += point;
         try{
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
-            stmt.execute("update player set point = "+point+" where id = '"+id+"'");
+            stmt.execute("update player set point = "+apoint+" where id = '"+id+"'");
         }
         catch(SQLException | ClassNotFoundException e){
             System.err.println(e.getMessage());

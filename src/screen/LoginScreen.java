@@ -77,7 +77,7 @@ public class LoginScreen extends JFrame{
             JOptionPane.showMessageDialog(null, "로그인시 10point가 지급됩니다.",
                     "포인트 지급", JOptionPane.WARNING_MESSAGE);
             new MainScreen(id);
-            b.givePoint(id);
+            b.givePoint(id,10);
             setVisible(false); // 창 안보이게 하기
 
         }
