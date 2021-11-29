@@ -5,18 +5,16 @@ import java.awt.*;
 import static java.lang.Integer.decode;
 
 public class ThemeManager {
-    private static int skin = 0;
-    private String [] background_color = new String[]{"#FFFFFF", "#FFFFFF", "#FFFFFF", "#000000", "#000000"};
 
-    public ThemeManager(String id){
+    public static Color getBackgroundColor(String id){
+        String [] background_color = new String[]{"#FFFFFF", "#FFFFFF", "#FFFFFF", "#000000", "#000000"};
+        return new Color(decode(background_color[getSQL(id)]));
+    }
+    public static String getCardBackImgURL(String id){
+        return "asset/card_back_" + getSQL(id)+".png";
+    }
+    private static int getSQL(String id){
         SQLiteManager b = new SQLiteManager("","","");
-        skin = b.getSkin(id);
-    }
-
-    public Color getBackgroundColor(){
-        return new Color(decode(background_color[skin]));
-    }
-    public static String getCardBackImgURL(){
-        return "asset/card_back_" + skin+".png";
+        return b.getSkin(id);
     }
 }

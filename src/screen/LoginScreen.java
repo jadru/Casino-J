@@ -86,6 +86,7 @@ public class LoginScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 loginPerformed(ID.getText(), PW.getText());
+                repaint();
             }
         });
         bt[1].addActionListener(new ActionListener() {
@@ -101,10 +102,9 @@ public class LoginScreen extends JFrame{
         if(b.login(id,pw)){
             JOptionPane.showMessageDialog(null, "로그인시 10point가 지급됩니다.",
                     "포인트 지급", JOptionPane.WARNING_MESSAGE);
-            new MainScreen(id);
             b.givePoint(id,10);
+            new MainScreen(id);
             setVisible(false); // 창 안보이게 하기
-
         }
         else{
             JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.\n아이디와 패스워드를 다시 확인해주세요",

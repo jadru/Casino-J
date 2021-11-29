@@ -21,11 +21,12 @@ public class MiniGame extends JFrame implements ActionListener {
     static int timer_stop; // 타이머를 종료할 변수
     static Timer timer = new Timer();
     String id;
-    ImageIcon game_bt = new ImageIcon(support.ThemeManager.getCardBackImgURL());//함수 구현하세용
+    ImageIcon game_bt;
 
     public MiniGame(String id){
         frm.setTitle("미니게임");
         this.id=id;
+        game_bt = new ImageIcon(support.ThemeManager.getCardBackImgURL(this.id));//함수 구현하세용
         frm.setBounds(600, 150, 490, 670); // 프레임 위치, 크기 설정
         frm.setLayout(null);
         frm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
