@@ -148,7 +148,7 @@ public class ProfileScreen extends JFrame{
                 b.SkinChange(id,4);
             }
         });
-
+        repaint(); revalidate();
 
 
     }
