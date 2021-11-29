@@ -43,7 +43,7 @@ public class ExchangeScreen extends  JFrame{
                     g.drawImage(card4_back, 885, 0, 200, 270, this);
 
                 }
-               
+
             }
         };
         ImageIcon card1_backside = new ImageIcon("asset/card_back_1.png");
@@ -64,20 +64,22 @@ public class ExchangeScreen extends  JFrame{
 
         jp.setBounds(80,270,1200,300);
         add(jp);
-        JButton bt[] = new JButton[6];
 
-        bt[0] = new JButton(backBt);
+
+        /*bt[0] = new JButton(backBt);
         bt[1] = new JButton(frontBt);
-        for(int i = 2; i < 6; i++)
-            bt[i] = new JButton(buyBt);
 
         bt[0].setBounds(100,200,285,65);
-        bt[1].setBounds(400,200,285,65);
+        bt[1].setBounds(400,200,285,65);*/
 
-        for(int i = 2; i < 6; i++)
-            bt[i].setBounds(100+((i-2) * 280),555,250,65);
+        JButton bt[] = new JButton[4];
+        for(int i = 0; i < 4; i++)
+            bt[i] = new JButton(buyBt);
 
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 4; i++)
+            bt[i].setBounds(100+((i) * 280),555,250,65);
+
+        for(int i = 0; i < 4; i++){
             bt[i].setBorderPainted(false);
             bt[i].setContentAreaFilled(false);
         }
@@ -87,7 +89,7 @@ public class ExchangeScreen extends  JFrame{
         JButton mainButton = new JButton("메인");
         mainButton.setBounds(170,30,70,70);
 
-        for(int i = 0; i < 6; i++)
+        for(int i = 0; i < 4; i++)
             add(bt[i]);
         add(mainButton);
         add(topBar);
@@ -107,7 +109,7 @@ public class ExchangeScreen extends  JFrame{
                 setVisible(false); // 창 안보이게 하기 
             }
         });
-        bt[0].addActionListener(new ActionListener() {
+        /*bt[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 checkFrontBack = true;
@@ -122,7 +124,7 @@ public class ExchangeScreen extends  JFrame{
                 revalidate();
                 repaint();
             }
-        });
+        });*/
 
     }
     class MyPanel extends JPanel{
