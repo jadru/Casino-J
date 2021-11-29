@@ -25,10 +25,11 @@ public class InGameResultDialog extends JDialog {
             JLabel label1 = new JLabel("WIN! 포인트 100점 적립");
             label1.setFont(new Font("Arial", Font.BOLD, 30));
             add(label1);
-            b.givePoint(user_id,100);
+            b.giveRecord(user_id,1, 0, 100);
         }else{
             JLabel label1 = new JLabel("졌습니다...");
             label1.setFont(new Font("Arial", Font.BOLD, 30));
+            b.giveRecord(user_id,0, 1, 0);
             add(label1);
         }
         JButton btn = new JButton("메인으로 가기");
