@@ -31,7 +31,6 @@ public class InGamePlayDialog extends JDialog {
         header.setBounds(30, 30, 340, 30);
 
         add(header); add(lose_btn); add(finish_btn); add(addcard_btn);
-
         addcard_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -70,5 +69,6 @@ public class InGamePlayDialog extends JDialog {
                 remove(frame);
             }
         });
+        setVisible(true);
     }
 }

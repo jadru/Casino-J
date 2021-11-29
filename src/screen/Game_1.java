@@ -125,7 +125,6 @@ public class Game_1 extends JFrame {
                 resultOut(false, point);
             }
         InGamePlayDialog dialog = new InGamePlayDialog(this, "블랙잭 하는 중", point);
-        dialog.setVisible(true);
     }
     private void setGameGUI(){
         every_cards = makeCardDeck();
@@ -193,7 +192,6 @@ public class Game_1 extends JFrame {
                 title,
                 iswin,
                 user_id);
-        dialog.setVisible(true);
         game.setEnabled(false);
         dialog.remove(game);
         game.dispose();
