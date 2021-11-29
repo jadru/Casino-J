@@ -17,6 +17,6 @@ public class ThemeManager {
         return new Color(decode(background_color[skin]));
     }
     public static String getCardBackImgURL(){
-        return "asset/card_back_" + skin;
+        return "asset/card_back_" + skin+".png";
     }
 }
