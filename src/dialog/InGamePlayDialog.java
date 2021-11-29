@@ -8,18 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InGamePlayDialog extends JDialog {
-
-    public InGamePlayDialog(JFrame frame, String title, int countpoint) {
+    int point;
+    public InGamePlayDialog(JFrame frame, String title, int point) {
         super(frame, title, true);
         setLayout(null);
         setSize(400, 200);
-
+        this.point = point;
         Dimension frameSize = getSize();
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((windowSize.width - frameSize.width) / 2,
+        setLocation((windowSize.width - frameSize.width) / 2 - 200,
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-        JLabel header = new JLabel("현재 점수 " + countpoint + "점입니다. 카드를 추가하시겠어요?");
+        JLabel header = new JLabel("현재 점수 " + point + "점입니다. 카드를 추가하시겠어요?");
         JButton addcard_btn = new JButton("한장 더");
         JButton lose_btn = new JButton("기권 패");
         JButton finish_btn = new JButton("한판 승");
@@ -34,8 +35,39 @@ public class InGamePlayDialog extends JDialog {
         addcard_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
                 screen.Game_1.addUserCardFromDialog();
+                setVisible(false);
+                dispose();
+                removeAll();
+                repaint();
+                revalidate();
+                remove(frame);
+            }
+        });
+        lose_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                screen.Game_1.resultOut(false, point);
+                setVisible(false);
+                dispose();
+                removeAll();
+                repaint();
+                revalidate();
+                screen.Game_1.setFinish();
+                remove(frame);
+            }
+        });
+        finish_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                screen.Game_1.finishGame();
+                setVisible(false);
+                dispose();
+                removeAll();
+                repaint();
+                revalidate();
+                screen.Game_1.setFinish();
+                remove(frame);
             }
         });
     }

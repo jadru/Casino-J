@@ -1,6 +1,7 @@
 package screen;
 
 import dialog.InGamePlayDialog;
+import dialog.InGameResultDialog;
 import panel.GamePanel;
 import support.SQLiteManager;
 import support.ShuffleCard;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import static support.ShuffleCard.makeCardDeck;
 import static support.ShuffleCard.getCardFromDeck;
@@ -22,15 +24,17 @@ public class Game_1 extends JFrame {
 
     private static String [][] every_cards;
     private static boolean [] using_cards;
-    private static ArrayList<Integer> user_card_deck = new ArrayList<Integer>();
-    private static ArrayList<Integer> com_cards_deck = new ArrayList<Integer>();
+    private static ArrayList<Integer> user_cards_deck;
+    private static ArrayList<Integer> com_cards_deck;
 
-    private static int usercard_cnt = 0;
-    private static int comcard_cnt = 0;
+    private static int usercard_cnt;
+    private static int comcard_cnt;
     private static JFrame game;
+    private static Random rd = new Random();
+    static boolean is_finished;
 
-    private final String user_id;
-    private GamePanel main = new GamePanel();
+    private static String user_id = "";
+    private GamePanel main;
     SQLiteManager sql_manager;
 
     JPanel com_profile_panel;
@@ -42,6 +46,8 @@ public class Game_1 extends JFrame {
     Game_1(String id) {
         this.user_id = id;
         game = this;
+        is_finished = false;
+        main = new GamePanel();
         generateGUI();
         setGameGUI();
         startGame();
@@ -60,6 +66,9 @@ public class Game_1 extends JFrame {
 
         ShuffleCard.game = this;
 
+        user_cards_deck = new ArrayList<Integer>();
+        com_cards_deck = new ArrayList<Integer>();
+
         com_profile_panel = new JPanel(new CardLayout());
         user_profile_panel = new JPanel(new CardLayout());
         com_card_panel = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
@@ -71,6 +80,9 @@ public class Game_1 extends JFrame {
         com_card_panel.setBounds(0, 160, 1280, 200);
         user_card_panel.setBounds(0, 360, 1280, 200);
         button_panel.setBounds(0, 560, 1280, 160);
+
+        usercard_cnt = 0;
+        comcard_cnt = 0;
 
         JLabel com_profile_img = new JLabel(COMPUTER_NAME,
                 new ImageIcon(COMPUTER_IMG_URL),
@@ -87,14 +99,20 @@ public class Game_1 extends JFrame {
 
         setVisible(true); com_profile_panel.setVisible(true); user_profile_panel.setVisible(true);
         com_card_panel.setVisible(true); user_card_panel.setVisible(true); button_panel.setVisible(true);
+
+        repaint(); revalidate();
     }
 
     private void startGame(){
-        boolean is_finished = false;
         try {
             while(!is_finished){
-                Thread.sleep(2000);
-                makePlayDialog();
+                int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
+                if(userpoint > 21){
+                    screen.Game_1.resultOut(false, userpoint);
+                    is_finished = true;
+                }else{
+                    makePlayDialog();
+                }
             }
         }catch(Exception e) {
             System.out.println(e);
@@ -102,27 +120,11 @@ public class Game_1 extends JFrame {
 
     }
     private void makePlayDialog(){
-        int getpoint = 0;
-        int hasA = 0;
-
-        for(int i = 0; i < usercard_cnt; i++){
-            int point = user_card_deck.get(i) % 13;
-            if(point > 9) point = 10;
-            else point++;
-            if(point == 0) hasA++;
-            getpoint += point;
-        }
-
-        if (getpoint > 21){
-            while(hasA > 0){
-                getpoint -= 10;
-                hasA--;
+        int point = calculatePoint(user_cards_deck, usercard_cnt);
+            if(point > 21){
+                resultOut(false, point);
             }
-            if(getpoint > 21){
-                resultOut(false, getpoint);
-            }
-        }
-        InGamePlayDialog dialog = new InGamePlayDialog(this, "블랙잭 하는 중", getpoint);
+        InGamePlayDialog dialog = new InGamePlayDialog(this, "블랙잭 하는 중", point);
         dialog.setVisible(true);
     }
     private void setGameGUI(){
@@ -130,7 +132,7 @@ public class Game_1 extends JFrame {
         using_cards = new boolean[52];
         Arrays.fill(using_cards, false);
         for(int i = 0; i < 2; i++){
-            user_card_deck.add(getCardFromDeck());
+            user_cards_deck.add(getCardFromDeck());
             comcard_cnt++;
         }
         for(int i = 0; i < 2; i++){
@@ -141,7 +143,7 @@ public class Game_1 extends JFrame {
         for (int i = 0; i < 2; i++) {
             addCardBack(com_card_panel);
         }
-        for (int card : user_card_deck) {
+        for (int card : user_cards_deck) {
             addCardGUI(card, user_card_panel);
         }
 
@@ -162,7 +164,7 @@ public class Game_1 extends JFrame {
         }
         cardPanel.add(btn);
     }
-    private void addCardBack(JPanel cardPanel){
+    private static void addCardBack(JPanel cardPanel){
         JButton btn = new JButton();
         btn.setIcon(new ImageIcon(support.ThemeManager.getCardBackImgURL(user_id)));
 //        btn.addActionListener(new cardActionListener());
@@ -177,17 +179,89 @@ public class Game_1 extends JFrame {
     public boolean getAtUsedCard(int index){
         return using_cards[index];
     }
-    private void resultOut(boolean iswin, int point){
+    public static void resultOut(boolean iswin, int point){
+        is_finished=true;
+        String title;
+        if(iswin){
+            title = "승리";
+        }else{
+            title = "패배";
 
+        }
+        InGameResultDialog dialog = new InGameResultDialog(
+                game,
+                title,
+                iswin,
+                user_id);
+        dialog.setVisible(true);
+        game.setEnabled(false);
+        dialog.remove(game);
+        game.dispose();
+        game.removeAll();
+        game.setVisible(false);
+        game.repaint(); game.revalidate();
     }
     public static void addUserCardFromDialog(){
-        user_card_deck.add(getCardFromDeck());
+        user_cards_deck.add(getCardFromDeck());
         usercard_cnt++;
-        addCardGUI(user_card_deck.get(usercard_cnt-1), user_card_panel);
+        addCardGUI(user_cards_deck.get(usercard_cnt-1), user_card_panel);
+        if(calculatePoint(com_cards_deck, comcard_cnt) < 21 - 5){
+            if(rd.nextBoolean()){
+                com_cards_deck.add(getCardFromDeck());
+                addCardBack(com_card_panel);
+                comcard_cnt++;
+                if(calculatePoint(com_cards_deck, comcard_cnt) > 21){
+                    screen.Game_1.resultOut(true, calculatePoint(com_cards_deck, comcard_cnt));
+                    is_finished=true;
+                }
+            }
+        }
         game.revalidate(); game.repaint();
     }
+    public static void finishGame(){
+        is_finished=true;
+        com_card_panel.removeAll();
+        for (int card : com_cards_deck) {
+            addCardGUI(card, com_card_panel);
+        }
+        game.repaint(); game.revalidate();
+        int compoint = calculatePoint(com_cards_deck, comcard_cnt);
+        int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
+        if(userpoint > 21){
+            screen.Game_1.resultOut(false, userpoint);
+        }else{
+            if(compoint > userpoint){
+                screen.Game_1.resultOut(false, userpoint);
+            }else{
+                screen.Game_1.resultOut(true, userpoint);
+            }
+        }
+    }
+    public static int calculatePoint(ArrayList<Integer> list, int cnt){
+        int getpoint = 0;
+        int hasA = 0;
 
+        for(int i = 0; i < cnt; i++){
+            int point = list.get(i) % 13;
+            if(point > 9) point = 10;
+            else point++;
+            if(point == 0) hasA++;
+            getpoint += point;
+        }
+
+        if (getpoint > 21){
+            while(hasA > 0){
+                getpoint -= 10;
+                hasA--;
+            }
+        }
+        return getpoint;
+    }
     public static void main(String[] args){
-        new Game_1("ddd");
+        new Game_1("admin");
+    }
+
+    public static void setFinish(){
+        is_finished = true;
     }
 }
