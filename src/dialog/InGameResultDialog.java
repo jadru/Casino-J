@@ -11,5 +11,11 @@ public class InGameResultDialog extends JDialog {
         super(frame, title, true);
         setLayout(null);
         setSize(400, 200);
+
+        if(iswinorlose){
+
+        }else{
+
+        }
     }
 }

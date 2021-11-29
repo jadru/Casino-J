@@ -1,7 +1,6 @@
 package screen;
 
 import dialog.InGamePlayDialog;
-import dialog.InGameProgressBarDialog;
 import panel.GamePanel;
 import support.SQLiteManager;
 import support.ShuffleCard;
@@ -9,8 +8,6 @@ import support.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import static support.ShuffleCard.makeCardDeck;
@@ -44,8 +41,6 @@ public class Game_1 extends JFrame {
     JPanel button_panel;
 
     Game_1(String id) {
-        progressThread th1 = new progressThread(this);
-        th1.start();
         this.user_id = id;
         generateGUI();
         setGameGUI();
@@ -179,28 +174,5 @@ public class Game_1 extends JFrame {
 
     public static void main(String[] args){
         new Game_1("ddd");
-    }
-
-    private class progressThread extends Thread {
-        Game_1 game;
-
-        public progressThread(Game_1 game) {
-            this.game = game;
-        }
-
-        public void run() { // run 메서드는 수행 흐름이 하나 더 생겼을 때의 메서드이다.
-            // 또 다른 메인메서드라고 생각하면 된다.
-            InGameProgressBarDialog progressBarDialog
-                    = new InGameProgressBarDialog(game, "로딩중");
-            progressBarDialog.setVisible(true);
-            try {
-                for (int i = 0; i < 10; i++) {
-                    Thread.sleep(300);
-                    progressBarDialog.addValue(10);
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }
