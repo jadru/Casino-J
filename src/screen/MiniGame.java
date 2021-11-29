@@ -21,7 +21,7 @@ public class MiniGame extends JFrame implements ActionListener {
     static int timer_stop; // 타이머를 종료할 변수
     static Timer timer = new Timer();
     String id;
-    ImageIcon game_bt = new ImageIcon("asset/card_back_0.png");//함수 구현하세용
+    ImageIcon game_bt = new ImageIcon(support.ThemeManager.getCardBackImgURL());//함수 구현하세용
 
     public MiniGame(String id){
         frm.setTitle("미니게임");

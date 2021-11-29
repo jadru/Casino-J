@@ -156,7 +156,7 @@ public class Game_1 extends JFrame {
     }
     private void addCardBack(JPanel cardPanel){
         JButton btn = new JButton();
-        btn.setIcon(new ImageIcon("asset/card_back_1.png"));
+        btn.setIcon(new ImageIcon(support.ThemeManager.getCardBackImgURL()));
 //        btn.addActionListener(new cardActionListener());
         btn.setBackground(Color.WHITE);
         btn.setPreferredSize(new Dimension(120, 160));

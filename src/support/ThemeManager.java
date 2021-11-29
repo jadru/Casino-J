@@ -5,8 +5,8 @@ import java.awt.*;
 import static java.lang.Integer.decode;
 
 public class ThemeManager {
-    int skin = 0;
-    String [] background_color = new String[]{"#FFFFFF", "#FFFFFF", "#FFFFFF", "#000000", "#000000"};
+    private static int skin = 0;
+    private String [] background_color = new String[]{"#FFFFFF", "#FFFFFF", "#FFFFFF", "#000000", "#000000"};
 
     public ThemeManager(String id){
         SQLiteManager b = new SQLiteManager("","","");
@@ -16,7 +16,7 @@ public class ThemeManager {
     public Color getBackgroundColor(){
         return new Color(decode(background_color[skin]));
     }
-    public String getCardBackImgURL(){
+    public static String getCardBackImgURL(){
         return "asset/card_back_" + skin;
     }
 }
