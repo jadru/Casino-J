@@ -4,6 +4,7 @@ import dialog.MyModalDialog;
 import support.SQLiteManager;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.event.*;
 import java.awt.*;
 import java.awt.font.ImageGraphicAttribute;
@@ -19,6 +20,13 @@ public class LoginScreen extends JFrame{
 
         JTextField ID = new JTextField();
         JPasswordField PW = new JPasswordField();
+        ID.setBackground(Color.BLACK);
+        PW.setBackground(Color.BLACK);
+        ID.setFont(new Font("Gothic",Font.BOLD,35));
+        PW.setFont(new Font("Gothic",Font.BOLD,35));
+        ID.setForeground(Color.WHITE);
+        PW.setForeground(Color.WHITE);
+
         JLabel id_label = new JLabel("ID : ");
         JLabel pw_label = new JLabel("PW : ");
         JLabel gameList[] = new JLabel[3];

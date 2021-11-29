@@ -341,6 +341,34 @@ public class SQLiteManager{
         }
 
     }
+    public void giveRecord(String id,int win,int lose,int point){
+        int apoint = getPoint(id);
+        int wwin = getWin(id);
+        int llose = getLose(id);
+        apoint += point;
+        wwin += win;
+        llose +=lose;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection(SQLURL);
+            Statement stmt = con.createStatement();
+            stmt.execute("update player set win = "+wwin+" where id = '"+id+"'");
+            stmt.execute("update player set win = "+llose+" where id = '"+id+"'");
+            stmt.execute("update player set point = "+apoint+" where id = '"+id+"'");
+        }
+        catch(SQLException | ClassNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+
+    }
     public void SkinChange(String id,int index){
         try{
             Class.forName("org.sqlite.JDBC");
