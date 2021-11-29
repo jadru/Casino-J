@@ -8,9 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MyModalDialog extends JDialog {
-    private ImageIcon settingbgImg = new ImageIcon("asset/settingScreen.png");
-    ImageIcon soundOn = new ImageIcon("asset/soundOn.png");
-    ImageIcon soundOff = new ImageIcon("asset/soundOff.png");
+    private ImageIcon settingbgImg = new ImageIcon("src/asset/settingScreen.png");
+    ImageIcon soundOn = new ImageIcon("src/asset/soundOn.png");
+    ImageIcon soundOff = new ImageIcon("src/asset/soundOff.png");
     JButton okButton = new JButton("확인");
     JButton bgSound = new JButton(soundOn);
     JButton efSound = new JButton(soundOn);
@@ -55,10 +55,10 @@ public class MyModalDialog extends JDialog {
         bgSound.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (bgCheck == true) {
+                if (bgCheck) {
                     bgCheck = false;
                     bgSound.setIcon(soundOn);
-                    MainScreen.Sound("asset/GameBackgroundMusic.mp3", true);
+                    MainScreen.Sound("src/asset/GameBackgroundMusic.mp3", true);
                 } else {
                     bgCheck = true;
                     bgSound.setIcon(soundOff);
@@ -70,7 +70,7 @@ public class MyModalDialog extends JDialog {
         efSound.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (efCheck == true) {
+                if (efCheck) {
                     efCheck = false;
                     efSound.setIcon(soundOn);
                 } else {

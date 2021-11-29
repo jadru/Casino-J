@@ -34,12 +34,12 @@ public class LoginScreen extends JFrame{
         String str[] = {"로그인","회원가입"};
         JButton bt[] = new JButton[2];
 
-        ImageIcon bt0 = new ImageIcon("asset/LogInButton.png");
-        ImageIcon bt1 = new ImageIcon("asset/SignInButton.png");
-        ImageIcon list1 = new ImageIcon("asset/login_gamelist_1.png");
-        ImageIcon list2 = new ImageIcon("asset/login_gamelist_2.png");
-        ImageIcon list3 = new ImageIcon("asset/login_gamelist_3.png");
-        ImageIcon Doge = new ImageIcon("asset/DOGE.png");
+        ImageIcon bt0 = new ImageIcon("src/asset/LogInButton.png");
+        ImageIcon bt1 = new ImageIcon("src/asset/SignInButton.png");
+        ImageIcon list1 = new ImageIcon("src/asset/login_gamelist_1.png");
+        ImageIcon list2 = new ImageIcon("src/asset/login_gamelist_2.png");
+        ImageIcon list3 = new ImageIcon("src/asset/login_gamelist_3.png");
+        ImageIcon Doge = new ImageIcon("src/asset/DOGE.png");
         JLabel Coin = new JLabel(Doge);
 
         bt[0] = new JButton(bt0);
@@ -126,7 +126,7 @@ public class LoginScreen extends JFrame{
 
 
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("asset/LoginImg.png");
+        private ImageIcon icon = new ImageIcon("src/asset/LoginImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

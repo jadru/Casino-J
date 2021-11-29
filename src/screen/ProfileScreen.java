@@ -38,11 +38,11 @@ public class ProfileScreen extends JFrame{
 
 
 
-        ImageIcon card0_backside = new ImageIcon("asset/card_back_0.png");
-        ImageIcon card1_backside = new ImageIcon("asset/card_back_1.png");
-        ImageIcon card2_backside = new ImageIcon("asset/card_back_2.png");
-        ImageIcon card3_backside = new ImageIcon("asset/card_back_3.png");
-        ImageIcon card4_backside = new ImageIcon("asset/card_back_4.png");
+        ImageIcon card0_backside = new ImageIcon("src/asset/card_back_0.png");
+        ImageIcon card1_backside = new ImageIcon("src/asset/card_back_1.png");
+        ImageIcon card2_backside = new ImageIcon("src/asset/card_back_2.png");
+        ImageIcon card3_backside = new ImageIcon("src/asset/card_back_3.png");
+        ImageIcon card4_backside = new ImageIcon("src/asset/card_back_4.png");
 
         card0_back = card0_backside.getImage();
         card1_back = card1_backside.getImage();
@@ -65,26 +65,26 @@ public class ProfileScreen extends JFrame{
         CardBt[4].setBounds(840,350,130,160);
 
 
-        CardText.setFont(new Font("Gothic",Font.BOLD,25));
+        CardText.setFont(new Font("Arial",Font.BOLD,25));
 
         for(int i = 0; i < 6; i++) {
             gridTitle[i] = new JLabel(title[i]);
             gridTitle[i].setBounds(200,100+i*70, 300,100);
-            gridTitle[i].setFont(new Font("Gothic",Font.BOLD,35));
+            gridTitle[i].setFont(new Font("Arial",Font.BOLD,35));
             gridTitle[i].setForeground(Color.WHITE);
             add(gridTitle[i]);
         }
 
         gridElement[0] = new JLabel(id);
         gridElement[1] = new JLabel(username);
-        gridElement[2] = new JLabel(userWin+"승 "+userLose+"패 승률:"+pow+"%");
+        gridElement[2] = new JLabel(userWin+"승 "+userLose+"패 승률:"+Math.round(pow)+"퍼");
         gridElement[3] = new JLabel(String.valueOf(userLevel));
         gridElement[4] = new JLabel("-");//랭킹 들어가야함
         gridElement[5] = new JLabel(String.valueOf(userPoint));
 
         for(int i = 0; i < 6; i++) {
-            gridElement[i].setBounds(300,100+i*70, 400,100);
-            gridElement[i].setFont(new Font("Gothic",Font.BOLD,35));
+            gridElement[i].setBounds(300,100+i*70, 500,100);
+            gridElement[i].setFont(new Font("Arial",Font.BOLD,35));
             gridElement[i].setForeground(Color.WHITE);
             add(gridElement[i]);
         }
@@ -153,7 +153,7 @@ public class ProfileScreen extends JFrame{
 
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("asset/profileImg.png");
+        private ImageIcon icon = new ImageIcon("src/asset/profileImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

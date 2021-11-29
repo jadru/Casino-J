@@ -18,8 +18,8 @@ import static support.ShuffleCard.getCardFromDeck;
 public class Game_1 extends JFrame {
 
     private static final String COMPUTER_NAME = "블랙잭 AI";
-    private static final String COMPUTER_IMG_URL = "asset/icons8-bot-96.png";
-    private static final String USER_IMG_URL = "asset/icons8-test-account-96.png";
+    private static final String COMPUTER_IMG_URL = "src/asset/icons8-bot-96.png";
+    private static final String USER_IMG_URL = "src/asset/icons8-test-account-96.png";
     private static final int PADDING = 20;
 
     private static String [][] every_cards;

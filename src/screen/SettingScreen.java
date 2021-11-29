@@ -35,7 +35,7 @@ public class SettingScreen extends  JFrame{
         });
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("asset/settingImg.png");
+        private ImageIcon icon = new ImageIcon("src/asset/settingImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

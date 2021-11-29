@@ -26,11 +26,11 @@ public class ExchangeScreen extends  JFrame{
         userPoint.setBounds(410,12,400,100);
         add(usertext);
         add(userPoint);
-        ImageIcon topbar_img = new ImageIcon("asset/topbar.png");
-        ImageIcon frontBt = new ImageIcon("asset/frontBt_Img.png");
-        ImageIcon backBt = new ImageIcon("asset/backBt_Img.png");
-        ImageIcon buyBt = new ImageIcon("asset/buyBt_Img.png");
-        ImageIcon possessionBt = new ImageIcon("asset/possessionBt_Img.png");
+        ImageIcon topbar_img = new ImageIcon("src/asset/topbar.png");
+        ImageIcon frontBt = new ImageIcon("src/asset/frontBt_Img.png");
+        ImageIcon backBt = new ImageIcon("src/asset/backBt_Img.png");
+        ImageIcon buyBt = new ImageIcon("src/asset/buyBt_Img.png");
+        ImageIcon possessionBt = new ImageIcon("src/asset/possessionBt_Img.png");
 
 
         JPanel jp = new JPanel(){
@@ -46,10 +46,10 @@ public class ExchangeScreen extends  JFrame{
 
             }
         };
-        ImageIcon card1_backside = new ImageIcon("asset/card_back_1.png");
-        ImageIcon card2_backside = new ImageIcon("asset/card_back_2.png");
-        ImageIcon card3_backside = new ImageIcon("asset/card_back_3.png");
-        ImageIcon card4_backside = new ImageIcon("asset/card_back_4.png");
+        ImageIcon card1_backside = new ImageIcon("src/asset/card_back_1.png");
+        ImageIcon card2_backside = new ImageIcon("src/asset/card_back_2.png");
+        ImageIcon card3_backside = new ImageIcon("src/asset/card_back_3.png");
+        ImageIcon card4_backside = new ImageIcon("src/asset/card_back_4.png");
 
 
 
@@ -233,7 +233,7 @@ public class ExchangeScreen extends  JFrame{
 
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("asset/exchangeImg.png");
+        private ImageIcon icon = new ImageIcon("src/asset/exchangeImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

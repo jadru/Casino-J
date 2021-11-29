@@ -66,11 +66,11 @@ public class MainScreen extends JFrame{
         add(userPoint);
 
 
-        ImageIcon exchange_bt_img = new ImageIcon("asset/exchange_button.png");
-        ImageIcon ranking_bt_img = new ImageIcon("asset/ranking_button.png");
-        ImageIcon game_bt_img = new ImageIcon("asset/game_button.png");
-        ImageIcon setting_bt_img = new ImageIcon("asset/setting_button.png");
-        ImageIcon topbar_img = new ImageIcon("asset/topbar.png");
+        ImageIcon exchange_bt_img = new ImageIcon("src/asset/exchange_button.png");
+        ImageIcon ranking_bt_img = new ImageIcon("src/asset/ranking_button.png");
+        ImageIcon game_bt_img = new ImageIcon("src/asset/game_button.png");
+        ImageIcon setting_bt_img = new ImageIcon("src/asset/setting_button.png");
+        ImageIcon topbar_img = new ImageIcon("src/asset/topbar.png");
 
 
         //버튼 및 라벨 이미지 넣기
@@ -177,7 +177,7 @@ public class MainScreen extends JFrame{
 
 	}
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("asset/mainImg.jpg");
+        private ImageIcon icon = new ImageIcon("src/asset/mainImg.jpg");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

@@ -126,7 +126,7 @@ public class SignupScreen extends JFrame {
         });
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("asset/mainimg.png");
+        private ImageIcon icon = new ImageIcon("src/asset/mainimg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

@@ -11,7 +11,7 @@ public class ThemeManager {
         return new Color(decode(background_color[getSQL(id)]));
     }
     public static String getCardBackImgURL(String id){
-        return "asset/card_back_" + getSQL(id)+".png";
+        return "src/asset/card_back_" + getSQL(id)+".png";
     }
     private static int getSQL(String id){
         SQLiteManager b = new SQLiteManager("","","");
