@@ -66,7 +66,7 @@ public class SignupScreen extends JFrame {
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((windowSize.width - frameSize.width) / 2,
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setVisible(true);
         idCheck.addActionListener(new ActionListener() {
             @Override
