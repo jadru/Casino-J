@@ -1,6 +1,7 @@
 package screen;
 
-import dialog.InGameDialog;
+import dialog.InGamePlayDialog;
+import dialog.InGameProgressBarDialog;
 import panel.GamePanel;
 import support.SQLiteManager;
 import support.ShuffleCard;
@@ -22,14 +23,14 @@ public class Game_1 extends JFrame {
     private static final String USER_IMG_URL = "asset/icons8-test-account-96.png";
     private static final int PADDING = 20;
 
-    private String [][] every_cards;
-    private boolean [] using_cards;
-    private boolean is_win = false;
-    private int[] user_card_deck;
-    private int[] com_cards_deck;
+    private static String [][] every_cards;
+    private static boolean [] using_cards;
+    private static boolean is_win = false;
+    private static int[] user_card_deck;
+    private static int[] com_cards_deck;
 
-    private int usercard_cnt = 0;
-    private int comcard_cnt = 0;
+    private static int usercard_cnt = 0;
+    private static int comcard_cnt = 0;
 
     private final String user_id;
     private GamePanel main = new GamePanel();
@@ -38,11 +39,13 @@ public class Game_1 extends JFrame {
 
     JPanel com_profile_panel;
     JPanel user_profile_panel;
-    JPanel com_card_panel;
-    JPanel user_card_panel;
+    static JPanel com_card_panel;
+    static JPanel user_card_panel;
     JPanel button_panel;
 
     Game_1(String id) {
+        progressThread th1 = new progressThread(this);
+        th1.start();
         this.user_id = id;
         generateGUI();
         setGameGUI();
@@ -94,22 +97,34 @@ public class Game_1 extends JFrame {
 
     private void startGame(){
         boolean is_finished = false;
-
-        while(!is_finished){
-            int getpoint = 0;
-            for(int i = 0; i < usercard_cnt; i++){
-                int point = user_card_deck[i] % 13;
-                if(point > 10) point = 10;
-                getpoint += point;
+        try {
+            while(!is_finished){
+                Thread.sleep(2000);
+                makePlayDialog();
             }
-            new InGameDialog(this, "어떻게 하시겠어요?", getpoint);
+        }catch(Exception e) {
+            System.out.println(e);
         }
+
+    }
+    private void makePlayDialog(){
+        int getpoint = 0;
+        int hasA = 0;
+
+        for(int i = 0; i < usercard_cnt; i++){
+            int point = user_card_deck[i] % 13;
+            if(point > 9) point = 10;
+            else point++;
+            if(point == 0) hasA++;
+            getpoint += point;
+        }
+        InGamePlayDialog dialog = new InGamePlayDialog(this, "블랙잭 하는 중", getpoint);
+        dialog.setVisible(true);
     }
     private void setGameGUI(){
         every_cards = makeCardDeck();
         using_cards = new boolean[52];
         Arrays.fill(using_cards, false);
-
         user_card_deck = getCardFromDeck(2);
         com_cards_deck = getCardFromDeck(2);
 
@@ -118,12 +133,14 @@ public class Game_1 extends JFrame {
             comcard_cnt++;
         }
         for (int card : user_card_deck) {
-            addCardGUI(user_card_deck, card, user_card_panel);
+            addCardGUI(card, user_card_panel);
             usercard_cnt++;
         }
-        System.out.println("게임 세팅 완료");
+
+        repaint();
+        revalidate();
     }
-    private void addCardGUI(int[] deck, int pick, JPanel cardPanel){
+    public static void addCardGUI(int pick, JPanel cardPanel){
         JButton btn = new JButton();
         btn.setText(every_cards[pick / 13][pick % 13]);
         btn.setBackground(Color.WHITE);
@@ -152,8 +169,38 @@ public class Game_1 extends JFrame {
     public boolean getAtUsedCard(int index){
         return using_cards[index];
     }
+    private void resultOut(){
+
+    }
+    public static void addUserCardFromDialog(){
+        addCardGUI(user_card_deck[usercard_cnt-1], user_card_panel);
+        usercard_cnt++;
+    }
 
     public static void main(String[] args){
         new Game_1("ddd");
+    }
+
+    private class progressThread extends Thread {
+        Game_1 game;
+
+        public progressThread(Game_1 game) {
+            this.game = game;
+        }
+
+        public void run() { // run 메서드는 수행 흐름이 하나 더 생겼을 때의 메서드이다.
+            // 또 다른 메인메서드라고 생각하면 된다.
+            InGameProgressBarDialog progressBarDialog
+                    = new InGameProgressBarDialog(game, "로딩중");
+            progressBarDialog.setVisible(true);
+            try {
+                for (int i = 0; i < 10; i++) {
+                    Thread.sleep(300);
+                    progressBarDialog.addValue(10);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

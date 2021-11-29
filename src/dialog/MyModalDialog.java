@@ -3,6 +3,7 @@ package dialog;
 import screen.MainScreen;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +22,11 @@ public class MyModalDialog extends JDialog {
     public MyModalDialog(JFrame frame, String title) {
         super(frame, title, true);
         setLayout(null);
+
+        Dimension frameSize = getSize();
+        Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((windowSize.width - frameSize.width) / 2,
+                (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
 
         okButton.setBounds(700, 320, 100, 50);
         bgSound.setBounds(240, 100, 100, 100);
