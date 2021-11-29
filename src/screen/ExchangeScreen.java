@@ -99,9 +99,8 @@ public class ExchangeScreen extends  JFrame{
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((windowSize.width - frameSize.width) / 2,
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setVisible(true);
-        
         mainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,6 +108,112 @@ public class ExchangeScreen extends  JFrame{
                 setVisible(false); // 창 안보이게 하기 
             }
         });
+
+        bt[0].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SQLiteManager b = new SQLiteManager("","","");
+                if(b.skinCheck(id,1)==true){
+                    JOptionPane.showMessageDialog(null,"이미 구매한 상품입니다.","Message",JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int result = JOptionPane.showConfirmDialog(null,"정말 구매하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
+                    if(result==JOptionPane.CLOSED_OPTION){
+
+                    }
+                    else if(result == JOptionPane.YES_OPTION){
+                        if(b.getPoint(id)>=1000){
+                            b.buySkin(id,1);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"포인트가 부족합니다.","Message",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else{
+
+                    }
+                }
+            }
+        });
+        bt[1].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SQLiteManager b = new SQLiteManager("","","");
+                if(b.skinCheck(id,2)==true){
+                    JOptionPane.showMessageDialog(null,"이미 구매한 상품입니다.","Message",JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int result = JOptionPane.showConfirmDialog(null,"정말 구매하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
+                    if(result==JOptionPane.CLOSED_OPTION){
+
+                    }
+                    else if(result == JOptionPane.YES_OPTION){
+                        if(b.getPoint(id)>=1000){
+                            b.buySkin(id,2);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"포인트가 부족합니다.","Message",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else{
+
+                    }
+                }
+            }
+        });
+        bt[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SQLiteManager b = new SQLiteManager("","","");
+                if(b.skinCheck(id,3)==true){
+                    JOptionPane.showMessageDialog(null,"이미 구매한 상품입니다.","Message",JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int result = JOptionPane.showConfirmDialog(null,"정말 구매하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
+                    if(result==JOptionPane.CLOSED_OPTION){
+
+                    }
+                    else if(result == JOptionPane.YES_OPTION){
+                        if(b.getPoint(id)>=1000){
+                            b.buySkin(id,3);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"포인트가 부족합니다.","Message",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else{
+
+                    }
+                }
+            }
+        });
+        bt[3].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SQLiteManager b = new SQLiteManager("","","");
+                if(b.skinCheck(id,4)==true){
+                    JOptionPane.showMessageDialog(null,"이미 구매한 상품입니다.","Message",JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int result = JOptionPane.showConfirmDialog(null,"정말 구매하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
+                    if(result==JOptionPane.CLOSED_OPTION){
+
+                    }
+                    else if(result == JOptionPane.YES_OPTION){
+                        if(b.getPoint(id)>=1000){
+                            b.buySkin(id,4);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"포인트가 부족합니다.","Message",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else{
+
+                    }
+                }
+            }
+        });
+
         /*bt[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -158,6 +158,52 @@ public class SQLiteManager{
 
         return this.win;
     }
+    public boolean skinCheck(String id,int index){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            int bcheck;
+            con = DriverManager.getConnection(SQLURL);
+            Statement stmt = con.createStatement();
+            sql="select * from player where id = '"+id+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if(index==1){
+                bcheck=rs.getInt("skin1");
+                if(bcheck==1){
+                    return true;
+                }
+            }else if(index==2){
+                bcheck=rs.getInt("skin2");
+                if(bcheck==1){
+                    return true;
+                }
+            }else if(index==3){
+                bcheck=rs.getInt("skin3");
+                if(bcheck==1){
+                    return true;
+                }
+            }else if(index==4){
+                bcheck=rs.getInt("skin4");
+                if(bcheck==1){
+                    return true;
+                }
+            }
+
+
+        }
+        catch(SQLException | ClassNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
+
+        return false;
+    }
     public int getLose(String id){
         try{
             Class.forName("org.sqlite.JDBC");
@@ -219,6 +265,7 @@ public class SQLiteManager{
         }
         return false;
     }
+
     public boolean idCheck(String iid){
         try{
             Class.forName("org.sqlite.JDBC");
@@ -288,6 +335,39 @@ public class SQLiteManager{
             }
         }
 
+    }
+    public void buySkin(String id,int index){
+        try{
+            int apoint = getPoint(id);
+            apoint -= 1000;
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection(SQLURL);
+            Statement stmt = con.createStatement();
+            PreparedStatement psmt = null;
+            if(index==1){
+                stmt.execute("update player set skin1 = 1"+" where id = '"+id+"'");
+            }else if(index==2){
+                stmt.execute("update player set skin2 = 1"+" where id = '"+id+"'");
+            }else if(index==3){
+                stmt.execute("update player set skin3 = 1"+" where id = '"+id+"'");
+            }else if(index==4){
+                stmt.execute("update player set skin3 = 1"+" where id = '"+id+"'");
+            }else{
+
+            }
+            stmt.execute("update player set point = "+apoint+" where id = '"+id+"'");
+        }
+        catch(SQLException | ClassNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
     }
     public Vector<String> getrank(){
         Vector<String> vec = new Vector<String>();
