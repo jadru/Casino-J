@@ -1,5 +1,6 @@
 package screen;
 
+import dialog.MyModalDialog;
 import support.SQLiteManager;
 
 import javax.swing.*;

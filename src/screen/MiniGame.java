@@ -14,20 +14,21 @@ public class MiniGame extends JFrame implements ActionListener {
     static JFrame frm = new JFrame();
     static JButton btn[] = new JButton[16];
     static JLabel image_label[] = new JLabel[16];
-
     static int click_stop = 0; // 클릭 했을 시 다른 버튼이 클릭이 안되게 함
     static int sec_time = 0; // 1초 단위
     static int dec_time = 0; // 0.1초 단위
     static int stop_time=-100; // 버튼이나 이미지를 1초후에 사라지게 할 변수
     static int timer_stop; // 타이머를 종료할 변수
-
     static Timer timer = new Timer();
     String id;
+    ImageIcon game_bt = new ImageIcon("asset/card_back_0.png");//함수 구현하세용
+
     public MiniGame(String id){
+        frm.setTitle("미니게임");
         this.id=id;
-        frm.setBounds(600, 150, 812, 838); // 프레임 위치, 크기 설정
+        frm.setBounds(600, 150, 490, 670); // 프레임 위치, 크기 설정
         frm.setLayout(null);
-        frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         for (i = 0; i < 16; i++) // 중복 검사
         {
@@ -43,23 +44,23 @@ public class MiniGame extends JFrame implements ActionListener {
         }
 
         for (i = 0; i < 16; i++) {
-            frm.add(btn[i] = new JButton("")); // 프레임안에 버튼을 넣음
+            frm.add(btn[i] = new JButton(game_bt)); // 프레임안에 버튼을 넣음
 
             btn[i].addActionListener(this); // 버튼에 이벤트를 사용하겠다
-            btn[i].setSize(200, 200);
+            btn[i].setSize(120, 160);
             if (i < 4)
-                btn[i].setLocation(0 + 200 * (i), 0);
+                btn[i].setLocation(0 + 120 * (i), 0);
             else if (i < 8)
-                btn[i].setLocation(0 + 200 * (i - 4), 200);
+                btn[i].setLocation(0 + 120 * (i - 4), 160);
             else if (i < 12)
-                btn[i].setLocation(0 + 200 * (i - 8), 400);
+                btn[i].setLocation(0 + 120 * (i - 8), 320);
             else if (i < 16)
-                btn[i].setLocation(0 + 200 * (i - 12), 600);
+                btn[i].setLocation(0 + 120 * (i - 12), 480);
         }
 
         for (i = 0; i < 16; i++) {
             if (num[i] == 0 || num[i] == 15)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/card_back_0.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image8.png")));
             else if (num[i] == 1 || num[i] == 14)
                 frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image1.png")));
             else if (num[i] == 2 || num[i] == 13)
@@ -75,95 +76,27 @@ public class MiniGame extends JFrame implements ActionListener {
             else if (num[i] == 7 || num[i] == 8)
                 frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image7.png")));
 
-            image_label[i].setSize(200, 200);
+            image_label[i].setSize(120, 160);
 
             if (i < 4)
-                image_label[i].setLocation(0 + 200 * (i), 0);
+                image_label[i].setLocation(0 + 120 * (i), 0);
             else if (i < 8)
-                image_label[i].setLocation(0 + 200 * (i - 4), 200);
+                image_label[i].setLocation(0 + 120 * (i - 4), 160);
             else if (i < 12)
-                image_label[i].setLocation(0 + 200 * (i - 8), 400);
+                image_label[i].setLocation(0 + 120 * (i - 8), 320);
             else if (i < 16)
-                image_label[i].setLocation(0 + 200 * (i - 12), 600);
+                image_label[i].setLocation(0 + 120 * (i - 12), 480);
             image_label[i].setVisible(false);
         }
 
         frm.setVisible(true); // 프레임을 볼수 있게 설정
-    }
-
-    public MiniGame() {
-        frm.setBounds(600, 150, 812, 838); // 프레임 위치, 크기 설정
-        frm.setLayout(null);
-        frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        for (i = 0; i < 16; i++) // 중복 검사
-        {
-            num[i] = rnd.nextInt(16);
-            if (i > 0) {
-                for (int j = 0; j < i; j++) {
-                    if (num[i] == num[j]) {
-                        i--;
-                        break;
-                    }
-                }
-            }
-        }
-
-        for (i = 0; i < 16; i++) {
-            frm.add(btn[i] = new JButton("")); // 프레임안에 버튼을 넣음
-
-            btn[i].addActionListener(this); // 버튼에 이벤트를 사용하겠다
-            btn[i].setSize(200, 200);
-            if (i < 4)
-                btn[i].setLocation(0 + 200 * (i), 0);
-            else if (i < 8)
-                btn[i].setLocation(0 + 200 * (i - 4), 200);
-            else if (i < 12)
-                btn[i].setLocation(0 + 200 * (i - 8), 400);
-            else if (i < 16)
-                btn[i].setLocation(0 + 200 * (i - 12), 600);
-        }
-
-        for (i = 0; i < 16; i++) {
-            if (num[i] == 0 || num[i] == 15)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/card_back_0.png")));
-            else if (num[i] == 1 || num[i] == 14)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image1.png")));
-            else if (num[i] == 2 || num[i] == 13)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image2.png")));
-            else if (num[i] == 3 || num[i] == 12)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image3.png")));
-            else if (num[i] == 4 || num[i] == 11)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image4.png")));
-            else if (num[i] == 5 || num[i] == 10)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image5.png")));
-            else if (num[i] == 6 || num[i] == 9)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image6.png")));
-            else if (num[i] == 7 || num[i] == 8)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image7.png")));
-
-            image_label[i].setSize(200, 200);
-
-            if (i < 4)
-                image_label[i].setLocation(0 + 200 * (i), 0);
-            else if (i < 8)
-                image_label[i].setLocation(0 + 200 * (i - 4), 200);
-            else if (i < 12)
-                image_label[i].setLocation(0 + 200 * (i - 8), 400);
-            else if (i < 16)
-                image_label[i].setLocation(0 + 200 * (i - 12), 600);
-            image_label[i].setVisible(false);
-        }
-
-        frm.setVisible(true); // 프레임을 볼수 있게 설정
-
     }
 
     public void finish() {
         JFrame ffrm = new JFrame("게임종료");
         ffrm.setBounds(700, 400, 300, 200);
         ffrm.setVisible(true);
-        ffrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ffrm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         SQLiteManager b = new SQLiteManager("","","");
         if(sec_time<=10&&sec_time>0){
             b.givePoint(id,50);
@@ -195,7 +128,7 @@ public class MiniGame extends JFrame implements ActionListener {
             JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n5포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
         }
-        new MainScreen(id);
+        repaint();
     }
     public static class WorkTask extends TimerTask {
         @Override

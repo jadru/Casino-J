@@ -72,6 +72,7 @@ public class MainScreen extends JFrame{
         ImageIcon setting_bt_img = new ImageIcon("asset/setting_button.png");
         ImageIcon topbar_img = new ImageIcon("asset/topbar.png");
 
+
         //버튼 및 라벨 이미지 넣기
        JLabel topBar = new JLabel(topbar_img);
         bt[0] = new JButton(exchange_bt_img);
@@ -185,7 +186,6 @@ public class MainScreen extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 timer.schedule(new MiniGame.WorkTask(),0,100);
                 new MiniGame(id);
-                setVisible(false);
             }
         });
 
