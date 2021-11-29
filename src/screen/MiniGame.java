@@ -61,7 +61,7 @@ public class MiniGame extends JFrame implements ActionListener {
 
         for (i = 0; i < 16; i++) {
             if (num[i] == 0 || num[i] == 15)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image8.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("asset/DogeCoin.png")));
             else if (num[i] == 1 || num[i] == 14)
                 frm.add(image_label[i] = new JLabel(new ImageIcon("asset/image1.png")));
             else if (num[i] == 2 || num[i] == 13)
@@ -131,6 +131,7 @@ public class MiniGame extends JFrame implements ActionListener {
         }
         repaint();
     }
+
     public static class WorkTask extends TimerTask {
         @Override
         public void run() {
