@@ -22,7 +22,6 @@ public class Game_1 extends JFrame {
 
     private static String [][] every_cards;
     private static boolean [] using_cards;
-    private static boolean is_win = false;
     private static int[] user_card_deck;
     private static int[] com_cards_deck;
 
@@ -31,7 +30,6 @@ public class Game_1 extends JFrame {
 
     private final String user_id;
     private GamePanel main = new GamePanel();
-    ThemeManager theme;
     SQLiteManager sql_manager;
 
     JPanel com_profile_panel;
@@ -56,7 +54,6 @@ public class Game_1 extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        theme = new ThemeManager(user_id);
         sql_manager = new SQLiteManager("","","");
 
         ShuffleCard.game = this;
@@ -81,7 +78,7 @@ public class Game_1 extends JFrame {
                 new ImageIcon(USER_IMG_URL),
                 SwingConstants.CENTER);
 
-        setBackground(theme.getBackgroundColor());
+        setBackground(support.ThemeManager.getBackgroundColor(user_id));
         
         add(com_profile_panel); add(user_profile_panel); add(com_card_panel); add(user_card_panel);
         com_profile_panel.add(com_profile_img); user_profile_panel.add(user_profile_img); add(button_panel);
@@ -112,6 +109,16 @@ public class Game_1 extends JFrame {
             else point++;
             if(point == 0) hasA++;
             getpoint += point;
+        }
+
+        if (getpoint > 21){
+            while(hasA > 0){
+                getpoint -= 10;
+                hasA--;
+            }
+            if(getpoint > 21){
+                resultOut(false, getpoint);
+            }
         }
         InGamePlayDialog dialog = new InGamePlayDialog(this, "블랙잭 하는 중", getpoint);
         dialog.setVisible(true);
@@ -151,7 +158,7 @@ public class Game_1 extends JFrame {
     }
     private void addCardBack(JPanel cardPanel){
         JButton btn = new JButton();
-        btn.setIcon(new ImageIcon(support.ThemeManager.getCardBackImgURL()));
+        btn.setIcon(new ImageIcon(support.ThemeManager.getCardBackImgURL(user_id)));
 //        btn.addActionListener(new cardActionListener());
         btn.setBackground(Color.WHITE);
         btn.setPreferredSize(new Dimension(120, 160));
@@ -164,7 +171,7 @@ public class Game_1 extends JFrame {
     public boolean getAtUsedCard(int index){
         return using_cards[index];
     }
-    private void resultOut(){
+    private void resultOut(boolean iswin, int point){
 
     }
     public static void addUserCardFromDialog(){
