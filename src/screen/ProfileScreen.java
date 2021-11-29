@@ -29,7 +29,7 @@ public class ProfileScreen extends JFrame{
         JButton mainButton = new JButton("메인");
         mainButton.setBounds(30,30,70,70);
 
-        String[] title = {"ID","이름","전적","레벨","순위"," ❤"};
+        String[] title = {"ID","이름","전적","레벨","순위"," $ "};
         JLabel[] gridTitle = new JLabel[6];
         JLabel[] gridElement = new JLabel[6];
         JLabel CardText = new JLabel("보유중인 카드");
