@@ -16,7 +16,7 @@ public class InGamePlayDialog extends JDialog {
         this.point = point;
         Dimension frameSize = getSize();
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((windowSize.width - frameSize.width) / 2 - 200,
+        setLocation((windowSize.width - frameSize.width) / 2 - 400,
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 

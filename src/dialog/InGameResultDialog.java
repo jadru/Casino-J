@@ -20,11 +20,11 @@ public class InGameResultDialog extends JDialog {
         setLocation((windowSize.width - frameSize.width) / 2,
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        SQLiteManager b = new SQLiteManager("","","");
         if(iswinorlose){
             JLabel label1 = new JLabel("WIN! 포인트 100점 적립");
             label1.setFont(new Font("Arial", Font.BOLD, 30));
             add(label1);
-            SQLiteManager b = new SQLiteManager("","","");
             b.givePoint(user_id,100);
         }else{
             JLabel label1 = new JLabel("졌습니다...");

@@ -55,7 +55,7 @@ public class MainScreen extends JFrame{
 
 		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
 		JButton bt[] = new JButton[5];
-        JButton minibt = new JButton("미니게임");
+
 		//for(int i = 0; i < 5; i++) {
 		//	bt[i]=new JButton(str[i]);
         //}
@@ -89,8 +89,7 @@ public class MainScreen extends JFrame{
         bt[4].setContentAreaFilled(false);
         bt[3].setBorderPainted(false);
         bt[3].setContentAreaFilled(false);
-        minibt.setBorderPainted(false);
-        minibt.setBorderPainted(false);
+
         topBar.setBounds(150,25,971,81);
 
 
@@ -99,13 +98,12 @@ public class MainScreen extends JFrame{
         bt[2].setBounds(650,400,324,83);
         bt[3].setBounds(1035,270,108,184);
         bt[4].setBounds(310,290,664,93);
-        minibt.setBounds(500,30,70,70);
 
 
         for(int i = 0 ; i < 5; i++){
             add(bt[i]);
         }
-        add(minibt);
+
         add(topBar);
         /*
 		panel1.add(bt[1]);
@@ -176,13 +174,7 @@ public class MainScreen extends JFrame{
                 setVisible(false); // 창 안보이게 하기
             }
         });
-        minibt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                timer.schedule(new Game_3.WorkTask(),0,100);
-                new Game_3(id);
-            }
-        });
+
 	}
     class MyPanel extends JPanel{
         private ImageIcon icon = new ImageIcon("asset/mainImg.jpg");

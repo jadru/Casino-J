@@ -203,7 +203,7 @@ public class Game_1 extends JFrame {
         user_cards_deck.add(getCardFromDeck());
         usercard_cnt++;
         addCardGUI(user_cards_deck.get(usercard_cnt-1), user_card_panel);
-        if(calculatePoint(com_cards_deck, comcard_cnt) < 21 - 5){
+        if(calculatePoint(com_cards_deck, comcard_cnt) < 21 - 3){
             if(rd.nextBoolean()){
                 com_cards_deck.add(getCardFromDeck());
                 addCardBack(com_card_panel);
