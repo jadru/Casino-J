@@ -31,6 +31,8 @@ public class LoginScreen extends JFrame{
         ImageIcon list1 = new ImageIcon("asset/login_gamelist_1.png");
         ImageIcon list2 = new ImageIcon("asset/login_gamelist_2.png");
         ImageIcon list3 = new ImageIcon("asset/login_gamelist_3.png");
+        ImageIcon Doge = new ImageIcon("asset/DOGE.png");
+        JLabel Coin = new JLabel(Doge);
 
         bt[0] = new JButton(bt0);
         bt[1] = new JButton(bt1);
@@ -47,6 +49,7 @@ public class LoginScreen extends JFrame{
         PW.setBounds(770,400,250,50);
         id_label.setBounds(570,530,130,30);
         pw_label.setBounds(570,570,130,30);
+        Coin.setBounds(800,160,250,250);
         gameList[0] = new JLabel(list1);
         gameList[1] = new JLabel(list2);
         gameList[2] = new JLabel(list3);
@@ -59,6 +62,7 @@ public class LoginScreen extends JFrame{
         for(int i = 0; i < 3; i++)
             add(gameList[i]);
         add(ID);add(PW);add(id_label);add(pw_label);
+        add(Coin);
         setSize(1280,720);
 		/*
 
