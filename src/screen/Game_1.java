@@ -1,5 +1,7 @@
 package screen;
 
+import dialog.InGameDialog;
+import panel.GamePanel;
 import support.SQLiteManager;
 import support.ShuffleCard;
 import support.ThemeManager;
@@ -18,15 +20,18 @@ public class Game_1 extends JFrame {
     private static final String COMPUTER_NAME = "블랙잭 AI";
     private static final String COMPUTER_IMG_URL = "asset/icons8-bot-96.png";
     private static final String USER_IMG_URL = "asset/icons8-test-account-96.png";
-    private static final String BG_IMG_URL = null;
     private static final int PADDING = 20;
 
-    String [][] every_cards;
-    boolean [] using_cards;
-    int[] user_card_deck;
-    int[] com_cards_deck;
+    private String [][] every_cards;
+    private boolean [] using_cards;
+    private boolean is_win = false;
+    private int[] user_card_deck;
+    private int[] com_cards_deck;
 
-    String user_id;
+    private int usercard_cnt = 0;
+    private int comcard_cnt = 0;
+
+    private final String user_id;
     private GamePanel main = new GamePanel();
     ThemeManager theme;
     SQLiteManager sql_manager;
@@ -37,13 +42,10 @@ public class Game_1 extends JFrame {
     JPanel user_card_panel;
     JPanel button_panel;
 
-    JButton backtomain_button;
-    JButton addcard_button;
-    JButton finish_button;
-
     Game_1(String id) {
         this.user_id = id;
         generateGUI();
+        setGameGUI();
         startGame();
     }
 
@@ -82,8 +84,6 @@ public class Game_1 extends JFrame {
                 SwingConstants.CENTER);
 
         setBackground(theme.getBackgroundColor());
-
-        setButtonPanel();
         
         add(com_profile_panel); add(user_profile_panel); add(com_card_panel); add(user_card_panel);
         com_profile_panel.add(com_profile_img); user_profile_panel.add(user_profile_img); add(button_panel);
@@ -93,6 +93,19 @@ public class Game_1 extends JFrame {
     }
 
     private void startGame(){
+        boolean is_finished = false;
+
+        while(!is_finished){
+            int getpoint = 0;
+            for(int i = 0; i < usercard_cnt; i++){
+                int point = user_card_deck[i] % 13;
+                if(point > 10) point = 10;
+                getpoint += point;
+            }
+            new InGameDialog(this, "어떻게 하시겠어요?", getpoint);
+        }
+    }
+    private void setGameGUI(){
         every_cards = makeCardDeck();
         using_cards = new boolean[52];
         Arrays.fill(using_cards, false);
@@ -102,31 +115,15 @@ public class Game_1 extends JFrame {
 
         for (int i = 0; i < 2; i++) {
             addCardBack(com_card_panel);
+            comcard_cnt++;
         }
         for (int card : user_card_deck) {
-            MakeCardGUI(user_card_deck, card, user_card_panel);
+            addCardGUI(user_card_deck, card, user_card_panel);
+            usercard_cnt++;
         }
+        System.out.println("게임 세팅 완료");
     }
-
-    class cardActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JButton btn = (JButton) e.getSource();
-
-        }
-    }
-
-    class GamePanel extends JPanel {
-        private ImageIcon icon = new ImageIcon(BG_IMG_URL);
-        private Image img = icon.getImage();
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
-        }
-
-    }
-
-    private void MakeCardGUI(int[] deck, int pick, JPanel cardPanel){
+    private void addCardGUI(int[] deck, int pick, JPanel cardPanel){
         JButton btn = new JButton();
         btn.setText(every_cards[pick / 13][pick % 13]);
         btn.setBackground(Color.WHITE);
@@ -140,7 +137,6 @@ public class Game_1 extends JFrame {
         }
         cardPanel.add(btn);
     }
-
     private void addCardBack(JPanel cardPanel){
         JButton btn = new JButton();
         btn.setIcon(new ImageIcon("asset/card_back_1.png"));
@@ -150,50 +146,14 @@ public class Game_1 extends JFrame {
         btn.setMargin(new Insets(0, 0, 0, 0));
         cardPanel.add(btn);
     }
-
     public void setAtUsedCard(boolean status, int index){
         using_cards[index] = status;
     }
     public boolean getAtUsedCard(int index){
         return using_cards[index];
     }
-    private void setButtonPanel(){
-        backtomain_button = new JButton("메인");
-        addcard_button = new JButton("카드 추가");
-        finish_button = new JButton("게임 종료");
 
-        backtomain_button.setSize(50,50);
-        addcard_button.setSize(50,50);
-        finish_button.setSize(50,50);
-
-        button_panel.add(backtomain_button);
-        button_panel.add(addcard_button);
-        button_panel.add(finish_button);
-
-        backtomain_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new MainScreen(user_id);
-                setVisible(false); // 창 안보이게 하기
-            }
-        });
-
-        addcard_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        finish_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-    }
-
-    void gameFinished(){
-        
+    public static void main(String[] args){
+        new Game_1("ddd");
     }
 }

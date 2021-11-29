@@ -1,7 +1,4 @@
 package screen;
-import dialog.MyModalDialog;
-import support.SQLiteManager;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -13,6 +10,8 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import dialog.MyModalDialog;
+import support.SQLiteManager;
 import static screen.MiniGame.timer;
 
 public class MainScreen extends JFrame{
@@ -34,11 +33,8 @@ public class MainScreen extends JFrame{
         }
     }
 
-
-
-
 	public MainScreen(String id) {
-		setTitle("Main화면");
+		setTitle("CaisnoJ");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         SQLiteManager b = new SQLiteManager("","","");
