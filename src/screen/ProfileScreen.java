@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class ProfileScreen extends JFrame{
     private MyPanel panel = new MyPanel();
-    private Image card1_back,card2_back,card3_back,card4_back,card5_back;
+    private Image card0_back,card1_back,card2_back,card3_back,card4_back;
 
     public boolean checkFrontBack = true;
 	ProfileScreen(String id){
@@ -37,24 +37,24 @@ public class ProfileScreen extends JFrame{
 
 
 
-
+        ImageIcon card0_backside = new ImageIcon("asset/card_back_0.png");
         ImageIcon card1_backside = new ImageIcon("asset/card_back_1.png");
         ImageIcon card2_backside = new ImageIcon("asset/card_back_2.png");
         ImageIcon card3_backside = new ImageIcon("asset/card_back_3.png");
         ImageIcon card4_backside = new ImageIcon("asset/card_back_4.png");
-        ImageIcon card5_backside = new ImageIcon("asset/card_back_0.png");
 
+        card0_back = card0_backside.getImage();
         card1_back = card1_backside.getImage();
         card2_back = card2_backside.getImage();
         card3_back = card3_backside.getImage();
         card4_back = card4_backside.getImage();
-        card5_back = card5_backside.getImage();
 
-        CardBt[0] = new JButton(card1_backside);
-        CardBt[1] = new JButton(card2_backside);
-        CardBt[2] = new JButton(card3_backside);
-        CardBt[3] = new JButton(card4_backside);
-        CardBt[4] = new JButton(card5_backside);
+        CardBt[0] = new JButton(card0_backside);
+        CardBt[1] = new JButton(card1_backside);
+        CardBt[2] = new JButton(card2_backside);
+        CardBt[3] = new JButton(card3_backside);
+        CardBt[4] = new JButton(card4_backside);
+
 
 
         CardBt[0].setBounds(690,150,130,160);

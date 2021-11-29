@@ -7,8 +7,7 @@ import java.awt.event.*;
 import java.awt.*;
 
 public class ExchangeScreen extends  JFrame{
-    private Image card1_back,card2_back,card3_back,card4_back,card5_back;
-    private Image card1_front,card2_front,card3_front,card4_front,card5_front;
+    private Image card1_back,card2_back,card3_back,card4_back;
     public boolean checkFrontBack = true;
     private MyPanel panel = new MyPanel();
 	ExchangeScreen(String id){
@@ -44,25 +43,15 @@ public class ExchangeScreen extends  JFrame{
                     g.drawImage(card4_back, 885, 0, 200, 270, this);
 
                 }
-                else{
-                    g.drawImage(card1_front, 43, 0, 200, 270, this);
-                    g.drawImage(card2_front, 323, 0, 200, 270, this);
-                    g.drawImage(card3_front, 605, 0, 200, 270, this);
-                    g.drawImage(card4_front, 885, 0, 200, 270, this);
-
-                }
+               
             }
         };
-        ImageIcon card1_backside = new ImageIcon("asset/card_back_2.png");
-        ImageIcon card2_backside = new ImageIcon("asset/card_back_3.png");
-        ImageIcon card3_backside = new ImageIcon("asset/card_back_4.png");
-        ImageIcon card4_backside = new ImageIcon("asset/card_back_0.png");
+        ImageIcon card1_backside = new ImageIcon("asset/card_back_1.png");
+        ImageIcon card2_backside = new ImageIcon("asset/card_back_2.png");
+        ImageIcon card3_backside = new ImageIcon("asset/card_back_3.png");
+        ImageIcon card4_backside = new ImageIcon("asset/card_back_4.png");
 
 
-        ImageIcon card1_frontside = new ImageIcon("asset/card2_front_side.jpeg");
-        ImageIcon card2_frontside = new ImageIcon("asset/card3_front_side.jpeg");
-        ImageIcon card3_frontside = new ImageIcon("asset/card4_front_side.jpeg");
-        ImageIcon card4_frontside = new ImageIcon("asset/card5_front_side.jpeg");
 
 
         card1_back = card1_backside.getImage();
@@ -71,10 +60,6 @@ public class ExchangeScreen extends  JFrame{
         card4_back = card4_backside.getImage();
 
 
-        card1_front = card1_frontside.getImage();
-        card2_front = card2_frontside.getImage();
-        card3_front = card3_frontside.getImage();
-        card4_front = card4_frontside.getImage();
 
 
         jp.setBounds(80,270,1200,300);
