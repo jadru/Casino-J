@@ -353,7 +353,7 @@ public class SQLiteManager{
             con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             stmt.execute("update player set win = "+wwin+" where id = '"+id+"'");
-            stmt.execute("update player set win = "+llose+" where id = '"+id+"'");
+            stmt.execute("update player set lose = "+llose+" where id = '"+id+"'");
             stmt.execute("update player set point = "+apoint+" where id = '"+id+"'");
         }
         catch(SQLException | ClassNotFoundException e){
