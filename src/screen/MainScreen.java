@@ -41,7 +41,7 @@ public class MainScreen extends JFrame{
         String username = b.getNickname(id);
         int userpoint = b.getPoint(id);
         JLabel usertext = new JLabel(username);
-        JLabel userPoint = new JLabel("$"+String.valueOf(userpoint));
+        JLabel userPoint = new JLabel("$"+ String.valueOf(userpoint));
         usertext.setFont(new Font("Gothic",Font.BOLD,30));
         userPoint.setFont(new Font("Gothic",Font.BOLD,30));
         setLayout(null);
@@ -106,11 +106,6 @@ public class MainScreen extends JFrame{
             add(bt[i]);
         }
         add(minibt);
-
-
-
-
-
         add(topBar);
         /*
 		panel1.add(bt[1]);
@@ -188,8 +183,6 @@ public class MainScreen extends JFrame{
                 new MiniGame(id);
             }
         });
-
-
 	}
     class MyPanel extends JPanel{
         private ImageIcon icon = new ImageIcon("asset/mainImg.jpg");
