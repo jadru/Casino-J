@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 
 import dialog.MyModalDialog;
 import support.SQLiteManager;
-import static screen.MiniGame.timer;
+import static screen.Game_3.timer;
 
 public class MainScreen extends JFrame{
     private MyPanel panel = new MyPanel();
@@ -179,8 +179,8 @@ public class MainScreen extends JFrame{
         minibt.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                timer.schedule(new MiniGame.WorkTask(),0,100);
-                new MiniGame(id);
+                timer.schedule(new Game_3.WorkTask(),0,100);
+                new Game_3(id);
             }
         });
 	}

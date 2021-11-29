@@ -33,27 +33,20 @@ public class ShuffleCard{
         }
         return cards;
     }
-    public static int[] getCardFromDeck(int size){
+    public static int getCardFromDeck(){
         int cnt = 0;
-        Set<Integer> set = new HashSet<>();
-        while (set.size() < size)
-        { int d = (int)(Math.random() * 52);
-            if (!game.getAtUsedCard(d))
-                set.add(d);
-            else if(cnt > 100)
-                System.out.println("카드를 선택할 수 없습니다");
-            else
+        int result = 0;
+        while (cnt < 100)
+        {
+            result = (int)(Math.random() * 52);
+            if (!game.getAtUsedCard(result)) {
                 cnt++;
+            } else {
+                game.setAtUsedCard(true, result);
+                break;
+            }
         }
-        int[] pickedcards = set.stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
-
-        for(int item:pickedcards){
-            game.setAtUsedCard(true, item);
-        }
-
-        return pickedcards;
+        return result;
     }
 
 }

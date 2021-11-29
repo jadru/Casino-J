@@ -4,10 +4,10 @@ import dialog.InGamePlayDialog;
 import panel.GamePanel;
 import support.SQLiteManager;
 import support.ShuffleCard;
-import support.ThemeManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static support.ShuffleCard.makeCardDeck;
@@ -22,11 +22,12 @@ public class Game_1 extends JFrame {
 
     private static String [][] every_cards;
     private static boolean [] using_cards;
-    private static int[] user_card_deck;
-    private static int[] com_cards_deck;
+    private static ArrayList<Integer> user_card_deck = new ArrayList<Integer>();
+    private static ArrayList<Integer> com_cards_deck = new ArrayList<Integer>();
 
     private static int usercard_cnt = 0;
     private static int comcard_cnt = 0;
+    private static JFrame game;
 
     private final String user_id;
     private GamePanel main = new GamePanel();
@@ -40,6 +41,7 @@ public class Game_1 extends JFrame {
 
     Game_1(String id) {
         this.user_id = id;
+        game = this;
         generateGUI();
         setGameGUI();
         startGame();
@@ -104,7 +106,7 @@ public class Game_1 extends JFrame {
         int hasA = 0;
 
         for(int i = 0; i < usercard_cnt; i++){
-            int point = user_card_deck[i] % 13;
+            int point = user_card_deck.get(i) % 13;
             if(point > 9) point = 10;
             else point++;
             if(point == 0) hasA++;
@@ -127,16 +129,20 @@ public class Game_1 extends JFrame {
         every_cards = makeCardDeck();
         using_cards = new boolean[52];
         Arrays.fill(using_cards, false);
-        user_card_deck = getCardFromDeck(2);
-        com_cards_deck = getCardFromDeck(2);
+        for(int i = 0; i < 2; i++){
+            user_card_deck.add(getCardFromDeck());
+            comcard_cnt++;
+        }
+        for(int i = 0; i < 2; i++){
+            com_cards_deck.add(getCardFromDeck());
+            usercard_cnt++;
+        }
 
         for (int i = 0; i < 2; i++) {
             addCardBack(com_card_panel);
-            comcard_cnt++;
         }
         for (int card : user_card_deck) {
             addCardGUI(card, user_card_panel);
-            usercard_cnt++;
         }
 
         repaint();
@@ -175,8 +181,10 @@ public class Game_1 extends JFrame {
 
     }
     public static void addUserCardFromDialog(){
-        addCardGUI(user_card_deck[usercard_cnt-1], user_card_panel);
+        user_card_deck.add(getCardFromDeck());
         usercard_cnt++;
+        addCardGUI(user_card_deck.get(usercard_cnt-1), user_card_panel);
+        game.revalidate(); game.repaint();
     }
 
     public static void main(String[] args){

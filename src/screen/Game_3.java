@@ -5,7 +5,7 @@ import java.util.Timer;
 import javax.swing.*;
 import support.SQLiteManager;
 
-public class MiniGame extends JFrame implements ActionListener {
+public class Game_3 extends JFrame implements ActionListener {
     Random rnd = new Random();
 
     static int btn_del = 0, btn_dele = 0;// 삭제할 버튼의 번호의 변수
@@ -23,7 +23,7 @@ public class MiniGame extends JFrame implements ActionListener {
     String id;
     ImageIcon game_bt;
 
-    public MiniGame(String id){
+    public Game_3(String id){
         frm.setTitle("미니게임");
         this.id=id;
         game_bt = new ImageIcon(support.ThemeManager.getCardBackImgURL(this.id));//함수 구현하세용
