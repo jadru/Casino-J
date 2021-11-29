@@ -88,9 +88,11 @@ public class Game_3 extends JFrame implements ActionListener {
             else if (i < 16)
                 image_label[i].setLocation(0 + 120 * (i - 12), 480);
             image_label[i].setVisible(false);
+
         }
 
         frm.setVisible(true); // 프레임을 볼수 있게 설정
+
     }
 
     public void finish() {
@@ -139,6 +141,7 @@ public class Game_3 extends JFrame implements ActionListener {
             if (dec_time % 10 == 0) {
                 sec_time++;
             }
+
 
             if (stop_time + 10 == dec_time) // 버튼 클릭 후 1초가 지나면 버튼을 보여주고 이미지를 사라지게함
             {

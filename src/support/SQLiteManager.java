@@ -166,7 +166,12 @@ public class SQLiteManager{
             Statement stmt = con.createStatement();
             sql="select * from player where id = '"+id+"'";
             ResultSet rs = stmt.executeQuery(sql);
-            if(index==1){
+            if(index==0){
+                bcheck=rs.getInt("skin0");
+                if(bcheck==1)
+                    return true;
+            }
+            else if(index==1){
                 bcheck=rs.getInt("skin1");
                 if(bcheck==1){
                     return true;
@@ -335,6 +340,35 @@ public class SQLiteManager{
             }
         }
 
+    }
+    public void SkinChange(String id,int index){
+        try{
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection(SQLURL);
+            Statement stmt = con.createStatement();
+            if(index==0){
+                stmt.execute("update player set skin = "+index+" where id = '"+id+"'");
+            } else if(index==1){
+                stmt.execute("update player set skin = "+index+" where id = '"+id+"'");
+            }else if(index==2){
+                stmt.execute("update player set skin = "+index+" where id = '"+id+"'");
+            }else if(index==3){
+                stmt.execute("update player set skin = "+index+" where id = '"+id+"'");
+            }else if(index==4){
+                stmt.execute("update player set skin = "+index+" where id = '"+id+"'");
+            }
+        }
+        catch(SQLException | ClassNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }
+            catch(Exception e){
+
+            }
+        }
     }
     public void buySkin(String id,int index){
         try{
