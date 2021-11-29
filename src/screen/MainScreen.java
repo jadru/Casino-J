@@ -41,7 +41,7 @@ public class MainScreen extends JFrame{
         String username = b.getNickname(id);
         int userpoint = b.getPoint(id);
         JLabel usertext = new JLabel(username);
-        JLabel userPoint = new JLabel("❤"+String.valueOf(userpoint));
+        JLabel userPoint = new JLabel("$"+String.valueOf(userpoint));
         usertext.setFont(new Font("Gothic",Font.BOLD,30));
         userPoint.setFont(new Font("Gothic",Font.BOLD,30));
         setLayout(null);
