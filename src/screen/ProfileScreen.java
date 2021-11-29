@@ -20,6 +20,7 @@ public class ProfileScreen extends JFrame{
         int userLevel = b.getLevel(id);
         int userRank;
         int userPoint = b.getPoint(id);
+
         double all=userWin+userLose;
         double pow = (userWin/all)*100;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,8 +94,13 @@ public class ProfileScreen extends JFrame{
 
         add(CardText);
         add(mainButton);
-        for(int i =0; i< 5; i++)
-            add(CardBt[i]);
+
+        for(int i =0; i< 5; i++){
+            if(b.skinCheck(id,i)==true){
+                add(CardBt[i]);
+            }
+        }
+
         setSize(1280,720);
 
         Dimension frameSize = getSize();
@@ -111,6 +117,40 @@ public class ProfileScreen extends JFrame{
                 setVisible(false); // 창 안보이게 하기 
             }
         });
+
+        CardBt[0].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                b.SkinChange(id,0);
+            }
+        });
+        CardBt[1].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                b.SkinChange(id,1);
+            }
+        });
+        CardBt[2].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                b.SkinChange(id,2);
+            }
+        });
+        CardBt[3].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                b.SkinChange(id,3);
+            }
+        });
+        CardBt[4].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                b.SkinChange(id,4);
+            }
+        });
+
+
+
     }
     class MyPanel extends JPanel{
         private ImageIcon icon = new ImageIcon("asset/profileImg.png");
