@@ -35,7 +35,7 @@ public class LoginScreen extends JFrame{
         JButton bt[] = new JButton[2];
 
         ImageIcon bt0 = new ImageIcon("src/asset/btn/LogInButton.png");
-        ImageIcon bt1 = new ImageIcon("src/asset/btn/SignInButton.png");
+        ImageIcon bt1 = new ImageIcon("src/asset/btn/SignUpButton.png");
         ImageIcon list1 = new ImageIcon("src/asset/ui/login_gamelist_1.png");
         ImageIcon list2 = new ImageIcon("src/asset/ui/login_gamelist_2.png");
         ImageIcon list3 = new ImageIcon("src/asset/ui/login_gamelist_3.png");

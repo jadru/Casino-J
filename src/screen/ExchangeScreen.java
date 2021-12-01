@@ -20,7 +20,8 @@ public class ExchangeScreen extends  JFrame{
         String username = b.getNickname(id);
         int userpoint = b.getPoint(id);
         JLabel usertext = new JLabel(username);
-        JLabel userPoint = new JLabel("❤"+String.valueOf(userpoint));
+        JLabel userPoint = new JLabel("$"+String.valueOf(userpoint));
+
         usertext.setFont(new Font("Gothic",Font.BOLD,30));
         userPoint.setFont(new Font("Gothic",Font.BOLD,30));
         usertext.setBounds(260,12,150,100);
@@ -36,6 +37,8 @@ public class ExchangeScreen extends  JFrame{
         ImageIcon buyBt = new ImageIcon("src/asset/btn/buyBt_Img.png");
         ImageIcon possessionBt = new ImageIcon("src/asset/btn/possessionBt_Img.png");
 
+        ImageIcon consImg = new ImageIcon("src/asset/ui/cost_Img.png");
+        JLabel cost = new JLabel(consImg);
 
         JPanel jp = new JPanel(){
             @Override
@@ -95,6 +98,8 @@ public class ExchangeScreen extends  JFrame{
         mainButton.setBorderPainted(false);
         mainButton.setContentAreaFilled(false);
 
+        cost.setBounds(410,150,465,100);
+
         JLabel topBar = new JLabel(topbar_img);
         topBar.setBounds(150,25,971,81);
 
@@ -104,6 +109,7 @@ public class ExchangeScreen extends  JFrame{
         add(mainButton);
         add(profile_bt);
         add(topBar);
+        add(cost);
         setSize(1280,720);
 
         Dimension frameSize = getSize();

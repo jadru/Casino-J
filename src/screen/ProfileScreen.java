@@ -20,6 +20,7 @@ public class ProfileScreen extends JFrame{
         int userLevel = b.getLevel(id);
         int userRank;
         int userPoint = b.getPoint(id);
+        int userskin = b.getSkin(id);
 
         double all=userWin+userLose;
         double pow = (userWin/all)*100;
@@ -40,12 +41,14 @@ public class ProfileScreen extends JFrame{
         JButton CardBt[] = new JButton[5];
 
 
-
+        ImageIcon selectCard = new ImageIcon("src/asset/ui/select_Img.png");
         ImageIcon card0_backside = new ImageIcon("src/asset/card_back_0.png");
         ImageIcon card1_backside = new ImageIcon("src/asset/card_back_1.png");
         ImageIcon card2_backside = new ImageIcon("src/asset/card_back_2.png");
         ImageIcon card3_backside = new ImageIcon("src/asset/card_back_3.png");
         ImageIcon card4_backside = new ImageIcon("src/asset/card_back_4.png");
+
+        JLabel select = new JLabel(selectCard);
 
         card0_back = card0_backside.getImage();
         card1_back = card1_backside.getImage();
@@ -66,6 +69,23 @@ public class ProfileScreen extends JFrame{
         CardBt[2].setBounds(990,150,130,160);
         CardBt[3].setBounds(690,350,130,160);
         CardBt[4].setBounds(840,350,130,160);
+
+        if(userskin == 0){
+            select.setBounds(690,220,130,30);
+        }
+        else if(userskin == 1){
+            select.setBounds(840,220,130,30);
+        }
+        else if(userskin == 2){
+            select.setBounds(990,220,130,30);
+        }
+        else if(userskin == 3){
+            select.setBounds(690,420,130,30);
+        }
+        else if(userskin == 4){
+            select.setBounds(840,420,130,30);
+        }
+
 
 
         CardText.setFont(new Font("Gothic",Font.BOLD,25));
@@ -93,7 +113,7 @@ public class ProfileScreen extends JFrame{
         }
         CardText.setBounds(690, 50,200,100);
 
-
+        add(select);
 
         add(CardText);
         add(mainButton);
@@ -125,30 +145,40 @@ public class ProfileScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 b.SkinChange(id,0);
+                select.setBounds(690,220,130,30);
+                repaint();
             }
         });
         CardBt[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 b.SkinChange(id,1);
+                select.setBounds(840,220,130,30);
+                repaint();
             }
         });
         CardBt[2].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 b.SkinChange(id,2);
+                select.setBounds(990,220,130,30);
+                repaint();
             }
         });
         CardBt[3].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 b.SkinChange(id,3);
+                select.setBounds(690,420,130,30);
+                repaint();
             }
         });
         CardBt[4].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 b.SkinChange(id,4);
+                select.setBounds(840,420,130,30);
+                repaint();
             }
         });
         repaint(); revalidate();
