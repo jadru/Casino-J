@@ -26,11 +26,9 @@ public class ExchangeScreen extends  JFrame{
         userPoint.setBounds(410,12,400,100);
         add(usertext);
         add(userPoint);
-        ImageIcon topbar_img = new ImageIcon("src/asset/topbar.png");
-        ImageIcon frontBt = new ImageIcon("src/asset/frontBt_Img.png");
-        ImageIcon backBt = new ImageIcon("src/asset/backBt_Img.png");
-        ImageIcon buyBt = new ImageIcon("src/asset/buyBt_Img.png");
-        ImageIcon possessionBt = new ImageIcon("src/asset/possessionBt_Img.png");
+        ImageIcon topbar_img = new ImageIcon("src/asset/ui/topbar.png");
+        ImageIcon buyBt = new ImageIcon("src/asset/btn/buyBt_Img.png");
+        ImageIcon possessionBt = new ImageIcon("src/asset/btn/possessionBt_Img.png");
 
 
         JPanel jp = new JPanel(){
@@ -233,7 +231,7 @@ public class ExchangeScreen extends  JFrame{
 
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/exchangeImg.png");
+        private ImageIcon icon = new ImageIcon("src/asset/bg/exchangeImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

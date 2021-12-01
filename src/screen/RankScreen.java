@@ -84,7 +84,7 @@ public class RankScreen extends  JFrame{
         });
     }
     class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/rankImg.png");
+        private ImageIcon icon = new ImageIcon("src/asset/bg/rankImg.png");
         private Image img = icon.getImage();
         public void paintComponent(Graphics g){
             super.paintComponent(g);

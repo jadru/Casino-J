@@ -61,21 +61,21 @@ public class Game_3 extends JFrame implements ActionListener {
 
         for (i = 0; i < 16; i++) {
             if (num[i] == 0 || num[i] == 15)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/DogeCoin.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/game2/DogeCoin.png")));
             else if (num[i] == 1 || num[i] == 14)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/BitCoin.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/game2/BitCoin.png")));
             else if (num[i] == 2 || num[i] == 13)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/EthCoin.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/game2/EthCoin.png")));
             else if (num[i] == 3 || num[i] == 12)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/RippleCoin.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/game2/RippleCoin.png")));
             else if (num[i] == 4 || num[i] == 11)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/NanoCoin.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/game2/NanoCoin.png")));
             else if (num[i] == 5 || num[i] == 10)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/TronCoin.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/game2/TronCoin.png")));
             else if (num[i] == 6 || num[i] == 9)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/NeoCoin.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/game2/NeoCoin.png")));
             else if (num[i] == 7 || num[i] == 8)
-                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/QtumCoin.png")));
+                frm.add(image_label[i] = new JLabel(new ImageIcon("src/asset/game2/QtumCoin.png")));
 
             image_label[i].setSize(120, 160);
 
