@@ -155,7 +155,7 @@ public class Game_1 extends JFrame {
         btn.setBackground(Color.WHITE);
         btn.setPreferredSize(new Dimension(120, 160));
         btn.setMargin(new Insets(0, 0, 0, 0));
-        btn.setFont(new Font("Arial", Font.BOLD, 30));
+        btn.setFont(new Font("Gothic", Font.BOLD, 30));
         switch((pick / 13)){
             case 1: btn.setForeground(Color.RED);
             case 3: btn.setForeground(Color.RED); break;
