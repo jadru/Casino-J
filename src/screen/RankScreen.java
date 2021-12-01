@@ -21,13 +21,21 @@ public class RankScreen extends  JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel);
         setLayout(null);
-        JButton mainButton = new JButton("메인");
-        mainButton.setBounds(170,30,70,70);
+
+
+
+        ImageIcon mainbtn = new ImageIcon("src/asset/btn/main_btn.png");
+        JButton mainButton = new JButton(mainbtn);
+        mainButton.setBounds(30,20,100,100);
+        mainButton.setBorderPainted(false);
+        mainButton.setContentAreaFilled(false);
         add(mainButton);
+
+
+
         String Title[] = new String[5];
         setSize(1280,720);
         SQLiteManager b = new SQLiteManager("","","");
-        String  username[] = new String[5];
         Vector<String> userRankingTable = new Vector<>();
         userRankingTable=b.getrank();
         for(int i=0;i<5;i++){

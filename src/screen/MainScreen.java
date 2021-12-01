@@ -65,7 +65,7 @@ public class MainScreen extends JFrame{
         add(usertext);
         add(userPoint);
 
-
+        ImageIcon profile_bt_img = new ImageIcon("src/asset/game1/icons8-test-account-96.png");
         ImageIcon exchange_bt_img = new ImageIcon("src/asset/btn/exchange_button.png");
         ImageIcon ranking_bt_img = new ImageIcon("src/asset/btn/ranking_button.png");
         ImageIcon game_bt_img = new ImageIcon("src/asset/btn/game_button.png");
@@ -76,19 +76,25 @@ public class MainScreen extends JFrame{
         //버튼 및 라벨 이미지 넣기
        JLabel topBar = new JLabel(topbar_img);
         bt[0] = new JButton(exchange_bt_img);
+        bt[1] = new JButton(profile_bt_img);
         bt[2] = new JButton(ranking_bt_img);
         bt[3] = new JButton(setting_bt_img);
         bt[4] = new JButton(game_bt_img);
 
         //버튼 투명하게 만들기
-        bt[0].setBorderPainted(false);
+        
+        for(int i = 0; i < 5; i++){
+            bt[i].setBorderPainted(false);
+            bt[i].setContentAreaFilled(false);
+        }
+        /*bt[0].setBorderPainted(false);
         bt[0].setContentAreaFilled(false);
         bt[2].setBorderPainted(false);
         bt[2].setContentAreaFilled(false);
         bt[4].setBorderPainted(false);
         bt[4].setContentAreaFilled(false);
         bt[3].setBorderPainted(false);
-        bt[3].setContentAreaFilled(false);
+        bt[3].setContentAreaFilled(false);*/
 
         topBar.setBounds(150,25,971,81);
 

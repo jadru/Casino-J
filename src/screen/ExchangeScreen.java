@@ -5,6 +5,7 @@ import support.SQLiteManager;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.awt.font.ImageGraphicAttribute;
 
 public class ExchangeScreen extends  JFrame{
     private Image card1_back,card2_back,card3_back,card4_back;
@@ -26,6 +27,11 @@ public class ExchangeScreen extends  JFrame{
         userPoint.setBounds(410,12,400,100);
         add(usertext);
         add(userPoint);
+
+        ImageIcon mainbtn = new ImageIcon("src/asset/btn/main_btn.png");
+        JButton mainButton = new JButton(mainbtn);
+        ImageIcon profile_bt_img = new ImageIcon("src/asset/game1/icons8-test-account-96.png");
+        JButton profile_bt = new JButton(profile_bt_img);
         ImageIcon topbar_img = new ImageIcon("src/asset/ui/topbar.png");
         ImageIcon buyBt = new ImageIcon("src/asset/btn/buyBt_Img.png");
         ImageIcon possessionBt = new ImageIcon("src/asset/btn/possessionBt_Img.png");
@@ -81,15 +87,22 @@ public class ExchangeScreen extends  JFrame{
             bt[i].setBorderPainted(false);
             bt[i].setContentAreaFilled(false);
         }
+        mainButton.setBounds(30,20,100,100);
+        mainButton.setBorderPainted(false);
+        mainButton.setContentAreaFilled(false);
+
+        profile_bt.setBounds(170,30,70,70);
+        mainButton.setBorderPainted(false);
+        mainButton.setContentAreaFilled(false);
 
         JLabel topBar = new JLabel(topbar_img);
         topBar.setBounds(150,25,971,81);
-        JButton mainButton = new JButton("메인");
-        mainButton.setBounds(170,30,70,70);
+
 
         for(int i = 0; i < 4; i++)
             add(bt[i]);
         add(mainButton);
+        add(profile_bt);
         add(topBar);
         setSize(1280,720);
 

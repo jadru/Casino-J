@@ -27,8 +27,11 @@ public class ProfileScreen extends JFrame{
         setContentPane(panel);
         setLayout(null);
 
-        JButton mainButton = new JButton("메인");
-        mainButton.setBounds(30,30,70,70);
+        ImageIcon mainbtn = new ImageIcon("src/asset/btn/main_btn.png");
+        JButton mainButton = new JButton(mainbtn);
+        mainButton.setBounds(30,20,100,100);
+        mainButton.setBorderPainted(false);
+        mainButton.setContentAreaFilled(false);
 
         String[] title = {"ID","이름","전적","레벨","순위"," $ "};
         JLabel[] gridTitle = new JLabel[6];
