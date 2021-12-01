@@ -55,7 +55,7 @@ public class MainScreen extends JFrame{
 
 		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
 		JButton bt[] = new JButton[5];
-
+        JButton logoutBt = new JButton("로그아웃");
 		//for(int i = 0; i < 5; i++) {
 		//	bt[i]=new JButton(str[i]);
         //}
@@ -172,6 +172,13 @@ public class MainScreen extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 new Game_1(id);
                 setVisible(false); // 창 안보이게 하기
+            }
+        });
+        logoutBt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoginScreen();
+                setVisible(false);
             }
         });
 
