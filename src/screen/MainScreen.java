@@ -10,13 +10,13 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import dialog.MyModalDialog;
+import dialog.InfoDialog;
 import support.SQLiteManager;
 import static screen.Game_3.timer;
 
 public class MainScreen extends JFrame{
     private MyPanel panel = new MyPanel();
-    private MyModalDialog settingScreen;
+    private InfoDialog settingScreen;
 
 
 
@@ -49,7 +49,7 @@ public class MainScreen extends JFrame{
         //Sound("asset/GameBackgroundMusic.mp3", true);
 
 
-        settingScreen = new MyModalDialog(this, "설정");
+        settingScreen = new InfoDialog(this, "설정");
 
 
 

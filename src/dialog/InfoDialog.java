@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyModalDialog extends JDialog {
+public class InfoDialog extends JDialog {
     private ImageIcon settingbgImg = new ImageIcon("src/asset/settingScreen.png");
     ImageIcon soundOn = new ImageIcon("src/asset/soundOn.png");
     ImageIcon soundOff = new ImageIcon("src/asset/soundOff.png");
@@ -19,7 +19,7 @@ public class MyModalDialog extends JDialog {
 
     private JLabel bg = new JLabel(settingbgImg);
 
-    public MyModalDialog(JFrame frame, String title) {
+    public InfoDialog(JFrame frame, String title) {
         super(frame, title, true);
         setLayout(null);
 
