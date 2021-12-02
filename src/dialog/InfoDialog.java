@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
 
 public class InfoDialog extends JDialog {
     private ImageIcon settingbgImg = new ImageIcon("src/asset/bg/settingScreen.png");
-    ImageIcon soundOn = new ImageIcon("src/asset/soundOn.png");
-    ImageIcon soundOff = new ImageIcon("src/asset/soundOff.png");
+    ImageIcon soundOn = new ImageIcon("src/asset/ui/soundOn.png");
+    ImageIcon soundOff = new ImageIcon("src/asset/ui/soundOff.png");
     JButton okButton = new JButton("확인");
     JButton bgSound = new JButton(soundOn);
     JButton efSound = new JButton(soundOn);

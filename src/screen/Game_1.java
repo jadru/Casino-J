@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import static java.awt.Font.BOLD;
 import static support.ShuffleCard.makeCardDeck;
 import static support.ShuffleCard.getCardFromDeck;
 
@@ -44,7 +45,7 @@ public class Game_1 extends JFrame {
     JPanel button_panel;
 
     Game_1(String id) {
-        this.user_id = id;
+        user_id = id;
         game = this;
         is_finished = false;
         main = new GamePanel();
@@ -75,11 +76,17 @@ public class Game_1 extends JFrame {
         user_card_panel = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
         button_panel = new JPanel(new FlowLayout(FlowLayout.CENTER, PADDING, PADDING));
 
-        com_profile_panel.setBounds(0, 0, 160, 160);
-        user_profile_panel.setBounds(1120, 0, 160, 160);
+        com_profile_panel.setBounds(0, 0, 300, 160);
+        user_profile_panel.setBounds(980, 0, 300, 160);
         com_card_panel.setBounds(0, 160, 1280, 200);
         user_card_panel.setBounds(0, 360, 1280, 200);
         button_panel.setBounds(0, 560, 1280, 160);
+
+        com_profile_panel.setBackground(new Color(0, 0, 0, 0));
+        user_profile_panel.setBackground(new Color(0, 0, 0, 0));
+        com_card_panel.setBackground(new Color(0, 0, 0, 0));
+        user_card_panel.setBackground(new Color(0, 0, 0, 0));
+        button_panel.setBackground(new Color(0, 0, 0, 0));
 
         usercard_cnt = 0;
         comcard_cnt = 0;
@@ -92,7 +99,15 @@ public class Game_1 extends JFrame {
                 new ImageIcon(USER_IMG_URL),
                 SwingConstants.CENTER);
 
-        setBackground(support.ThemeManager.getBackgroundColor(user_id));
+        com_profile_img.setFont(new Font("Arial", BOLD, 30));
+        user_profile_img.setFont(new Font("Arial", BOLD, 30));
+
+        com_profile_img.setForeground(new Color(255, 255, 255));
+        user_profile_img.setForeground(new Color(255, 255, 255));
+
+        user_profile_img.setHorizontalTextPosition(JLabel.LEFT);
+
+//        setBackground(support.ThemeManager.getBackgroundColor(user_id));
         
         add(com_profile_panel); add(user_profile_panel); add(com_card_panel); add(user_card_panel);
         com_profile_panel.add(com_profile_img); user_profile_panel.add(user_profile_img); add(button_panel);
@@ -155,7 +170,7 @@ public class Game_1 extends JFrame {
         btn.setBackground(Color.WHITE);
         btn.setPreferredSize(new Dimension(120, 160));
         btn.setMargin(new Insets(0, 0, 0, 0));
-        btn.setFont(new Font("Gothic", Font.BOLD, 30));
+        btn.setFont(new Font("Gothic", BOLD, 30));
         switch((pick / 13)){
             case 1: btn.setForeground(Color.RED);
             case 3: btn.setForeground(Color.RED); break;
@@ -179,13 +194,17 @@ public class Game_1 extends JFrame {
         return using_cards[index];
     }
     public static void resultOut(boolean iswin, int point){
+        com_card_panel.removeAll();
+        for (int card : com_cards_deck) {
+            addCardGUI(card, com_card_panel);
+        }
+        game.repaint(); game.revalidate();
         is_finished=true;
         String title;
         if(iswin){
             title = "승리";
         }else{
             title = "패배";
-
         }
         InGameResultDialog dialog = new InGameResultDialog(
                 game,
@@ -203,13 +222,18 @@ public class Game_1 extends JFrame {
         user_cards_deck.add(getCardFromDeck());
         usercard_cnt++;
         addCardGUI(user_cards_deck.get(usercard_cnt-1), user_card_panel);
-        if(calculatePoint(com_cards_deck, comcard_cnt) < 21 - 3){
+        if(calculatePoint(com_cards_deck, comcard_cnt) <= 21 - 10){
+            com_cards_deck.add(getCardFromDeck());
+            addCardBack(com_card_panel);
+            comcard_cnt++;
+        }
+        else if(calculatePoint(com_cards_deck, comcard_cnt) < 21 - 3){
             if(rd.nextBoolean()){
                 com_cards_deck.add(getCardFromDeck());
                 addCardBack(com_card_panel);
                 comcard_cnt++;
                 if(calculatePoint(com_cards_deck, comcard_cnt) > 21){
-                    screen.Game_1.resultOut(true, calculatePoint(com_cards_deck, comcard_cnt));
+                    resultOut(true, calculatePoint(com_cards_deck, comcard_cnt));
                     is_finished=true;
                 }
             }
@@ -218,20 +242,15 @@ public class Game_1 extends JFrame {
     }
     public static void finishGame(){
         is_finished=true;
-        com_card_panel.removeAll();
-        for (int card : com_cards_deck) {
-            addCardGUI(card, com_card_panel);
-        }
-        game.repaint(); game.revalidate();
         int compoint = calculatePoint(com_cards_deck, comcard_cnt);
         int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
         if(userpoint > 21){
-            screen.Game_1.resultOut(false, userpoint);
+            resultOut(false, userpoint);
         }else{
             if(compoint > userpoint){
-                screen.Game_1.resultOut(false, userpoint);
+                resultOut(false, userpoint);
             }else{
-                screen.Game_1.resultOut(true, userpoint);
+                resultOut(true, userpoint);
             }
         }
     }

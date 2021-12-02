@@ -53,10 +53,10 @@ public class ExchangeScreen extends  JFrame{
 
             }
         };
-        ImageIcon card1_backside = new ImageIcon("src/asset/card_back_1.png");
-        ImageIcon card2_backside = new ImageIcon("src/asset/card_back_2.png");
-        ImageIcon card3_backside = new ImageIcon("src/asset/card_back_3.png");
-        ImageIcon card4_backside = new ImageIcon("src/asset/card_back_4.png");
+        ImageIcon card1_backside = new ImageIcon("src/asset/theme/card_back_1.png");
+        ImageIcon card2_backside = new ImageIcon("src/asset/theme/card_back_2.png");
+        ImageIcon card3_backside = new ImageIcon("src/asset/theme/card_back_3.png");
+        ImageIcon card4_backside = new ImageIcon("src/asset/theme/card_back_4.png");
 
 
 
