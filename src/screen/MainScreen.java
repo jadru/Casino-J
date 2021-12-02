@@ -69,7 +69,7 @@ public class MainScreen extends JFrame{
         ImageIcon exchange_bt_img = new ImageIcon("src/asset/btn/exchange_button.png");
         ImageIcon ranking_bt_img = new ImageIcon("src/asset/btn/ranking_button.png");
         ImageIcon game_bt_img = new ImageIcon("src/asset/btn/game_button.png");
-        ImageIcon setting_bt_img = new ImageIcon("src/asset/btn/setting_button.png");
+        ImageIcon setting_bt_img = new ImageIcon("src/asset/btn/produce_Img.png");
         ImageIcon topbar_img = new ImageIcon("src/asset/ui/topbar.png");
 
 
@@ -102,7 +102,7 @@ public class MainScreen extends JFrame{
         bt[0].setBounds(310,400,324,83);
         bt[1].setBounds(170,30,70,70);
         bt[2].setBounds(650,400,324,83);
-        bt[3].setBounds(1035,270,108,184);
+        bt[3].setBounds(503,512,280,152);
         bt[4].setBounds(310,290,664,93);
 
 
