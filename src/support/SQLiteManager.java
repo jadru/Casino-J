@@ -440,7 +440,7 @@ public class SQLiteManager{
             sql="select * from player order by point DESC";
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
-                vec.add(rs.getString("id"));
+                vec.add(rs.getString("nickname"));
             }
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
