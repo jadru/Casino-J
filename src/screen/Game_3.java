@@ -132,7 +132,6 @@ public class Game_3 extends JFrame implements ActionListener {
             ffrm.add(finish);
         }
         repaint();
-        new MainScreen(id);
     }
 
     public static class WorkTask extends TimerTask {
@@ -203,6 +202,7 @@ public class Game_3 extends JFrame implements ActionListener {
         if (cor_count == 8) {
             frm.setVisible(false);
             timer_stop = 1; // 타이머 정지 변수를 1로 만듬
+            new MainScreen(id);
             finish();
         }
     }
