@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static screen.Game_3.timer;
+
 public class GameSelectScreen extends JFrame {
     String id;
     private GamePanel game;
@@ -21,6 +23,7 @@ public class GameSelectScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(game);
         setLayout(new FlowLayout(FlowLayout.CENTER));
+        setVisible(true);
         setSize(1280, 740);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -41,6 +44,7 @@ public class GameSelectScreen extends JFrame {
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                timer.schedule(new Game_3.WorkTask(),0,100);
                 new Game_3(id);
                 dispose();
             }

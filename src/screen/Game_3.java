@@ -132,6 +132,7 @@ public class Game_3 extends JFrame implements ActionListener {
             ffrm.add(finish);
         }
         repaint();
+        new MainScreen(id);
     }
 
     public static class WorkTask extends TimerTask {
