@@ -30,6 +30,13 @@ public class GameSelectScreen extends JFrame {
         ImageIcon blackjack = new ImageIcon("src/asset/btn/BlackJack_btn.png");
         ImageIcon minigame = new ImageIcon("src/asset/btn/MiniGame_btn.png");
 
+        ImageIcon mainbtn = new ImageIcon("src/asset/btn/main_btn.png");
+        JButton mainButton = new JButton(mainbtn);
+        mainButton.setBounds(30,20,100,100);
+        mainButton.setBorderPainted(false);
+        mainButton.setContentAreaFilled(false);
+        add(mainButton);
+
 
         JButton btn1 = new JButton(blackjack);
         btn1.setBounds(100,50,518, 600);
@@ -57,6 +64,13 @@ public class GameSelectScreen extends JFrame {
         btn3.setBorderPainted(false);
         btn3.setContentAreaFilled(false);
         add(btn3);
+        mainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainScreen(id);
+                setVisible(false); // 창 안보이게 하기
+            }
+        });
     }
 }
 
