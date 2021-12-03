@@ -22,14 +22,17 @@ public class GameSelectScreen extends JFrame {
         setTitle("게임을 선택하세요");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(game);
-        setLayout(new FlowLayout(FlowLayout.CENTER));
+        setLayout(null);
         setVisible(true);
         setSize(1280, 740);
         setLocationRelativeTo(null);
         setResizable(false);
+        ImageIcon blackjack = new ImageIcon("src/asset/btn/BlackJack_btn.png");
+        ImageIcon minigame = new ImageIcon("src/asset/btn/MiniGame_btn.png");
 
-        JButton btn1 = new JButton("블랙잭");
-        btn1.setSize(620, 350);
+
+        JButton btn1 = new JButton(blackjack);
+        btn1.setBounds(100,50,518, 600);
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,10 +40,12 @@ public class GameSelectScreen extends JFrame {
                 dispose();
             }
         });
+        btn1.setBorderPainted(false);
+        btn1.setContentAreaFilled(false);
         add(btn1);
 
-        JButton btn3 = new JButton("카드맞추기");
-        btn3.setSize(620, 350);
+        JButton btn3 = new JButton(minigame);
+        btn3.setBounds(730,50,417, 600);
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,6 +54,8 @@ public class GameSelectScreen extends JFrame {
                 dispose();
             }
         });
+        btn3.setBorderPainted(false);
+        btn3.setContentAreaFilled(false);
         add(btn3);
     }
 }
