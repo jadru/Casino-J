@@ -1,6 +1,7 @@
-package screen;
+package screen.game;
 
-import support.GlobalGUI;
+import screen.ui.MainScreen;
+import global.GlobalGUI;
 import support.SQLiteManager;
 import support.ShuffleCard;
 
@@ -43,7 +44,7 @@ public class Game_1 extends GlobalGUI {
     static JPanel user_card_panel;
     static JPanel button_panel;
 
-    Game_1(String user_id) {
+    public Game_1(String user_id) {
         super(COMPUTER_NAME, "src/asset/game1/game1_bg.png");
         Game_1.user_id = user_id;
         game = this;
@@ -125,7 +126,7 @@ public class Game_1 extends GlobalGUI {
             if (!is_finished) {
                 int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
                 if (userpoint > 21) {
-                    screen.Game_1.resultOut(false);
+                    Game_1.resultOut(false);
                     is_finished = true;
                 } else {
                     int point = calculatePoint(user_cards_deck, usercard_cnt);

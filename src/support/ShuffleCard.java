@@ -1,6 +1,6 @@
 package support;
 
-import screen.Game_1;
+import screen.game.Game_1;
 
 public class ShuffleCard {
     public static Game_1 game;

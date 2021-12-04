@@ -1,7 +1,7 @@
-package screen;
+package screen.ui;
 
 import dialog.InfoDialog;
-import support.GlobalGUI;
+import global.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.sound.sampled.AudioInputStream;

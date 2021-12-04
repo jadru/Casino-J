@@ -1,6 +1,6 @@
-package screen;
+package screen.ui;
 
-import support.GlobalGUI;
+import global.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.swing.*;

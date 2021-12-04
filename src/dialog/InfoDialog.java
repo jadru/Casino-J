@@ -1,6 +1,6 @@
 package dialog;
 
-import screen.MainScreen;
+import screen.ui.MainScreen;
 
 import javax.swing.*;
 import java.awt.*;

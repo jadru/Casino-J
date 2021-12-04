@@ -1,6 +1,4 @@
-package support;
-
-import panel.GlobalPanel;
+package global;
 
 import javax.swing.*;
 import java.awt.*;

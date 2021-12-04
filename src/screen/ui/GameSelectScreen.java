@@ -1,12 +1,14 @@
-package screen;
+package screen.ui;
 
-import support.GlobalGUI;
+import screen.game.Game_1;
+import screen.game.Game_3;
+import global.GlobalGUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static screen.Game_3.timer;
+import static screen.game.Game_3.timer;
 
 public class GameSelectScreen extends GlobalGUI {
     String id;

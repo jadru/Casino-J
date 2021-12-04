@@ -1,5 +1,6 @@
-package screen;
+package screen.game;
 
+import screen.ui.MainScreen;
 import support.SQLiteManager;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class Game_3 extends JFrame implements ActionListener {
     static int dec_time = 0; // 0.1초 단위
     static int stop_time = -100; // 버튼이나 이미지를 1초후에 사라지게 할 변수
     static int timer_stop; // 타이머를 종료할 변수
-    static Timer timer = new Timer();
+    public static Timer timer = new Timer();
     String id;
     ImageIcon game_bt;
 
