@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class ProfileScreen extends GlobalGUI {
     private Image card0_back, card1_back, card2_back, card3_back, card4_back;
@@ -19,8 +20,17 @@ public class ProfileScreen extends GlobalGUI {
         String username = b.getNickname(id);
         int userWin = b.getWin(id);
         int userLose = b.getLose(id);
-        int userLevel = b.getLevel(id);
-        int userRank;
+        int userRank = -1;
+
+        Vector<String> userOrdered = b.getrank();
+        for (int i = 0; i < userOrdered.size(); i++) {
+            String now = userOrdered.get(i);
+            if (username.equals(now)) {
+                userRank = i;
+            }
+        }
+        userRank++;
+
         int userPoint = b.getPoint(id);
         int userskin = b.getSkin(id);
 
@@ -33,9 +43,9 @@ public class ProfileScreen extends GlobalGUI {
         mainButton.setBorderPainted(false);
         mainButton.setContentAreaFilled(false);
 
-        String[] title = {"ID", "이름", "전적", "레벨", "순위", " $ "};
+        String[] title = {"ID", "이름", "전적", "순위", " $ "};
         JLabel[] gridTitle = new JLabel[6];
-        JLabel[] gridElement = new JLabel[6];
+        JLabel[] gridElement = new JLabel[5];
         JLabel CardText = new JLabel("보유중인 카드");
         JButton CardBt[] = new JButton[5];
 
@@ -83,7 +93,7 @@ public class ProfileScreen extends GlobalGUI {
 
         CardText.setFont(casinoFont(25));
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             gridTitle[i] = new JLabel(title[i]);
             gridTitle[i].setBounds(200, 100 + i * 70, 300, 100);
             gridTitle[i].setFont(casinoFont(35));
@@ -94,11 +104,11 @@ public class ProfileScreen extends GlobalGUI {
         gridElement[0] = new JLabel(id);
         gridElement[1] = new JLabel(username);
         gridElement[2] = new JLabel(userWin + "승 " + userLose + "패 승률:" + Math.round(pow) + "%");
-        gridElement[3] = new JLabel(String.valueOf(userLevel));
-        gridElement[4] = new JLabel("-");//랭킹 들어가야함
-        gridElement[5] = new JLabel(String.valueOf(userPoint));
+        //gridElement[3] = new JLabel(String.valueOf(userLevel));
+        gridElement[3] = new JLabel(String.valueOf(userRank));//랭킹 들어가야함
+        gridElement[4] = new JLabel(String.valueOf(userPoint));
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             gridElement[i].setBounds(300, 100 + i * 70, 500, 100);
             gridElement[i].setFont(casinoFont(35));
             gridElement[i].setForeground(Color.WHITE);

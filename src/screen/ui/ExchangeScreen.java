@@ -23,8 +23,8 @@ public class ExchangeScreen extends GlobalGUI {
 
         usertext.setFont(casinoFont(30));
         userPoint.setFont(casinoFont(30));
-        usertext.setBounds(260, 12, 150, 100);
-        userPoint.setBounds(410, 12, 400, 100);
+        usertext.setBounds(260, 12, 200, 100);
+        userPoint.setBounds(460, 12, 400, 100);
         add(usertext);
         add(userPoint);
 
@@ -38,6 +38,7 @@ public class ExchangeScreen extends GlobalGUI {
 
         ImageIcon consImg = new ImageIcon("src/asset/ui/cost_Img.png");
         JLabel cost = new JLabel(consImg);
+
 
         JPanel jp = new JPanel() {
             @Override
@@ -90,8 +91,8 @@ public class ExchangeScreen extends GlobalGUI {
         mainButton.setContentAreaFilled(false);
 
         profile_bt.setBounds(170, 30, 70, 70);
-        mainButton.setBorderPainted(false);
-        mainButton.setContentAreaFilled(false);
+        profile_bt.setBorderPainted(false);
+        profile_bt.setContentAreaFilled(false);
 
         cost.setBounds(410, 150, 465, 100);
 
@@ -213,6 +214,13 @@ public class ExchangeScreen extends GlobalGUI {
                     }
                 }
              
+            }
+        });
+        profile_bt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ProfileScreen(id);
+                setVisible(false); // 창 안보이게 하기
             }
         });
 
