@@ -58,8 +58,8 @@ public class MainScreen extends GlobalGUI {
         //	bt[i]=new JButton(str[i]);
         //}
         bt[1] = new JButton(str[1]);
-        usertext.setBounds(260, 12, 150, 100);
-        userPoint.setBounds(410, 12, 400, 100);
+        usertext.setBounds(260, 12, 200, 100);
+        userPoint.setBounds(460, 12, 400, 100);
         add(usertext);
         add(userPoint);
 
