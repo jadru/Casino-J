@@ -33,7 +33,6 @@ public class Game_1 extends GlobalGUI {
     private static int comcard_cnt;
     private static JFrame game;
     private static Random rd = new Random();
-    static boolean is_finished;
 
     private static String user_id = "";
     static SQLiteManager sql_manager;
@@ -48,7 +47,6 @@ public class Game_1 extends GlobalGUI {
         super(COMPUTER_NAME, "src/asset/game1/game1_bg.png");
         Game_1.user_id = user_id;
         game = this;
-        is_finished = false;
         setScreenGUI();
         setGameGUI();
         startGame();
@@ -122,24 +120,12 @@ public class Game_1 extends GlobalGUI {
     }
 
     private void startGame() {
-        try {
-            if (!is_finished) {
-                int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
-                if (userpoint > 21) {
-                    Game_1.resultOut(false);
-                    is_finished = true;
-                } else {
-                    int point = calculatePoint(user_cards_deck, usercard_cnt);
-                    if (point > 21) {
-                        resultOut(false);
-                    }
-                    setButtonPanel(point);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
+        if (userpoint > 21) {
+            Game_1.resultOut(false);
+        } else {
+            setButtonPanel(userpoint);
         }
-
     }
 
     private void setGameGUI() {
@@ -211,7 +197,6 @@ public class Game_1 extends GlobalGUI {
         for (int card : com_cards_deck) {
             addCardGUI(card, com_card_panel);
         }
-        setFinish();
         repaintGUI();
         String winorlose = "";
         if (iswin) {
@@ -241,11 +226,10 @@ public class Game_1 extends GlobalGUI {
         button_panel.add(mainButton);
     }
 
-    public static void addUserCardFromDialog() {
+    public static void addUserCard() {
         user_cards_deck.add(getCardFromDeck());
         usercard_cnt++;
         addCardGUI(user_cards_deck.get(usercard_cnt - 1), user_card_panel);
-        addComCardRandom();
         game.revalidate();
         game.repaint();
     }
@@ -260,17 +244,14 @@ public class Game_1 extends GlobalGUI {
                 com_cards_deck.add(getCardFromDeck());
                 addCardBack(com_card_panel);
                 comcard_cnt++;
-                if (calculatePoint(com_cards_deck, comcard_cnt) > 21) {
-                    resultOut(true);
-                    is_finished = true;
-                }
             }
+        }
+        if (calculatePoint(com_cards_deck, comcard_cnt) > 21) {
+            resultOut(true);
         }
     }
 
     public static void finishGame() {
-        addComCardRandom();
-        is_finished = true;
         int compoint = calculatePoint(com_cards_deck, comcard_cnt);
         int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
         if (userpoint > 21) {
@@ -326,15 +307,15 @@ public class Game_1 extends GlobalGUI {
         addcard_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addUserCardFromDialog();
+                addUserCard();
                 clearAllintButtonPanel();
+                addComCardRandom();
                 startGame();
             }
         });
         lose_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setFinish();
                 clearAllintButtonPanel();
                 resultOut(false);
             }
@@ -343,6 +324,7 @@ public class Game_1 extends GlobalGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearAllintButtonPanel();
+                addComCardRandom();
                 finishGame();
             }
         });
@@ -353,9 +335,5 @@ public class Game_1 extends GlobalGUI {
         button_panel.removeAll();
         button_panel.repaint();
         button_panel.revalidate();
-    }
-
-    public static void setFinish() {
-        is_finished = true;
     }
 }

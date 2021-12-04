@@ -11,32 +11,48 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Game_3 extends JFrame implements ActionListener {
-    Random rnd = new Random();
-
-    static int btn_del = 0, btn_dele = 0;// 삭제할 버튼의 번호의 변수
-    static int i = 0, num[] = new int[16];
-    static int fc, sc, click_count = 0, cor_count;// 첫번째 클릭, 두번째 클릭, 클릭 횟수, 정답
-    static JFrame frm = new JFrame();
-    static JButton btn[] = new JButton[16];
-    static JLabel image_label[] = new JLabel[16];
-    static int click_stop = 0; // 클릭 했을 시 다른 버튼이 클릭이 안되게 함
-    static int sec_time = 0; // 1초 단위
-    static int dec_time = 0; // 0.1초 단위
-    static int stop_time = -100; // 버튼이나 이미지를 1초후에 사라지게 할 변수
-    static int timer_stop; // 타이머를 종료할 변수
-    public static Timer timer;
+    Random rnd;
+    static int btn_del, btn_dele;
+    int i;
+    int num[];
+    int fc, sc, click_count, cor_count;
+    JFrame frm;
+    static JButton btn[];
+    static JLabel image_label[];
+    static int click_stop;
+    static int sec_time;
+    static int dec_time;
+    static int stop_time;
+    static int timer_stop;
     String id;
     ImageIcon game_bt;
 
     public Game_3(String id) {
+        frm = new JFrame();
+        Timer timer = new Timer();
+        WorkTask worktask = new WorkTask();
+        btn = new JButton[16];
+        rnd = new Random();
+        num = new int[16];
+        image_label = new JLabel[16];
+
         frm.setTitle("미니게임");
         this.id = id;
         game_bt = new ImageIcon(support.ThemeManager.getCardBackImgURL(this.id));
         frm.setBounds(600, 150, 490, 670);
         frm.setLayout(null);
         frm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        timer = new Timer();
-        timer.schedule(new WorkTask(), 0, 100);
+        timer.schedule(worktask, 0, 100);
+        click_stop = 0; // 클릭 했을 시 다른 버튼이 클릭이 안되게 함
+        sec_time = 0; // 1초 단위
+        dec_time = 0; // 0.1초 단위
+        stop_time = -100; // 버튼이나 이미지를 1초후에 사라지게 할 변수
+        click_count = 0;
+        timer_stop = 0;
+        this.i = 0;
+        btn_del = 0;
+        btn_dele = 0;// 삭제할 버튼의 번호의 변수
+
         for (i = 0; i < 16; i++) // 중복 검사
         {
             num[i] = rnd.nextInt(16);
@@ -96,9 +112,7 @@ public class Game_3 extends JFrame implements ActionListener {
             image_label[i].setVisible(false);
 
         }
-
         frm.setVisible(true); // 프레임을 볼수 있게 설정
-
     }
 
     public void finish() {
@@ -132,14 +146,16 @@ public class Game_3 extends JFrame implements ActionListener {
             JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n5포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
         }
-        timer.cancel();
-        timer = null;
+        frm.removeAll();
         repaint();
+        dispose();
     }
 
     public static class WorkTask extends TimerTask {
+
         @Override
         public void run() {
+            System.out.println("WorkTask RUN");
             dec_time++;
             if (dec_time % 10 == 0) {
                 sec_time++;
@@ -152,13 +168,14 @@ public class Game_3 extends JFrame implements ActionListener {
                 btn[btn_dele].setVisible(true);
                 image_label[btn_dele].setVisible(false);
                 click_stop = 0;
+                System.out.println("이미지 보여주고 사라지고 반복");
             }
 
-            if (timer_stop == 1)
-                timer.cancel(); // 타이머 정지
+            if (timer_stop == 1){
+                cancel();
+                System.out.println("cancel");
+            }
         }
-
-
     }
 
     @Override
@@ -173,28 +190,22 @@ public class Game_3 extends JFrame implements ActionListener {
                         fc = num[i];
                         click_count++;
 
-                        btn[btn_del].setVisible(false); // 버튼을 보이지 않게함
-                        image_label[btn_del].setVisible(true); // 이미지를 보이게 함
-                    } else if (click_count == 1) // count를 이용하여 두번째 클릭을 구분
+                        btn[btn_del].setVisible(false);
+                        image_label[btn_del].setVisible(true);
+                    } else if (click_count == 1)
                     {
                         btn_dele = i;
                         sc = num[i];
                         click_count--;
 
-                        btn[btn_dele].setVisible(false); // 버튼을 보이지 않게함
-                        image_label[btn_dele].setVisible(true); // 이미지를 보이게 함
+                        btn[btn_dele].setVisible(false);
+                        image_label[btn_dele].setVisible(true);
 
                         if (fc + sc == 15) {
                             cor_count++;
                         } else {
-
-                            /*
-                             * try { Thread.sleep(500); } catch
-                             * (InterruptedException e1) 버튼 클릭시 1초 지연. 미구현 {
-                             * e1.printStackTrace(); }
-                             */
                             click_stop = 1;
-                            stop_time = dec_time;    //1초동안 버튼이 보이게 현재 시간(0.1초 단위)를 넣음
+                            stop_time = dec_time;
                         }
                     }
                 }
