@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static support.GlobalGUI.casinoFont;
+import static support.GlobalGUI.getFontName;
+
 public class InGameResultDialog extends JDialog {
 
     public InGameResultDialog(JFrame frame, String title, boolean iswinorlose, String user_id) {
@@ -24,16 +27,17 @@ public class InGameResultDialog extends JDialog {
         SQLiteManager b = new SQLiteManager("","","");
         if(iswinorlose){
             JLabel label1 = new JLabel("WIN! 포인트 100점 적립");
-            label1.setFont(GlobalGUI.casinoFont(30));
+            label1.setFont(casinoFont(30));
             add(label1);
             b.giveRecord(user_id,1, 0, 100);
         }else{
             JLabel label1 = new JLabel("졌습니다...");
-            label1.setFont(GlobalGUI.casinoFont(30));
+            label1.setFont(casinoFont(30));
             b.giveRecord(user_id,0, 1, 0);
             add(label1);
         }
         JButton btn = new JButton("메인으로 가기");
+        btn.setFont(casinoFont(30));
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -19,7 +19,8 @@ public class LoginScreen extends GlobalGUI {
         PW.setFont(casinoFont(35));
         ID.setForeground(Color.WHITE);
         PW.setForeground(Color.WHITE);
-
+        ID.setFocusable(true);
+        ID.requestFocus();
         JLabel id_label = new JLabel("ID : ");
         JLabel pw_label = new JLabel("PW : ");
         JLabel gameList[] = new JLabel[3];
