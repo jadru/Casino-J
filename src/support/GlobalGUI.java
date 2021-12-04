@@ -1,15 +1,11 @@
 package support;
 
-import com.sun.tools.javac.Main;
 import panel.GlobalPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-
-import static java.awt.Font.BOLD;
 
 public class GlobalGUI extends JFrame {
     static JPanel panel;
@@ -27,6 +23,7 @@ public class GlobalGUI extends JFrame {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null);
         setResizable(false);
+        requestFocusInWindow();
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((windowSize.width - WINDOW_WIDTH) / 2,
                 (windowSize.height - WINDOW_HEIGHT) / 2); //화면 중앙에 띄우기
@@ -44,9 +41,10 @@ public class GlobalGUI extends JFrame {
     public static Font casinoFont(int size){
         return new Font(FONT_NAME, Font.BOLD, size);
     }
-    public void repaintGUI(){
-        this.repaint();
-        this.revalidate();
+    public static void repaintGUI(){
+        panel.repaint();
+        panel.revalidate();
+        System.out.println("GUI를 다시 그리는 중...");
     }
     public static String getFontName(){
         return FONT_NAME;

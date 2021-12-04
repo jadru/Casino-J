@@ -21,6 +21,7 @@ public class LoginScreen extends GlobalGUI {
         PW.setForeground(Color.WHITE);
         ID.setFocusable(true);
         ID.requestFocus();
+        ID.grabFocus();
         JLabel id_label = new JLabel("ID : ");
         JLabel pw_label = new JLabel("PW : ");
         JLabel gameList[] = new JLabel[3];
