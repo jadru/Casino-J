@@ -1,6 +1,7 @@
 package screen;
 
-import panel.GamePanel;
+import panel.GlobalPanel;
+import support.GlobalGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,24 +10,17 @@ import java.awt.event.ActionListener;
 
 import static screen.Game_3.timer;
 
-public class GameSelectScreen extends JFrame {
+public class GameSelectScreen extends GlobalGUI {
     String id;
-    private GamePanel game;
     GameSelectScreen(String id){
+        super("게임을 선택하세요", "src/asset/game1/game1_bg.png");
         this.id = id;
-        game = new GamePanel();
         createUI();
+        repaintGUI();
     }
 
     private void createUI(){
-        setTitle("게임을 선택하세요");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(game);
-        setLayout(null);
-        setVisible(true);
-        setSize(1280, 740);
-        setLocationRelativeTo(null);
-        setResizable(false);
+
         ImageIcon blackjack = new ImageIcon("src/asset/btn/BlackJack_btn.png");
         ImageIcon minigame = new ImageIcon("src/asset/btn/MiniGame_btn.png");
 

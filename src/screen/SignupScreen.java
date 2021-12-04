@@ -1,5 +1,6 @@
 package screen;
 
+import panel.GlobalPanel;
 import support.SQLiteManager;
 
 import javax.swing.*;
@@ -8,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SignupScreen extends JFrame {
-    private MyPanel panel = new MyPanel();
+    private GlobalPanel panel = new GlobalPanel("src/asset/bg/Signup_img.png");
     SignupScreen(){
         super("회원가입"); //타이틀
 
@@ -138,14 +139,6 @@ public class SignupScreen extends JFrame {
                 }
             }
         });
-    }
-    class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/bg/Signup_img.png");
-        private Image img = icon.getImage();
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
-        }
     }
 }
 

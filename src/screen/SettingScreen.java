@@ -1,10 +1,12 @@
 package screen;
 
+import panel.GlobalPanel;
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 public class SettingScreen extends  JFrame{
-    private MyPanel panel = new MyPanel();
+    private GlobalPanel panel = new GlobalPanel("src/asset/settingImg.png");
 	SettingScreen(String id){
         super("설정"); //타이틀
 
@@ -33,13 +35,6 @@ public class SettingScreen extends  JFrame{
                 setVisible(false); // 창 안보이게 하기 
             }
         });
-    }
-    class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/settingImg.png");
-        private Image img = icon.getImage();
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
-        }
+
     }
 }

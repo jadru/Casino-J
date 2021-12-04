@@ -1,18 +1,21 @@
 package screen;
 
+import panel.GlobalPanel;
+import support.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
-public class ProfileScreen extends JFrame{
-    private MyPanel panel = new MyPanel();
+import static support.GlobalGUI.casinoFont;
+
+public class ProfileScreen extends GlobalGUI {
     private Image card0_back,card1_back,card2_back,card3_back,card4_back;
 
     public boolean checkFrontBack = true;
 	ProfileScreen(String id){
-        super("프로필"); //타이틀
+        super("프로필", "src/asset/bg/profileImg.png"); //타이틀
         SQLiteManager b = new SQLiteManager("","","");
         String username = b.getNickname(id);
         int userWin=b.getWin(id);
@@ -24,9 +27,6 @@ public class ProfileScreen extends JFrame{
 
         double all=userWin+userLose;
         double pow = (userWin/all)*100;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(panel);
-        setLayout(null);
 
         ImageIcon mainbtn = new ImageIcon("src/asset/btn/main_btn.png");
         JButton mainButton = new JButton(mainbtn);
@@ -88,12 +88,12 @@ public class ProfileScreen extends JFrame{
 
 
 
-        CardText.setFont(new Font("Gothic",Font.BOLD,25));
+        CardText.setFont(casinoFont(25));
 
         for(int i = 0; i < 6; i++) {
             gridTitle[i] = new JLabel(title[i]);
             gridTitle[i].setBounds(200,100+i*70, 300,100);
-            gridTitle[i].setFont(new Font("Gothic",Font.BOLD,35));
+            gridTitle[i].setFont(casinoFont(35));
             gridTitle[i].setForeground(Color.WHITE);
             add(gridTitle[i]);
         }
@@ -107,7 +107,7 @@ public class ProfileScreen extends JFrame{
 
         for(int i = 0; i < 6; i++) {
             gridElement[i].setBounds(300,100+i*70, 500,100);
-            gridElement[i].setFont(new Font("Gothic",Font.BOLD,35));
+            gridElement[i].setFont(casinoFont(35));
             gridElement[i].setForeground(Color.WHITE);
             add(gridElement[i]);
         }
@@ -181,17 +181,7 @@ public class ProfileScreen extends JFrame{
                 repaint();
             }
         });
-        repaint(); revalidate();
+        repaintGUI();
 
-
-    }
-    class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/bg/profileImg.png");
-        private Image img = icon.getImage();
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
-
-        }
     }
 }

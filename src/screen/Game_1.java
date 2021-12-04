@@ -2,7 +2,8 @@ package screen;
 
 import dialog.InGamePlayDialog;
 import dialog.InGameResultDialog;
-import panel.GamePanel;
+import panel.GlobalPanel;
+import support.GlobalGUI;
 import support.SQLiteManager;
 import support.ShuffleCard;
 
@@ -16,7 +17,7 @@ import static java.awt.Font.BOLD;
 import static support.ShuffleCard.makeCardDeck;
 import static support.ShuffleCard.getCardFromDeck;
 
-public class Game_1 extends JFrame {
+public class Game_1 extends GlobalGUI {
 
     private static final String COMPUTER_NAME = "블랙잭 AI";
     private static final String COMPUTER_IMG_URL = "src/asset/game1/icons8-bot-96.png";
@@ -35,7 +36,6 @@ public class Game_1 extends JFrame {
     static boolean is_finished;
 
     private static String user_id = "";
-    private GamePanel main;
     SQLiteManager sql_manager;
 
     JPanel com_profile_panel;
@@ -44,27 +44,20 @@ public class Game_1 extends JFrame {
     static JPanel user_card_panel;
     JPanel button_panel;
 
-    Game_1(String id) {
-        user_id = id;
+    Game_1(String user_id) {
+        super(COMPUTER_NAME, "src/asset/game1/game1_bg.png");
+        Game_1.user_id = user_id;
         game = this;
         is_finished = false;
-        main = new GamePanel();
-        generateGUI();
+        setScreenGUI();
         setGameGUI();
         startGame();
+        repaintGUI();
     }
 
-    private void generateGUI(){
-        setTitle(COMPUTER_NAME);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(main);
-        setLayout(null);
-        setSize(1280, 740);
-        setLocationRelativeTo(null);
-        setResizable(false);
+    private void setScreenGUI(){
 
         sql_manager = new SQLiteManager("","","");
-
         ShuffleCard.game = this;
 
         user_cards_deck = new ArrayList<Integer>();
@@ -99,8 +92,8 @@ public class Game_1 extends JFrame {
                 new ImageIcon(USER_IMG_URL),
                 SwingConstants.CENTER);
 
-        com_profile_img.setFont(new Font("Arial", BOLD, 30));
-        user_profile_img.setFont(new Font("Arial", BOLD, 30));
+        com_profile_img.setFont(casinoFont(30));
+        user_profile_img.setFont(casinoFont(30));
 
         com_profile_img.setForeground(new Color(255, 255, 255));
         user_profile_img.setForeground(new Color(255, 255, 255));
@@ -170,7 +163,7 @@ public class Game_1 extends JFrame {
         btn.setBackground(Color.WHITE);
         btn.setPreferredSize(new Dimension(120, 160));
         btn.setMargin(new Insets(0, 0, 0, 0));
-        btn.setFont(new Font("Gothic", BOLD, 30));
+        btn.setFont(new Font(Font.SERIF, BOLD, 30));
         switch((pick / 13)){
             case 1: btn.setForeground(Color.RED);
             case 3: btn.setForeground(Color.RED); break;
@@ -274,10 +267,6 @@ public class Game_1 extends JFrame {
         }
         return getpoint;
     }
-    public static void main(String[] args){
-        new Game_1("admin");
-    }
-
     public static void setFinish(){
         is_finished = true;
     }

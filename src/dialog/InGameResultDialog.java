@@ -1,6 +1,7 @@
 package dialog;
 
 import screen.MainScreen;
+import support.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.swing.*;
@@ -23,12 +24,12 @@ public class InGameResultDialog extends JDialog {
         SQLiteManager b = new SQLiteManager("","","");
         if(iswinorlose){
             JLabel label1 = new JLabel("WIN! 포인트 100점 적립");
-            label1.setFont(new Font("Arial", Font.BOLD, 30));
+            label1.setFont(GlobalGUI.casinoFont(30));
             add(label1);
             b.giveRecord(user_id,1, 0, 100);
         }else{
             JLabel label1 = new JLabel("졌습니다...");
-            label1.setFont(new Font("Arial", Font.BOLD, 30));
+            label1.setFont(GlobalGUI.casinoFont(30));
             b.giveRecord(user_id,0, 1, 0);
             add(label1);
         }

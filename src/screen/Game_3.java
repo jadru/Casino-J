@@ -26,8 +26,8 @@ public class Game_3 extends JFrame implements ActionListener {
     public Game_3(String id){
         frm.setTitle("미니게임");
         this.id=id;
-        game_bt = new ImageIcon(support.ThemeManager.getCardBackImgURL(this.id));//함수 구현하세용
-        frm.setBounds(600, 150, 490, 670); // 프레임 위치, 크기 설정
+        game_bt = new ImageIcon(support.ThemeManager.getCardBackImgURL(this.id));
+        frm.setBounds(600, 150, 490, 670);
         frm.setLayout(null);
         frm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 

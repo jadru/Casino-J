@@ -1,5 +1,7 @@
 package screen;
 
+import panel.GlobalPanel;
+import support.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.swing.*;
@@ -10,19 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class RankScreen extends  JFrame{
-    private MyPanel panel = new MyPanel();
+import static support.GlobalGUI.casinoFont;
+
+public class RankScreen extends GlobalGUI {
     ArrayList<ResultSet> users;
 
     RankScreen(String id) throws SQLException {
-        super("랭킹"); //타이틀
-
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(panel);
-        setLayout(null);
-
-
+        super("랭킹", "src/asset/bg/rankImg.png");
 
         ImageIcon mainbtn = new ImageIcon("src/asset/btn/main_btn.png");
         JButton mainButton = new JButton(mainbtn);
@@ -31,10 +27,7 @@ public class RankScreen extends  JFrame{
         mainButton.setContentAreaFilled(false);
         add(mainButton);
 
-
-
         String Title[] = new String[5];
-        setSize(1280,720);
         SQLiteManager b = new SQLiteManager("","","");
         Vector<String> userRankingTable = new Vector<>();
         userRankingTable=b.getrank();
@@ -46,16 +39,13 @@ public class RankScreen extends  JFrame{
         JLabel title[] = new JLabel[5];
         for(int i = 1 ; i < 5; i++){
             title[i] = new JLabel(Title[i]);
-            title[i].setFont(new Font("Gothic",Font.BOLD,40));
+            title[i].setFont(casinoFont(40));
             title[i].setForeground(Color.WHITE);
-
         }
         Color a = new Color(70,255,154);
         title[0] = new JLabel(Title[0]);
-        title[0].setFont(new Font("Gothic",Font.BOLD,50));
+        title[0].setFont(casinoFont(50));
         title[0].setForeground(a);
-
-
 
         title[0].setBounds(480,198,1000,100);
         title[1].setBounds(350,308,1000,100);
@@ -63,25 +53,14 @@ public class RankScreen extends  JFrame{
         title[3].setBounds(350,426,1000,100);
         title[4].setBounds(750,426,1000,100);
 
-
-    for(int i = 0; i < 5; i++)
-        add(title[i]);
-
-
-
+        for(int i = 0; i < 5; i++)
+            add(title[i]);
 
 //       userRankingTable.add();
 
 
         //for(int i = 0; i < 5; i++)
         //    add(title[i]);
-
-        Dimension frameSize = getSize();
-        Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((windowSize.width - frameSize.width) / 2,
-                (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
         
         mainButton.addActionListener(new ActionListener() {
             @Override
@@ -90,14 +69,7 @@ public class RankScreen extends  JFrame{
                 setVisible(false); // 창 안보이게 하기 
             }
         });
-    }
-    class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/bg/rankImg.png");
-        private Image img = icon.getImage();
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
-        }
+        repaintGUI();
     }
 
 }

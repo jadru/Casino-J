@@ -1,5 +1,7 @@
 package screen;
 
+import panel.GlobalPanel;
+import support.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.swing.*;
@@ -7,23 +9,22 @@ import java.awt.event.*;
 import java.awt.*;
 import java.awt.font.ImageGraphicAttribute;
 
-public class ExchangeScreen extends  JFrame{
+import static support.GlobalGUI.casinoFont;
+
+public class ExchangeScreen extends  GlobalGUI{
     private Image card1_back,card2_back,card3_back,card4_back;
     public boolean checkFrontBack = true;
-    private MyPanel panel = new MyPanel();
 	ExchangeScreen(String id){
-        super("상점"); //타이틀
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(panel);
-        setLayout(null);
+        super("상점", "src/asset/bg/exchangeImg.png"); //타이틀
+
         SQLiteManager b = new SQLiteManager("","","");
         String username = b.getNickname(id);
         int userpoint = b.getPoint(id);
         JLabel usertext = new JLabel(username);
         JLabel userPoint = new JLabel("$"+String.valueOf(userpoint));
 
-        usertext.setFont(new Font("Gothic",Font.BOLD,30));
-        userPoint.setFont(new Font("Gothic",Font.BOLD,30));
+        usertext.setFont(casinoFont(30));
+        userPoint.setFont(casinoFont(30));
         usertext.setBounds(260,12,150,100);
         userPoint.setBounds(410,12,400,100);
         add(usertext);
@@ -110,14 +111,7 @@ public class ExchangeScreen extends  JFrame{
         add(profile_bt);
         add(topBar);
         add(cost);
-        setSize(1280,720);
 
-        Dimension frameSize = getSize();
-        Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((windowSize.width - frameSize.width) / 2,
-                (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
-        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        setVisible(true);
         mainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -248,13 +242,6 @@ public class ExchangeScreen extends  JFrame{
             }
         });*/
 
-    }
-    class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/bg/exchangeImg.png");
-        private Image img = icon.getImage();
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
-        }
+        repaintGUI();
     }
 }

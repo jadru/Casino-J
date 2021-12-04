@@ -11,15 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import dialog.InfoDialog;
+import panel.GlobalPanel;
+import support.GlobalGUI;
 import support.SQLiteManager;
 import static screen.Game_3.timer;
+import static support.GlobalGUI.casinoFont;
 
-public class MainScreen extends JFrame{
-    private MyPanel panel = new MyPanel();
+public class MainScreen extends GlobalGUI {
     private InfoDialog settingScreen;
-
-
-
+    private static String id = "";
     public static void Sound(String file, boolean Loop){
         Clip clip;
         try {
@@ -34,30 +34,30 @@ public class MainScreen extends JFrame{
     }
 
 	public MainScreen(String id) {
-		setTitle("CaisnoJ");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(panel);
+		super("Casino-J", "src/asset/bg/mainImg.jpg");
+        MainScreen.id = id;
+        makeMainUI();
+        repaintGUI();
+	}
+
+    private void makeMainUI(){
         SQLiteManager b = new SQLiteManager("","","");
         String username = b.getNickname(id);
         int userpoint = b.getPoint(id);
         JLabel usertext = new JLabel(username);
         JLabel userPoint = new JLabel("$"+ String.valueOf(userpoint));
-        usertext.setFont(new Font("Gothic",Font.BOLD,30));
-        userPoint.setFont(new Font("Gothic",Font.BOLD,30));
-        setLayout(null);
+        usertext.setFont(casinoFont(30));
+        userPoint.setFont(casinoFont(30));
 
         //Sound("asset/GameBackgroundMusic.mp3", true);
 
-
         settingScreen = new InfoDialog(this, "설정");
 
-
-
-		String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
-		JButton bt[] = new JButton[5];
+        String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
+        JButton bt[] = new JButton[5];
         JButton logoutBt = new JButton("로그아웃");
-		//for(int i = 0; i < 5; i++) {
-		//	bt[i]=new JButton(str[i]);
+        //for(int i = 0; i < 5; i++) {
+        //	bt[i]=new JButton(str[i]);
         //}
         bt[1] = new JButton(str[1]);
         usertext.setBounds(260,12,150,100);
@@ -74,7 +74,7 @@ public class MainScreen extends JFrame{
 
 
         //버튼 및 라벨 이미지 넣기
-       JLabel topBar = new JLabel(topbar_img);
+        JLabel topBar = new JLabel(topbar_img);
         bt[0] = new JButton(exchange_bt_img);
         bt[1] = new JButton(profile_bt_img);
         bt[2] = new JButton(ranking_bt_img);
@@ -82,7 +82,7 @@ public class MainScreen extends JFrame{
         bt[4] = new JButton(game_bt_img);
 
         //버튼 투명하게 만들기
-        
+
         for(int i = 0; i < 5; i++){
             bt[i].setBorderPainted(false);
             bt[i].setContentAreaFilled(false);
@@ -111,6 +111,7 @@ public class MainScreen extends JFrame{
         }
 
         add(topBar);
+
         /*
 		panel1.add(bt[1]);
         panel1.add(bt[3]);v
@@ -123,32 +124,18 @@ public class MainScreen extends JFrame{
         setLayout(new GridLayout(3,0));
 		*/
 
-		setSize(1280,720);
-		/*
-		
-		setVisible(true);*/
-		
-		Dimension frameSize = getSize();
-		 
-        Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((windowSize.width - frameSize.width) / 2,
-                (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
-        settingScreen.setLocation((windowSize.width - frameSize.width) / 2,
-                (windowSize.height - frameSize.height) / 2);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
         bt[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ExchangeScreen(id);
-                setVisible(false); // 창 안보이게 하기 
+                setVisible(false); // 창 안보이게 하기
             }
         });
         bt[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ProfileScreen(id);
-                setVisible(false); // 창 안보이게 하기 
+                setVisible(false); // 창 안보이게 하기
             }
         });
         bt[2].addActionListener(new ActionListener() {
@@ -159,7 +146,7 @@ public class MainScreen extends JFrame{
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
-                setVisible(false); // 창 안보이게 하기 
+                setVisible(false); // 창 안보이게 하기
             }
         });
 
@@ -187,20 +174,5 @@ public class MainScreen extends JFrame{
                 setVisible(false);
             }
         });
-
-	}
-    class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/bg/mainImg.jpg");
-        private Image img = icon.getImage();
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
-        }
     }
-
-
-
-	public static void main(String[] agrs) {
-
-	}
 }

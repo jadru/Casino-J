@@ -1,29 +1,22 @@
 package screen;
 
-import dialog.InfoDialog;
+import support.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.event.*;
 import java.awt.*;
-import java.awt.font.ImageGraphicAttribute;
 
-public class LoginScreen extends JFrame{
-    private  MyPanel panel = new MyPanel();
-    private  Image bt0_img, bt1_img;
+public class LoginScreen extends GlobalGUI {
     public LoginScreen() {
-        setTitle("로그인 화면");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(panel);
-        setLayout(null);
+        super("Casino-J에 로그인", "src/asset/bg/LoginImg.png");
 
         JTextField ID = new JTextField();
         JPasswordField PW = new JPasswordField();
         ID.setBackground(Color.BLACK);
         PW.setBackground(Color.BLACK);
-        ID.setFont(new Font("Gothic",Font.BOLD,35));
-        PW.setFont(new Font("Gothic",Font.BOLD,35));
+        ID.setFont(casinoFont(35));
+        PW.setFont(casinoFont(35));
         ID.setForeground(Color.WHITE);
         PW.setForeground(Color.WHITE);
 
@@ -71,18 +64,6 @@ public class LoginScreen extends JFrame{
             add(gameList[i]);
         add(ID);add(PW);add(id_label);add(pw_label);
         add(Coin);
-        setSize(1280,720);
-		/*
-
-		setVisible(true);*/
-
-        Dimension frameSize = getSize();
-
-        Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((windowSize.width - frameSize.width) / 2,
-                (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
 
         PW.addKeyListener(new KeyAdapter() {
             @Override
@@ -108,6 +89,7 @@ public class LoginScreen extends JFrame{
                 //setVisible(false); // 창 안보이게 하기
             }
         });
+        repaintGUI();
     }
     private void loginPerformed(String id, String pw){
         SQLiteManager b = new SQLiteManager("","","");
@@ -124,15 +106,6 @@ public class LoginScreen extends JFrame{
         }
     }
 
-
-    class MyPanel extends JPanel{
-        private ImageIcon icon = new ImageIcon("src/asset/bg/LoginImg.png");
-        private Image img = icon.getImage();
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            g.drawImage(img, 0,0,getWidth(),getHeight(),this);
-        }
-    }
     public static void main(String[] agrs) {
         new LoginScreen();
     }
