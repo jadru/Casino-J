@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class ExchangeScreen extends GlobalGUI {
     private Image card1_back, card2_back, card3_back, card4_back;
     public boolean checkFrontBack = true;
-
+    JLabel userPoint;
     ExchangeScreen(String id) {
         super("상점", "src/asset/bg/exchangeImg.png"); //타이틀
 
@@ -19,7 +19,7 @@ public class ExchangeScreen extends GlobalGUI {
         String username = b.getNickname(id);
         int userpoint = b.getPoint(id);
         JLabel usertext = new JLabel(username);
-        JLabel userPoint = new JLabel("$" + String.valueOf(userpoint));
+        userPoint = new JLabel("$" + String.valueOf(userpoint));
 
         usertext.setFont(casinoFont(30));
         userPoint.setFont(casinoFont(30));
@@ -127,6 +127,8 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 1);
+                            userPoint.setText(String.valueOf(b.getPoint(id)));
+
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         }
@@ -134,7 +136,6 @@ public class ExchangeScreen extends GlobalGUI {
 
                     }
                 }
-                repaint();
             }
         });
         bt[1].addActionListener(new ActionListener() {
@@ -150,6 +151,8 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 2);
+                            userPoint.setText(String.valueOf(b.getPoint(id)));
+
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         }
@@ -157,7 +160,7 @@ public class ExchangeScreen extends GlobalGUI {
 
                     }
                 }
-                repaint();
+
             }
         });
         bt[2].addActionListener(new ActionListener() {
@@ -173,6 +176,8 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 3);
+                            userPoint.setText(String.valueOf(b.getPoint(id)));
+
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         }
@@ -180,7 +185,7 @@ public class ExchangeScreen extends GlobalGUI {
 
                     }
                 }
-                repaint();
+
             }
         });
         bt[3].addActionListener(new ActionListener() {
@@ -196,14 +201,18 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 4);
+                            userPoint.setText(String.valueOf(b.getPoint(id)));
+
+
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         }
+
                     } else {
 
                     }
                 }
-                repaint();
+             
             }
         });
 
