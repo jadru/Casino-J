@@ -128,7 +128,7 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 1);
-                            userPoint.setText(String.valueOf(b.getPoint(id)));
+                            userPoint.setText("$" + String.valueOf(b.getPoint(id)));
 
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -152,7 +152,7 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 2);
-                            userPoint.setText(String.valueOf(b.getPoint(id)));
+                            userPoint.setText("$" +String.valueOf(b.getPoint(id)));
 
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -177,7 +177,7 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 3);
-                            userPoint.setText(String.valueOf(b.getPoint(id)));
+                            userPoint.setText("$" +String.valueOf(b.getPoint(id)));
 
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -202,7 +202,7 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 4);
-                            userPoint.setText(String.valueOf(b.getPoint(id)));
+                            userPoint.setText("$" +String.valueOf(b.getPoint(id)));
 
 
                         } else {
