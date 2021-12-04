@@ -155,6 +155,8 @@ public class Game_3 extends JFrame implements ActionListener {
             if (timer_stop == 1)
                 timer.cancel(); // 타이머 정지
         }
+
+
     }
 
     @Override

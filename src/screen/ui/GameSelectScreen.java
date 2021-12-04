@@ -63,6 +63,7 @@ public class GameSelectScreen extends GlobalGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new MainScreen(id);
+
                 setVisible(false); // 창 안보이게 하기
             }
         });

@@ -387,7 +387,7 @@ public class SQLiteManager {
             } else if (index == 3) {
                 stmt.execute("update player set skin3 = 1" + " where id = '" + id + "'");
             } else if (index == 4) {
-                stmt.execute("update player set skin3 = 1" + " where id = '" + id + "'");
+                stmt.execute("update player set skin4 = 1" + " where id = '" + id + "'");
             } else {
 
             }

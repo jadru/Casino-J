@@ -134,6 +134,7 @@ public class ExchangeScreen extends GlobalGUI {
 
                     }
                 }
+                repaint();
             }
         });
         bt[1].addActionListener(new ActionListener() {
@@ -156,6 +157,7 @@ public class ExchangeScreen extends GlobalGUI {
 
                     }
                 }
+                repaint();
             }
         });
         bt[2].addActionListener(new ActionListener() {
@@ -178,6 +180,7 @@ public class ExchangeScreen extends GlobalGUI {
 
                     }
                 }
+                repaint();
             }
         });
         bt[3].addActionListener(new ActionListener() {
@@ -200,6 +203,7 @@ public class ExchangeScreen extends GlobalGUI {
 
                     }
                 }
+                repaint();
             }
         });
 
