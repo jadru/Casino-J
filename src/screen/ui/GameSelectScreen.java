@@ -8,8 +8,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static screen.game.Game_3.timer;
-
 public class GameSelectScreen extends GlobalGUI {
     String id;
 
@@ -51,7 +49,6 @@ public class GameSelectScreen extends GlobalGUI {
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                timer.schedule(new Game_3.WorkTask(), 0, 100);
                 new Game_3(id);
                 dispose();
             }

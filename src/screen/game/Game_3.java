@@ -24,7 +24,7 @@ public class Game_3 extends JFrame implements ActionListener {
     static int dec_time = 0; // 0.1초 단위
     static int stop_time = -100; // 버튼이나 이미지를 1초후에 사라지게 할 변수
     static int timer_stop; // 타이머를 종료할 변수
-    public static Timer timer = new Timer();
+    public static Timer timer;
     String id;
     ImageIcon game_bt;
 
@@ -35,7 +35,8 @@ public class Game_3 extends JFrame implements ActionListener {
         frm.setBounds(600, 150, 490, 670);
         frm.setLayout(null);
         frm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
+        timer = new Timer();
+        timer.schedule(new WorkTask(), 0, 100);
         for (i = 0; i < 16; i++) // 중복 검사
         {
             num[i] = rnd.nextInt(16);
@@ -131,6 +132,8 @@ public class Game_3 extends JFrame implements ActionListener {
             JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n5포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
         }
+        timer.cancel();
+        timer = null;
         repaint();
     }
 
@@ -141,7 +144,6 @@ public class Game_3 extends JFrame implements ActionListener {
             if (dec_time % 10 == 0) {
                 sec_time++;
             }
-
 
             if (stop_time + 10 == dec_time) // 버튼 클릭 후 1초가 지나면 버튼을 보여주고 이미지를 사라지게함
             {
