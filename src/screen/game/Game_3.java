@@ -103,7 +103,7 @@ public class Game_3 extends JFrame implements ActionListener {
 
     public void finish() {
         JFrame ffrm = new JFrame("게임종료");
-        ffrm.setBounds(700, 400, 300, 200);
+        ffrm.setBounds(500, 400, 500, 200);
         ffrm.setVisible(true);
         ffrm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         SQLiteManager b = new SQLiteManager("", "", "");
