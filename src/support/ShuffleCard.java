@@ -2,17 +2,15 @@ package support;
 
 import screen.Game_1;
 
-import java.util.*;
-
-public class ShuffleCard{
+public class ShuffleCard {
     public static Game_1 game;
 
-    public static String[][] makeCardDeck(){
+    public static String[][] makeCardDeck() {
         String[] marks = {"♠", "♦", "♣", "♥"};
         String[][] cards = new String[4][13];
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 13; j++){
-                switch (j){
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 13; j++) {
+                switch (j) {
                     case 0:
                         cards[i][j] = marks[i] + " A";
                         break;
@@ -33,12 +31,12 @@ public class ShuffleCard{
         }
         return cards;
     }
-    public static int getCardFromDeck(){
+
+    public static int getCardFromDeck() {
         int cnt = 0;
         int result = 0;
-        while (cnt < 100)
-        {
-            result = (int)(Math.random() * 52);
+        while (cnt < 100) {
+            result = (int) (Math.random() * 52);
             if (!game.getAtUsedCard(result)) {
                 cnt++;
             } else {

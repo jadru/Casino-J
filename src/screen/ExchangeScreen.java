@@ -1,32 +1,30 @@
 package screen;
 
-import panel.GlobalPanel;
 import support.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
-import java.awt.font.ImageGraphicAttribute;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import static support.GlobalGUI.casinoFont;
-
-public class ExchangeScreen extends  GlobalGUI{
-    private Image card1_back,card2_back,card3_back,card4_back;
+public class ExchangeScreen extends GlobalGUI {
+    private Image card1_back, card2_back, card3_back, card4_back;
     public boolean checkFrontBack = true;
-	ExchangeScreen(String id){
+
+    ExchangeScreen(String id) {
         super("상점", "src/asset/bg/exchangeImg.png"); //타이틀
 
-        SQLiteManager b = new SQLiteManager("","","");
+        SQLiteManager b = new SQLiteManager("", "", "");
         String username = b.getNickname(id);
         int userpoint = b.getPoint(id);
         JLabel usertext = new JLabel(username);
-        JLabel userPoint = new JLabel("$"+String.valueOf(userpoint));
+        JLabel userPoint = new JLabel("$" + String.valueOf(userpoint));
 
         usertext.setFont(casinoFont(30));
         userPoint.setFont(casinoFont(30));
-        usertext.setBounds(260,12,150,100);
-        userPoint.setBounds(410,12,400,100);
+        usertext.setBounds(260, 12, 150, 100);
+        userPoint.setBounds(410, 12, 400, 100);
         add(usertext);
         add(userPoint);
 
@@ -41,7 +39,7 @@ public class ExchangeScreen extends  GlobalGUI{
         ImageIcon consImg = new ImageIcon("src/asset/ui/cost_Img.png");
         JLabel cost = new JLabel(consImg);
 
-        JPanel jp = new JPanel(){
+        JPanel jp = new JPanel() {
             @Override
             public void paint(Graphics g) {
                 if (checkFrontBack == true) {
@@ -60,17 +58,13 @@ public class ExchangeScreen extends  GlobalGUI{
         ImageIcon card4_backside = new ImageIcon("src/asset/theme/card_back_4.png");
 
 
-
-
         card1_back = card1_backside.getImage();
         card2_back = card2_backside.getImage();
         card3_back = card3_backside.getImage();
         card4_back = card4_backside.getImage();
 
 
-
-
-        jp.setBounds(80,270,1200,300);
+        jp.setBounds(80, 270, 1200, 300);
         add(jp);
 
 
@@ -81,31 +75,31 @@ public class ExchangeScreen extends  GlobalGUI{
         bt[1].setBounds(400,200,285,65);*/
 
         JButton bt[] = new JButton[4];
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
             bt[i] = new JButton(buyBt);
 
-        for(int i = 0; i < 4; i++)
-            bt[i].setBounds(100+((i) * 280),555,250,65);
+        for (int i = 0; i < 4; i++)
+            bt[i].setBounds(100 + ((i) * 280), 555, 250, 65);
 
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             bt[i].setBorderPainted(false);
             bt[i].setContentAreaFilled(false);
         }
-        mainButton.setBounds(30,20,100,100);
+        mainButton.setBounds(30, 20, 100, 100);
         mainButton.setBorderPainted(false);
         mainButton.setContentAreaFilled(false);
 
-        profile_bt.setBounds(170,30,70,70);
+        profile_bt.setBounds(170, 30, 70, 70);
         mainButton.setBorderPainted(false);
         mainButton.setContentAreaFilled(false);
 
-        cost.setBounds(410,150,465,100);
+        cost.setBounds(410, 150, 465, 100);
 
         JLabel topBar = new JLabel(topbar_img);
-        topBar.setBounds(150,25,971,81);
+        topBar.setBounds(150, 25, 971, 81);
 
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
             add(bt[i]);
         add(mainButton);
         add(profile_bt);
@@ -123,24 +117,20 @@ public class ExchangeScreen extends  GlobalGUI{
         bt[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SQLiteManager b = new SQLiteManager("","","");
-                if(b.skinCheck(id,1)==true){
-                    JOptionPane.showMessageDialog(null,"이미 구매한 상품입니다.","Message",JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    int result = JOptionPane.showConfirmDialog(null,"정말 구매하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
-                    if(result==JOptionPane.CLOSED_OPTION){
+                SQLiteManager b = new SQLiteManager("", "", "");
+                if (b.skinCheck(id, 1) == true) {
+                    JOptionPane.showMessageDialog(null, "이미 구매한 상품입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    int result = JOptionPane.showConfirmDialog(null, "정말 구매하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.CLOSED_OPTION) {
 
-                    }
-                    else if(result == JOptionPane.YES_OPTION){
-                        if(b.getPoint(id)>=1000){
-                            b.buySkin(id,1);
+                    } else if (result == JOptionPane.YES_OPTION) {
+                        if (b.getPoint(id) >= 1000) {
+                            b.buySkin(id, 1);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         }
-                        else{
-                            JOptionPane.showMessageDialog(null,"포인트가 부족합니다.","Message",JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                    else{
+                    } else {
 
                     }
                 }
@@ -149,24 +139,20 @@ public class ExchangeScreen extends  GlobalGUI{
         bt[1].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SQLiteManager b = new SQLiteManager("","","");
-                if(b.skinCheck(id,2)==true){
-                    JOptionPane.showMessageDialog(null,"이미 구매한 상품입니다.","Message",JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    int result = JOptionPane.showConfirmDialog(null,"정말 구매하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
-                    if(result==JOptionPane.CLOSED_OPTION){
+                SQLiteManager b = new SQLiteManager("", "", "");
+                if (b.skinCheck(id, 2) == true) {
+                    JOptionPane.showMessageDialog(null, "이미 구매한 상품입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    int result = JOptionPane.showConfirmDialog(null, "정말 구매하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.CLOSED_OPTION) {
 
-                    }
-                    else if(result == JOptionPane.YES_OPTION){
-                        if(b.getPoint(id)>=1000){
-                            b.buySkin(id,2);
+                    } else if (result == JOptionPane.YES_OPTION) {
+                        if (b.getPoint(id) >= 1000) {
+                            b.buySkin(id, 2);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         }
-                        else{
-                            JOptionPane.showMessageDialog(null,"포인트가 부족합니다.","Message",JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                    else{
+                    } else {
 
                     }
                 }
@@ -175,24 +161,20 @@ public class ExchangeScreen extends  GlobalGUI{
         bt[2].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SQLiteManager b = new SQLiteManager("","","");
-                if(b.skinCheck(id,3)==true){
-                    JOptionPane.showMessageDialog(null,"이미 구매한 상품입니다.","Message",JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    int result = JOptionPane.showConfirmDialog(null,"정말 구매하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
-                    if(result==JOptionPane.CLOSED_OPTION){
+                SQLiteManager b = new SQLiteManager("", "", "");
+                if (b.skinCheck(id, 3) == true) {
+                    JOptionPane.showMessageDialog(null, "이미 구매한 상품입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    int result = JOptionPane.showConfirmDialog(null, "정말 구매하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.CLOSED_OPTION) {
 
-                    }
-                    else if(result == JOptionPane.YES_OPTION){
-                        if(b.getPoint(id)>=1000){
-                            b.buySkin(id,3);
+                    } else if (result == JOptionPane.YES_OPTION) {
+                        if (b.getPoint(id) >= 1000) {
+                            b.buySkin(id, 3);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         }
-                        else{
-                            JOptionPane.showMessageDialog(null,"포인트가 부족합니다.","Message",JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                    else{
+                    } else {
 
                     }
                 }
@@ -201,24 +183,20 @@ public class ExchangeScreen extends  GlobalGUI{
         bt[3].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SQLiteManager b = new SQLiteManager("","","");
-                if(b.skinCheck(id,4)==true){
-                    JOptionPane.showMessageDialog(null,"이미 구매한 상품입니다.","Message",JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    int result = JOptionPane.showConfirmDialog(null,"정말 구매하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
-                    if(result==JOptionPane.CLOSED_OPTION){
+                SQLiteManager b = new SQLiteManager("", "", "");
+                if (b.skinCheck(id, 4) == true) {
+                    JOptionPane.showMessageDialog(null, "이미 구매한 상품입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    int result = JOptionPane.showConfirmDialog(null, "정말 구매하시겠습니까?", "Confirm", JOptionPane.YES_NO_OPTION);
+                    if (result == JOptionPane.CLOSED_OPTION) {
 
-                    }
-                    else if(result == JOptionPane.YES_OPTION){
-                        if(b.getPoint(id)>=1000){
-                            b.buySkin(id,4);
+                    } else if (result == JOptionPane.YES_OPTION) {
+                        if (b.getPoint(id) >= 1000) {
+                            b.buySkin(id, 4);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         }
-                        else{
-                            JOptionPane.showMessageDialog(null,"포인트가 부족합니다.","Message",JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
-                    else{
+                    } else {
 
                     }
                 }

@@ -1,9 +1,13 @@
 package screen;
-import java.util.*;
-import java.awt.event.*;
-import java.util.Timer;
-import javax.swing.*;
+
 import support.SQLiteManager;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Game_3 extends JFrame implements ActionListener {
     Random rnd = new Random();
@@ -17,15 +21,15 @@ public class Game_3 extends JFrame implements ActionListener {
     static int click_stop = 0; // 클릭 했을 시 다른 버튼이 클릭이 안되게 함
     static int sec_time = 0; // 1초 단위
     static int dec_time = 0; // 0.1초 단위
-    static int stop_time=-100; // 버튼이나 이미지를 1초후에 사라지게 할 변수
+    static int stop_time = -100; // 버튼이나 이미지를 1초후에 사라지게 할 변수
     static int timer_stop; // 타이머를 종료할 변수
     static Timer timer = new Timer();
     String id;
     ImageIcon game_bt;
 
-    public Game_3(String id){
+    public Game_3(String id) {
         frm.setTitle("미니게임");
-        this.id=id;
+        this.id = id;
         game_bt = new ImageIcon(support.ThemeManager.getCardBackImgURL(this.id));
         frm.setBounds(600, 150, 490, 670);
         frm.setLayout(null);
@@ -100,33 +104,28 @@ public class Game_3 extends JFrame implements ActionListener {
         ffrm.setBounds(700, 400, 300, 200);
         ffrm.setVisible(true);
         ffrm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        SQLiteManager b = new SQLiteManager("","","");
-        if(sec_time<=10&&sec_time>0){
-            b.givePoint(id,50);
-            JLabel finish = new JLabel(sec_time+"초 걸렸습니다.\n50포인트를 획득하였습니다.", JLabel.CENTER);
+        SQLiteManager b = new SQLiteManager("", "", "");
+        if (sec_time <= 10 && sec_time > 0) {
+            b.givePoint(id, 50);
+            JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n50포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
-        }
-        else if(sec_time<=20&&sec_time>10){
-            b.givePoint(id,40);
-            JLabel finish = new JLabel(sec_time+"초 걸렸습니다.\n40포인트를 획득하였습니다.", JLabel.CENTER);
+        } else if (sec_time <= 20 && sec_time > 10) {
+            b.givePoint(id, 40);
+            JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n40포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
-        }
-        else if(sec_time<=30&&sec_time>20){
-            b.givePoint(id,30);
-            JLabel finish = new JLabel(sec_time+"초 걸렸습니다.\n30포인트를 획득하였습니다.", JLabel.CENTER);
+        } else if (sec_time <= 30 && sec_time > 20) {
+            b.givePoint(id, 30);
+            JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n30포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
-        }
-        else if(sec_time<=40&&sec_time>30){
-            b.givePoint(id,20);
-            JLabel finish = new JLabel(sec_time+"초 걸렸습니다.\n20포인트를 획득하였습니다.", JLabel.CENTER);
+        } else if (sec_time <= 40 && sec_time > 30) {
+            b.givePoint(id, 20);
+            JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n20포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
-        }
-        else if(sec_time<=50&&sec_time>40){
-            b.givePoint(id,10);
-            JLabel finish = new JLabel(sec_time+"초 걸렸습니다.\n10포인트를 획득하였습니다.", JLabel.CENTER);
+        } else if (sec_time <= 50 && sec_time > 40) {
+            b.givePoint(id, 10);
+            JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n10포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
-        }
-        else {
+        } else {
             b.givePoint(id, 5);
             JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n5포인트를 획득하였습니다.", JLabel.CENTER);
             ffrm.add(finish);
@@ -171,8 +170,7 @@ public class Game_3 extends JFrame implements ActionListener {
 
                         btn[btn_del].setVisible(false); // 버튼을 보이지 않게함
                         image_label[btn_del].setVisible(true); // 이미지를 보이게 함
-                    }
-                    else if (click_count == 1) // count를 이용하여 두번째 클릭을 구분
+                    } else if (click_count == 1) // count를 이용하여 두번째 클릭을 구분
                     {
                         btn_dele = i;
                         sc = num[i];
@@ -183,9 +181,7 @@ public class Game_3 extends JFrame implements ActionListener {
 
                         if (fc + sc == 15) {
                             cor_count++;
-                        }
-
-                        else {
+                        } else {
 
                             /*
                              * try { Thread.sleep(500); } catch
@@ -193,7 +189,7 @@ public class Game_3 extends JFrame implements ActionListener {
                              * e1.printStackTrace(); }
                              */
                             click_stop = 1;
-                            stop_time = dec_time;	//1초동안 버튼이 보이게 현재 시간(0.1초 단위)를 넣음
+                            stop_time = dec_time;    //1초동안 버튼이 보이게 현재 시간(0.1초 단위)를 넣음
                         }
                     }
                 }

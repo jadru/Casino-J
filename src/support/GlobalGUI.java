@@ -13,7 +13,8 @@ public class GlobalGUI extends JFrame {
     private final static int WINDOW_WIDTH = 1280;
     private final static String FONT_PATH = "src/asset/ui/neodgm.ttf";
     private final static String FONT_NAME = "Neo둥근모"; // 변경 금지!!
-    protected GlobalGUI(String title, String BG_IMG_URL){
+
+    protected GlobalGUI(String title, String BG_IMG_URL) {
         super();
         setTitle(title);
         GlobalGUI.panel = new GlobalPanel(BG_IMG_URL);
@@ -38,15 +39,18 @@ public class GlobalGUI extends JFrame {
         setDefaultFont();
         setVisible(true);
     }
-    public static Font casinoFont(int size){
+
+    public static Font casinoFont(int size) {
         return new Font(FONT_NAME, Font.BOLD, size);
     }
-    public static void repaintGUI(){
+
+    public static void repaintGUI() {
         panel.repaint();
         panel.revalidate();
         System.out.println("GUI를 다시 그리는 중...");
     }
-    public static String getFontName(){
+
+    public static String getFontName() {
         return FONT_NAME;
     }
 

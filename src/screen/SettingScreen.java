@@ -3,11 +3,14 @@ package screen;
 import panel.GlobalPanel;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
-public class SettingScreen extends  JFrame{
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class SettingScreen extends JFrame {
     private GlobalPanel panel = new GlobalPanel("src/asset/settingImg.png");
-	SettingScreen(String id){
+
+    SettingScreen(String id) {
         super("설정"); //타이틀
 
 
@@ -15,10 +18,10 @@ public class SettingScreen extends  JFrame{
         setContentPane(panel);
         setLayout(null);
         JButton mainButton = new JButton("메인");
-        mainButton.setBounds(30,30,70,70);
+        mainButton.setBounds(30, 30, 70, 70);
         add(mainButton);
 
-        setSize(700,500);
+        setSize(700, 500);
 
 
         Dimension frameSize = getSize();
@@ -27,7 +30,7 @@ public class SettingScreen extends  JFrame{
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        
+
         mainButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

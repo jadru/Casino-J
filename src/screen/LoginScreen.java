@@ -4,8 +4,11 @@ import support.GlobalGUI;
 import support.SQLiteManager;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginScreen extends GlobalGUI {
     public LoginScreen() {
@@ -26,7 +29,7 @@ public class LoginScreen extends GlobalGUI {
         JLabel pw_label = new JLabel("PW : ");
         JLabel gameList[] = new JLabel[3];
 
-        String str[] = {"로그인","회원가입"};
+        String str[] = {"로그인", "회원가입"};
         JButton bt[] = new JButton[2];
 
         ImageIcon bt0 = new ImageIcon("src/asset/btn/LogInButton.png");
@@ -39,39 +42,42 @@ public class LoginScreen extends GlobalGUI {
 
         bt[0] = new JButton(bt0);
         bt[1] = new JButton(bt1);
-        for(int i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++) {
             bt[i].setFocusable(false);
         }
-        bt[0].setBounds(450,450,305,100);
-        bt[1].setBounds(760,450,305,100);
+        bt[0].setBounds(450, 450, 305, 100);
+        bt[1].setBounds(760, 450, 305, 100);
         bt[0].setBorderPainted(false);
         bt[0].setContentAreaFilled(false);
         bt[1].setBorderPainted(false);
         bt[1].setContentAreaFilled(false);
-        ID.setBounds(460,400,250,50);
-        PW.setBounds(770,400,250,50);
-        id_label.setBounds(570,530,130,30);
-        pw_label.setBounds(570,570,130,30);
-        Coin.setBounds(800,160,250,250);
+        ID.setBounds(460, 400, 250, 50);
+        PW.setBounds(770, 400, 250, 50);
+        id_label.setBounds(570, 530, 130, 30);
+        pw_label.setBounds(570, 570, 130, 30);
+        Coin.setBounds(800, 160, 250, 250);
         gameList[0] = new JLabel(list1);
         gameList[1] = new JLabel(list2);
         gameList[2] = new JLabel(list3);
 
-        gameList[0].setBounds(200,160,400,80);
-        gameList[1].setBounds(200,230,400,80);
-        gameList[2].setBounds(200,310,400,80);
-        for(int i = 0; i < 2; i++)
+        gameList[0].setBounds(200, 160, 400, 80);
+        gameList[1].setBounds(200, 230, 400, 80);
+        gameList[2].setBounds(200, 310, 400, 80);
+        for (int i = 0; i < 2; i++)
             add(bt[i]);
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
             add(gameList[i]);
-        add(ID);add(PW);add(id_label);add(pw_label);
+        add(ID);
+        add(PW);
+        add(id_label);
+        add(pw_label);
         add(Coin);
 
         PW.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
-                if(e.getKeyCode()==KeyEvent.VK_ENTER)
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
                     loginPerformed(ID.getText(), PW.getText());
             }
         });
@@ -93,16 +99,16 @@ public class LoginScreen extends GlobalGUI {
         });
         repaintGUI();
     }
-    private void loginPerformed(String id, String pw){
-        SQLiteManager b = new SQLiteManager("","","");
-        if(b.login(id,pw)){
+
+    private void loginPerformed(String id, String pw) {
+        SQLiteManager b = new SQLiteManager("", "", "");
+        if (b.login(id, pw)) {
             JOptionPane.showMessageDialog(null, "로그인시 10point가 지급됩니다.",
                     "포인트 지급", JOptionPane.WARNING_MESSAGE);
-            b.givePoint(id,10);
+            b.givePoint(id, 10);
             new MainScreen(id);
             setVisible(false); // 창 안보이게 하기
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.\n아이디와 패스워드를 다시 확인해주세요",
                     "로그인 실패", JOptionPane.WARNING_MESSAGE);
         }

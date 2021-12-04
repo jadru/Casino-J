@@ -1,51 +1,49 @@
 package screen;
+
+import dialog.InfoDialog;
+import support.GlobalGUI;
+import support.SQLiteManager;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.sql.SQLException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import dialog.InfoDialog;
-import panel.GlobalPanel;
-import support.GlobalGUI;
-import support.SQLiteManager;
-import static screen.Game_3.timer;
-import static support.GlobalGUI.casinoFont;
 
 public class MainScreen extends GlobalGUI {
     private InfoDialog settingScreen;
     private static String id = "";
-    public static void Sound(String file, boolean Loop){
+
+    public static void Sound(String file, boolean Loop) {
         Clip clip;
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(file)));
             clip = AudioSystem.getClip();
             clip.open(ais);
             clip.start();
-            if ( Loop) clip.loop(-1);//Loop 값이true면 사운드재생을무한반복시킵니다.//false면 한번만재생시킵니다.
+            if (Loop) clip.loop(-1);//Loop 값이true면 사운드재생을무한반복시킵니다.//false면 한번만재생시킵니다.
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-	public MainScreen(String id) {
-		super("Casino-J", "src/asset/bg/mainImg.jpg");
+    public MainScreen(String id) {
+        super("Casino-J", "src/asset/bg/mainImg.jpg");
         MainScreen.id = id;
         makeMainUI();
         repaintGUI();
-	}
+    }
 
-    private void makeMainUI(){
-        SQLiteManager b = new SQLiteManager("","","");
+    private void makeMainUI() {
+        SQLiteManager b = new SQLiteManager("", "", "");
         String username = b.getNickname(id);
         int userpoint = b.getPoint(id);
         JLabel usertext = new JLabel(username);
-        JLabel userPoint = new JLabel("$"+ String.valueOf(userpoint));
+        JLabel userPoint = new JLabel("$" + String.valueOf(userpoint));
         usertext.setFont(casinoFont(30));
         userPoint.setFont(casinoFont(30));
 
@@ -53,15 +51,15 @@ public class MainScreen extends GlobalGUI {
 
         settingScreen = new InfoDialog(this, "설정");
 
-        String str[] = {"상점","프로필","랭킹","설정", "게임하기"};
+        String str[] = {"상점", "프로필", "랭킹", "설정", "게임하기"};
         JButton bt[] = new JButton[5];
         JButton logoutBt = new JButton("로그아웃");
         //for(int i = 0; i < 5; i++) {
         //	bt[i]=new JButton(str[i]);
         //}
         bt[1] = new JButton(str[1]);
-        usertext.setBounds(260,12,150,100);
-        userPoint.setBounds(410,12,400,100);
+        usertext.setBounds(260, 12, 150, 100);
+        userPoint.setBounds(410, 12, 400, 100);
         add(usertext);
         add(userPoint);
 
@@ -83,7 +81,7 @@ public class MainScreen extends GlobalGUI {
 
         //버튼 투명하게 만들기
 
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             bt[i].setBorderPainted(false);
             bt[i].setContentAreaFilled(false);
         }
@@ -96,17 +94,17 @@ public class MainScreen extends GlobalGUI {
         bt[3].setBorderPainted(false);
         bt[3].setContentAreaFilled(false);*/
 
-        topBar.setBounds(150,25,971,81);
+        topBar.setBounds(150, 25, 971, 81);
 
 
-        bt[0].setBounds(310,400,324,83);
-        bt[1].setBounds(170,30,70,70);
-        bt[2].setBounds(650,400,324,83);
-        bt[3].setBounds(503,512,280,152);
-        bt[4].setBounds(310,290,664,93);
+        bt[0].setBounds(310, 400, 324, 83);
+        bt[1].setBounds(170, 30, 70, 70);
+        bt[2].setBounds(650, 400, 324, 83);
+        bt[3].setBounds(503, 512, 280, 152);
+        bt[4].setBounds(310, 290, 664, 93);
 
 
-        for(int i = 0 ; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             add(bt[i]);
         }
 
@@ -149,7 +147,6 @@ public class MainScreen extends GlobalGUI {
                 setVisible(false); // 창 안보이게 하기
             }
         });
-
 
 
         bt[3].addActionListener(new ActionListener() {
