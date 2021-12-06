@@ -73,8 +73,9 @@ public class LoginScreen extends GlobalGUI {
         PW.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if(ID.getText().equals("PASS"))
-                    ID.setText("");
+                if(PW.getText().equals("PASS"))
+                    PW.setText("");
+
             }
         });
 

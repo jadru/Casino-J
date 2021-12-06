@@ -318,7 +318,22 @@ public class SQLiteManager {
         }
 
     }
+    public void giveTime(String id, int time){
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection(SQLURL);
+            Statement stmt = con.createStatement();
+            stmt.execute("update player set Game3Time = " + time + " where id = '" + id + "'");
+        } catch (SQLException | ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (Exception e) {
 
+            }
+        }
+    }
     public void giveRecord(String id, int win, int lose, int point) {
         int apoint = getPoint(id);
         int wwin = getWin(id);
@@ -410,6 +425,29 @@ public class SQLiteManager {
             con = DriverManager.getConnection(SQLURL);
             Statement stmt = con.createStatement();
             sql = "select * from player order by point DESC";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                vec.add(rs.getString("nickname"));
+            }
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+        return vec;
+    }
+    public Vector<String> get3rank() {
+        Vector<String> vec = new Vector<String>();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection(SQLURL);
+            Statement stmt = con.createStatement();
+            sql = "select * from player order by Game3Time ASC ";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 vec.add(rs.getString("nickname"));

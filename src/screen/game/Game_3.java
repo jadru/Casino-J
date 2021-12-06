@@ -115,12 +115,13 @@ public class Game_3 extends JFrame implements ActionListener {
         frm.setVisible(true); // 프레임을 볼수 있게 설정
     }
 
-    public void finish() {
+    public void finish(String id) {
         JFrame ffrm = new JFrame("게임종료");
         ffrm.setBounds(500, 400, 500, 200);
         ffrm.setVisible(true);
         ffrm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         SQLiteManager b = new SQLiteManager("", "", "");
+        b.giveTime(id,sec_time);
         if (sec_time <= 10 && sec_time > 0) {
             b.givePoint(id, 50);
             JLabel finish = new JLabel(sec_time + "초 걸렸습니다.\n50포인트를 획득하였습니다.", JLabel.CENTER);
@@ -215,7 +216,7 @@ public class Game_3 extends JFrame implements ActionListener {
             frm.setVisible(false);
             timer_stop = 1; // 타이머 정지 변수를 1로 만듬
             new MainScreen(id);
-            finish();
+            finish(id);
         }
     }
 }

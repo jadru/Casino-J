@@ -22,6 +22,11 @@ public class RankScreen extends GlobalGUI {
         mainButton.setBorderPainted(false);
         mainButton.setContentAreaFilled(false);
         add(mainButton);
+        JButton Game3RankButton = new JButton(new ImageIcon("src/asset/btn/main_btn.png"));
+        Game3RankButton.setBounds(1000,20,100,100);
+        Game3RankButton.setBorderPainted(false);
+        Game3RankButton.setContentAreaFilled(false);
+        add(Game3RankButton);
         String Title[] = new String[5];
         SQLiteManager b = new SQLiteManager("", "", "");
         Vector<String> userRankingTable = new Vector<>();
@@ -62,6 +67,38 @@ public class RankScreen extends GlobalGUI {
             public void actionPerformed(ActionEvent e) {
                 new MainScreen(id);
                 setVisible(false); // 창 안보이게 하기 
+            }
+        });
+        Game3RankButton.addActionListener(new ActionListener() {
+            boolean change = true;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(change==true){
+                    Vector<String> user3RankingTable = new Vector<>();
+                    user3RankingTable = b.get3rank();
+                    for (int i = 0; i < 5; i++) {
+                        System.out.println(user3RankingTable.get(i));
+                        Title[i] = user3RankingTable.get(i);
+                    }
+                    for(int i=0;i<5;i++){
+                        title[i].setText(Title[i]);
+                    }
+                    repaint();
+                    change=false;
+                }
+                else{
+                    Vector<String> userRankingTable = new Vector<>();
+                    userRankingTable = b.getrank();
+                    for (int i = 0; i < 5; i++) {
+                        System.out.println(userRankingTable.get(i));
+                        Title[i] = userRankingTable.get(i);
+                    }
+                    for(int i=0;i<5;i++){
+                        title[i].setText(Title[i]);
+                    }
+                    repaint();
+                    change=true;
+                }
             }
         });
         repaintGUI();
