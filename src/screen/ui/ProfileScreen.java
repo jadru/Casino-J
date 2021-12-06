@@ -83,7 +83,10 @@ public class ProfileScreen extends GlobalGUI {
         CardBt[2].setBounds(990, 150, 130, 160);
         CardBt[3].setBounds(690, 350, 130, 160);
         CardBt[4].setBounds(840, 350, 130, 160);
-
+        for (int i = 0; i < 5; i++) {
+            CardBt[i].setBorderPainted(false);
+            CardBt[i].setContentAreaFilled(false);
+        }
         CardText.setFont(casinoFont(25));
 
         for (int i = 0; i < 5; i++) {
@@ -110,11 +113,10 @@ public class ProfileScreen extends GlobalGUI {
         CardText.setBounds(690, 50, 200, 100);
 
         setSelectedText();
-        add(select);
 
         add(CardText);
         add(mainButton);
-
+        add(select);
         for (int i = 0; i < 5; i++) {
             if (b.skinCheck(id, i)) {
                 add(CardBt[i]);
@@ -133,6 +135,7 @@ public class ProfileScreen extends GlobalGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setSkinChange(0);
+
             }
         });
         CardBt[1].addActionListener(new ActionListener() {
