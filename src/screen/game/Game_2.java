@@ -163,7 +163,7 @@ public class Game_2 extends GlobalGUI {
         addCardGUI(comcard, com_card_panel);
         String winorlose = "";
         if (iswin) {
-            winorlose = "WIN! 컴퓨터가 배팅한 " + combat + "적립!";
+            winorlose = "WIN! 컴퓨터가 배팅한 $" + combat + "적립!";
             sql_manager.giveRecord(user_id, 1, 0, combat);
         } else {
             winorlose = "LOSE.. " + sql_manager.getNickname(user_id) + "님의 $ -"+userbat+ "";
