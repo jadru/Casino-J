@@ -21,6 +21,7 @@ public class GameSelectScreen extends GlobalGUI {
     private void createUI() {
 
         ImageIcon blackjack = new ImageIcon("src/asset/btn/BlackJack_btn.png");
+        ImageIcon Indian = new ImageIcon("src/asset/btn/IndianPoker_btn.png");
         ImageIcon minigame = new ImageIcon("src/asset/btn/MiniGame_btn.png");
 
         ImageIcon mainbtn = new ImageIcon("src/asset/btn/main_btn.png");
@@ -32,7 +33,7 @@ public class GameSelectScreen extends GlobalGUI {
 
 
         JButton btn1 = new JButton(blackjack);
-        btn1.setBounds(100, 50, 518, 600);
+        btn1.setBounds(110, 200, 302, 350);
         btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,8 +45,21 @@ public class GameSelectScreen extends GlobalGUI {
         btn1.setContentAreaFilled(false);
         add(btn1);
 
+        JButton btn2 = new JButton(Indian);
+        btn2.setBounds(520, 200, 309, 350);
+        btn2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Game_1(id);
+                dispose();
+            }
+        });
+        btn2.setBorderPainted(false);
+        btn2.setContentAreaFilled(false);
+        add(btn2);
+
         JButton btn3 = new JButton(minigame);
-        btn3.setBounds(730, 50, 417, 600);
+        btn3.setBounds(930, 200, 243, 350);
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
