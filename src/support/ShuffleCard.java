@@ -1,6 +1,7 @@
 package support;
 
 import screen.game.Game_1;
+import screen.game.Game_2;
 
 public class ShuffleCard {
     public static Game_1 game;
@@ -46,5 +47,10 @@ public class ShuffleCard {
         }
         return result;
     }
+
+    public static int getOneCardFromDeck() {
+        return (int) (Math.random() * 52);
+    }
+
 
 }

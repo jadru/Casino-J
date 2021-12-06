@@ -1,6 +1,7 @@
 package screen.ui;
 
 import screen.game.Game_1;
+import screen.game.Game_2;
 import screen.game.Game_3;
 import global.GlobalGUI;
 
@@ -50,7 +51,7 @@ public class GameSelectScreen extends GlobalGUI {
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Game_1(id);
+                new Game_2(id);
                 dispose();
             }
         });
