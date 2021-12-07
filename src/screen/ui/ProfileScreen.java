@@ -100,7 +100,6 @@ public class ProfileScreen extends GlobalGUI {
         gridElement[0] = new JLabel(id);
         gridElement[1] = new JLabel(username);
         gridElement[2] = new JLabel(userWin + "승 " + userLose + "패 승률:" + Math.round(pow) + "%");
-        //gridElement[3] = new JLabel(String.valueOf(userLevel));
         gridElement[3] = new JLabel(String.valueOf(userRank));//랭킹 들어가야함
         gridElement[4] = new JLabel(String.valueOf(userPoint));
 

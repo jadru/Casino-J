@@ -30,7 +30,7 @@ public class LoginScreen extends GlobalGUI {
         ImageIcon bt0 = new ImageIcon("src/asset/btn/LogInButton.png");
         ImageIcon bt1 = new ImageIcon("src/asset/btn/SignUpButton.png");
         ImageIcon list1 = new ImageIcon("src/asset/ui/login_gamelist_1.png");
-        ImageIcon list3 = new ImageIcon("src/asset/ui/login_gamelist_3.png");
+        ImageIcon list3 = new ImageIcon("src/asset/ui/login_gamelist_2.png");
         ImageIcon Doge = new ImageIcon("src/asset/DOGE.png");
         JLabel Coin = new JLabel(Doge);
 
@@ -52,8 +52,8 @@ public class LoginScreen extends GlobalGUI {
         gameList[0] = new JLabel(list1);
         gameList[2] = new JLabel(list3);
 
-        gameList[0].setBounds(200, 160, 400, 80);
-        gameList[2].setBounds(200, 310, 400, 80);
+        gameList[0].setBounds(200, 180, 400, 80);
+        gameList[2].setBounds(200, 270, 400, 80);
         for (int i = 0; i < 2; i++)
             add(bt[i]);
         for (int i = 0; i < 3; i++)

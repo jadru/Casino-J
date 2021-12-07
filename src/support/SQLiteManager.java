@@ -11,7 +11,6 @@ public class SQLiteManager {
     String nickname;
     String password;
     String sql;
-    int level;
     int skin;
     int point;
     int win;
@@ -50,7 +49,6 @@ public class SQLiteManager {
             sql = "select * from player where id = '" + id + "'";
             ResultSet rs = stmt.executeQuery(sql);
             this.nickname = rs.getString("nickname");
-            this.level = rs.getInt("level");
             this.skin = rs.getInt("skin");
             this.point = rs.getInt("point");
 
@@ -64,27 +62,6 @@ public class SQLiteManager {
             }
         }
         return this.nickname;
-    }
-
-    public int getLevel(String id) {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection(SQLURL);
-            Statement stmt = con.createStatement();
-            sql = "select * from player where id = '" + id + "'";
-            ResultSet rs = stmt.executeQuery(sql);
-            this.level = rs.getInt("level");
-
-        } catch (SQLException | ClassNotFoundException e) {
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                con.close();
-            } catch (Exception e) {
-
-            }
-        }
-        return this.level;
     }
 
     public int getSkin(String id) {
@@ -318,22 +295,7 @@ public class SQLiteManager {
         }
 
     }
-    public void giveTime(String id, int time){
-        try {
-            Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection(SQLURL);
-            Statement stmt = con.createStatement();
-            stmt.execute("update player set Game3Time = " + time + " where id = '" + id + "'");
-        } catch (SQLException | ClassNotFoundException e) {
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                con.close();
-            } catch (Exception e) {
 
-            }
-        }
-    }
     public void giveRecord(String id, int win, int lose, int point) {
         int apoint = getPoint(id);
         int wwin = getWin(id);
@@ -441,62 +403,4 @@ public class SQLiteManager {
 
         return vec;
     }
-    public Vector<String> get3rank() {
-        Vector<String> vec = new Vector<String>();
-        try {
-            Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection(SQLURL);
-            Statement stmt = con.createStatement();
-            sql = "select * from player order by Game3Time ASC ";
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                vec.add(rs.getString("nickname"));
-            }
-        } catch (SQLException | ClassNotFoundException throwables) {
-            throwables.printStackTrace();
-        } finally {
-            try {
-                con.close();
-            } catch (Exception e) {
-
-            }
-        }
-
-        return vec;
-    }
-
-    /*public ArrayList<ResultSet> getOrderByDescPoint(){
-        Map<Integer, Object> map = new HashMap<Integer, Object>();
-        try{
-            Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:src/jjam/userdb.db");
-            Statement stmt = con.createStatement();
-            sql="select * from player";
-            ResultSet rs = stmt.executeQuery(sql);
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-
-            while(rs.next()) {
-                for(int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
-                    map.put(rs.getInt("point"), rs);
-
-                }
-                System.out.println(rs.getString("id"));
-            }
-
-            Object[] mapkey = map.keySet().toArray();
-            Arrays.sort(mapkey);
-        } catch (SQLException | ClassNotFoundException throwables) {
-            throwables.printStackTrace();
-        }
-        finally {
-            try{
-                con.close();
-            }
-            catch(Exception e){
-
-            }
-        }
-        return new ArrayList(map.values());
-    }*/
 }

@@ -47,7 +47,7 @@ public class Game_2 extends GlobalGUI {
     static int userpoint;
 
     static int comcard;
-    int usercard;
+    static int usercard;
     int userbatcnt = 0;
 
     public Game_2(String user_id) {
@@ -126,8 +126,8 @@ public class Game_2 extends GlobalGUI {
         comcard = getOneCardFromDeck();
         usercard = getOneCardFromDeck();
 
-        addCardGUI(usercard, user_card_panel);
-        addCardBack(com_card_panel);
+        addCardGUI(comcard, com_card_panel);
+        addCardBack(user_card_panel);
 
         combat += 10;
         userbat += 10;
@@ -146,7 +146,7 @@ public class Game_2 extends GlobalGUI {
         switch ((pick / 13)) {
             case 1:
                 btn.setForeground(Color.RED);
-            case 3:
+            case 2:
                 btn.setForeground(Color.RED);
                 break;
             default:
@@ -167,9 +167,9 @@ public class Game_2 extends GlobalGUI {
     }
 
     public static void resultOut(boolean iswin) {
-        com_card_panel.removeAll();
-        com_card_panel.setBackground(new Color(0, 0, 0, 0));
-        addCardGUI(comcard, com_card_panel);
+        user_card_panel.removeAll();
+        user_card_panel.setBackground(new Color(0, 0, 0, 0));
+        addCardGUI(usercard, user_card_panel);
         String winorlose = "";
         if (iswin) {
             winorlose = "WIN! 컴퓨터가 배팅한 $" + combat + "적립!";
@@ -208,15 +208,18 @@ public class Game_2 extends GlobalGUI {
         JLabel header = new JLabel("배팅하세요! 컴퓨터 : $" + combat + "배팅, " + sql_manager.getNickname(user_id) + "님 $" + userbat + "배팅");
         JButton addpoint_btn = new JButton("+");
         JTextField pointfield = new JTextField("10");
+        JButton lose = new JButton("기권 패");
         JButton finish_btn = new JButton("한판 승");
 
         addpoint_btn.setPreferredSize(new Dimension(110, 110));
         pointfield.setPreferredSize(new Dimension(210, 110));
         finish_btn.setPreferredSize(new Dimension(110, 110));
+        lose.setPreferredSize(new Dimension(110, 110));
         header.setPreferredSize(new Dimension(600, 110));
 
         button_panel.add(header);
         button_panel.add(pointfield);
+        button_panel.add(lose);
         button_panel.add(finish_btn);
         button_panel.add(addpoint_btn);
 
@@ -256,28 +259,34 @@ public class Game_2 extends GlobalGUI {
                 finish();
             }
         });
+        lose.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resultOut(false);
+            }
+        });
     }
 
     private void finish(){
         if(comcard % 13 > usercard % 13){
             resultOut(false);
         }else if (comcard % 13 == usercard % 13){
-            resultOut(comcard / 13 <= usercard / 13);
+            resultOut(comcard / 13 >= usercard / 13);
         }else{
             resultOut(true);
         }
     }
 
     private void computerBatting(){
-        if (combat >= 950)
+        int card = usercard % 13;
+        if (combat >= 9999)
             return;
-        if (comcard % 13 >= 3) {
+        if(card >= 9){
+            combat += Math.random() * 50;
+        }else if (card > 5) {
             if (rd.nextBoolean()) {
                 combat += Math.random() * 100;
             }
-        }
-        else if(comcard % 13 >= 9){
-            combat += Math.random() * 150;
         }
     }
 

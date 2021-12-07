@@ -7,7 +7,7 @@ public class ShuffleCard {
     public static Game_1 game;
 
     public static String[][] makeCardDeck() {
-        String[] marks = {"♠", "♦", "♣", "♥"};
+        String[] marks = {"♠", "♦", "♥", "♣"};
         String[][] cards = new String[4][13];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 13; j++) {

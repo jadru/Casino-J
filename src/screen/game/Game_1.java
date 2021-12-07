@@ -163,7 +163,7 @@ public class Game_1 extends GlobalGUI {
         switch ((pick / 13)) {
             case 1:
                 btn.setForeground(Color.RED);
-            case 3:
+            case 2:
                 btn.setForeground(Color.RED);
                 break;
             default:
