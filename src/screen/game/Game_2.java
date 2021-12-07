@@ -44,6 +44,8 @@ public class Game_2 extends GlobalGUI {
     static int combat = 0;
     static int userbat = 0;
 
+    static int userpoint;
+
     static int comcard;
     int usercard;
     int userbatcnt = 0;
@@ -117,6 +119,7 @@ public class Game_2 extends GlobalGUI {
         using_cards = new boolean[52];
         Arrays.fill(using_cards, false);
 
+        userpoint = sql_manager.getPoint(user_id);
         comcard = getOneCardFromDeck();
         usercard = getOneCardFromDeck();
 
@@ -167,6 +170,8 @@ public class Game_2 extends GlobalGUI {
             sql_manager.giveRecord(user_id, 1, 0, combat);
         } else {
             winorlose = "LOSE.. " + sql_manager.getNickname(user_id) + "님의 $ -"+userbat+ "";
+            if (userbat > userpoint)
+                userbat = userpoint;
             sql_manager.giveRecord(user_id, 0, 1, -userbat);
         }
         JLabel label = new JLabel(winorlose);
@@ -212,20 +217,29 @@ public class Game_2 extends GlobalGUI {
         addpoint_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userbat += Integer.parseInt(pointfield.getText());
-                pointfield.setText("");
-                userbatcnt++;
-                computerBatting();
-                clearAllintButtonPanel();
-                setButtonPanel();
+                int num =  Integer.parseInt(pointfield.getText());
+                if(userbat + num > userpoint)
+                    userbat = userpoint;
+                else{
+                    userbat += num;
+                    pointfield.setText("0");
+                    userbatcnt++;
+                    computerBatting();
+                    clearAllintButtonPanel();
+                    setButtonPanel();
+                }
             }
         });
         pointfield.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
+            public void keyTyped(KeyEvent e) {
+                super.keyTyped(e);
                 if (!Character.isDigit(e.getKeyChar())) {
                     e.consume();
+                }else{
+                    int num = Integer.parseInt(String.valueOf(e.getKeyChar()));
+                    if(userbat + num > userpoint)
+                        pointfield.setText(String.valueOf(userpoint - userbat));
                 }
             }
         });
@@ -239,10 +253,10 @@ public class Game_2 extends GlobalGUI {
     }
 
     private void finish(){
-        if(comcard % 13 < usercard % 13){
+        if(comcard % 13 > usercard % 13){
             resultOut(false);
         }else if (comcard % 13 == usercard % 13){
-            if(comcard / 13 < usercard / 13){
+            if(comcard / 13 > usercard / 13){
                 resultOut(false);
             }else{
                 resultOut(true);
