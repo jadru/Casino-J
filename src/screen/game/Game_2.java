@@ -201,13 +201,14 @@ public class Game_2 extends GlobalGUI {
 
     private void setButtonPanel() {
 
+        button_panel.removeAll();
         JLabel header = new JLabel("배팅하세요! 컴퓨터 : $" + combat + "배팅, " + sql_manager.getNickname(user_id) + "님 $" + userbat + "배팅");
         JButton addpoint_btn = new JButton(new ImageIcon("src/asset/game1/icon_money.png"));
         JTextField pointfield = new JTextField("10");
         JButton lose = new JButton(new ImageIcon("src/asset/game1/icon_lose.png"));
         JButton finish_btn = new JButton(new ImageIcon("src/asset/game1/icon_play.png"));
 
-        button_panel.setBackground(new Color(1f, 1f, 1f, .5f));
+        button_panel.setBackground(new Color(0XFFFFFF));
 
         addpoint_btn.setBorderPainted(false);
         addpoint_btn.setContentAreaFilled(false);

@@ -207,7 +207,7 @@ public class Game_1 extends GlobalGUI {
         user_profile_panel.setBackground(new Color(0, 0, 0, 0));
         com_card_panel.setBackground(new Color(0, 0, 0, 0));
         user_card_panel.setBackground(new Color(0, 0, 0, 0));
-        button_panel.setBackground(new Color(1f, 1f, 1f, .5f));
+        button_panel.setBackground(new Color(0XFFFFFF));
 
         usercard_cnt = 0;
         comcard_cnt = 0;
@@ -292,6 +292,7 @@ public class Game_1 extends GlobalGUI {
 
     private void setButtonPanel(int point) {
 
+        button_panel.removeAll();
         JLabel header = new JLabel("현재 점수 " + point + "점입니다. 카드를 추가하시겠어요?");
 
         JButton addcard_btn = new JButton(new ImageIcon("src/asset/game1/icon_card.png"));
@@ -312,10 +313,6 @@ public class Game_1 extends GlobalGUI {
         lose_btn.setBorderPainted(false);
         lose_btn.setContentAreaFilled(false);
 
-        button_panel.add(header);
-        button_panel.add(lose_btn);
-        button_panel.add(finish_btn);
-        button_panel.add(addcard_btn);
         addcard_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -340,6 +337,11 @@ public class Game_1 extends GlobalGUI {
                 finishGame();
             }
         });
+
+        button_panel.add(header);
+        button_panel.add(lose_btn);
+        button_panel.add(finish_btn);
+        button_panel.add(addcard_btn);
 
     }
 }
