@@ -1,8 +1,8 @@
 package screen.ui;
 
+import global.GlobalGUI;
 import screen.game.Game_1;
 import screen.game.Game_2;
-import global.GlobalGUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

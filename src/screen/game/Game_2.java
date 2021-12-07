@@ -1,9 +1,8 @@
 package screen.game;
 
-import screen.ui.MainScreen;
 import global.GlobalGUI;
+import screen.ui.MainScreen;
 import support.SQLiteManager;
-import support.ShuffleCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 import static java.awt.Font.BOLD;
-import static support.ShuffleCard.*;
+import static support.ShuffleCard.getOneCardFromDeck;
+import static support.ShuffleCard.makeCardDeck;
 
 public class Game_2 extends GlobalGUI {
 
@@ -25,29 +23,22 @@ public class Game_2 extends GlobalGUI {
     private static final String COMPUTER_IMG_URL = "src/asset/game1/icons8-bot-96.png";
     private static final String USER_IMG_URL = "src/asset/game1/icons8-test-account-96.png";
     private static final int PADDING = 20;
-
-    private static String[][] every_cards;
-    private static boolean[] using_cards;
-
-    private static JFrame game;
-    private static Random rd = new Random();
-
-    private static String user_id = "";
     static SQLiteManager sql_manager;
-
-    JPanel com_profile_panel;
-    JPanel user_profile_panel;
     static JPanel com_card_panel;
     static JPanel user_card_panel;
     static JPanel button_panel;
-
     static int combat;
     static int userbat;
-
     static int userpoint;
-
     static int comcard;
     static int usercard;
+    private static String[][] every_cards;
+    private static boolean[] using_cards;
+    private static JFrame game;
+    private static Random rd = new Random();
+    private static String user_id = "";
+    JPanel com_profile_panel;
+    JPanel user_profile_panel;
     int userbatcnt = 0;
 
     public Game_2(String user_id) {
@@ -58,6 +49,80 @@ public class Game_2 extends GlobalGUI {
         setGameGUI();
         setButtonPanel();
         repaintGUI();
+    }
+
+    public static void addCardGUI(int pick, JPanel cardPanel) {
+        JButton btn = new JButton();
+        btn.setText(every_cards[pick / 13][pick % 13]);
+        btn.setBackground(Color.WHITE);
+        btn.setPreferredSize(new Dimension(120, 160));
+        btn.setMargin(new Insets(0, 0, 0, 0));
+        btn.setFont(new Font(Font.SERIF, BOLD, 30));
+        btn.setFocusable(false);
+        switch ((pick / 13)) {
+            case 1:
+                btn.setForeground(Color.RED);
+            case 2:
+                btn.setForeground(Color.RED);
+                break;
+            default:
+                btn.setForeground(Color.BLACK);
+        }
+        cardPanel.add(btn);
+    }
+
+    private static void addCardBack(JPanel cardPanel) {
+        JButton btn = new JButton();
+        btn.setFocusable(false);
+        btn.setIcon(new ImageIcon(support.ThemeManager.getCardBackImgURL(user_id)));
+//        btn.addActionListener(new cardActionListener());
+        btn.setBackground(Color.WHITE);
+        btn.setPreferredSize(new Dimension(120, 160));
+        btn.setMargin(new Insets(0, 0, 0, 0));
+        cardPanel.add(btn);
+    }
+
+    public static void resultOut(boolean iswin) {
+        user_card_panel.removeAll();
+        user_card_panel.setBackground(new Color(0, 0, 0, 0));
+        addCardGUI(usercard, user_card_panel);
+        String winorlose = "";
+        if (iswin) {
+            winorlose = "WIN! 컴퓨터가 배팅한 $" + combat + "적립!";
+            sql_manager.giveRecord(user_id, 1, 0, combat);
+        } else {
+            winorlose = "LOSE.. " + sql_manager.getNickname(user_id) + "님의 $ -" + userbat + "";
+            if (userbat > userpoint)
+                userbat = userpoint;
+            sql_manager.giveRecord(user_id, 0, 1, -userbat);
+        }
+        JLabel label = new JLabel(winorlose);
+        JButton mainButton = new JButton(new ImageIcon("src/asset/btn/main_btn.png"));
+
+        mainButton.setBorderPainted(false);
+        mainButton.setContentAreaFilled(false);
+        mainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.dispose();
+                game.removeAll();
+                new MainScreen(user_id);
+                game.setVisible(false);
+            }
+        });
+
+        label.setPreferredSize(new Dimension(600, 110));
+        mainButton.setPreferredSize(new Dimension(100, 100));
+        button_panel.removeAll();
+        button_panel.add(label);
+        button_panel.add(mainButton);
+        repaintGUI();
+    }
+
+    private static void clearAllintButtonPanel() {
+        button_panel.removeAll();
+        button_panel.repaint();
+        button_panel.revalidate();
     }
 
     private void setScreenGUI() {
@@ -135,74 +200,6 @@ public class Game_2 extends GlobalGUI {
         repaintGUI();
     }
 
-    public static void addCardGUI(int pick, JPanel cardPanel) {
-        JButton btn = new JButton();
-        btn.setText(every_cards[pick / 13][pick % 13]);
-        btn.setBackground(Color.WHITE);
-        btn.setPreferredSize(new Dimension(120, 160));
-        btn.setMargin(new Insets(0, 0, 0, 0));
-        btn.setFont(new Font(Font.SERIF, BOLD, 30));
-        btn.setFocusable(false);
-        switch ((pick / 13)) {
-            case 1:
-                btn.setForeground(Color.RED);
-            case 2:
-                btn.setForeground(Color.RED);
-                break;
-            default:
-                btn.setForeground(Color.BLACK);
-        }
-        cardPanel.add(btn);
-    }
-
-    private static void addCardBack(JPanel cardPanel) {
-        JButton btn = new JButton();
-        btn.setFocusable(false);
-        btn.setIcon(new ImageIcon(support.ThemeManager.getCardBackImgURL(user_id)));
-//        btn.addActionListener(new cardActionListener());
-        btn.setBackground(Color.WHITE);
-        btn.setPreferredSize(new Dimension(120, 160));
-        btn.setMargin(new Insets(0, 0, 0, 0));
-        cardPanel.add(btn);
-    }
-
-    public static void resultOut(boolean iswin) {
-        user_card_panel.removeAll();
-        user_card_panel.setBackground(new Color(0, 0, 0, 0));
-        addCardGUI(usercard, user_card_panel);
-        String winorlose = "";
-        if (iswin) {
-            winorlose = "WIN! 컴퓨터가 배팅한 $" + combat + "적립!";
-            sql_manager.giveRecord(user_id, 1, 0, combat);
-        } else {
-            winorlose = "LOSE.. " + sql_manager.getNickname(user_id) + "님의 $ -"+userbat+ "";
-            if (userbat > userpoint)
-                userbat = userpoint;
-            sql_manager.giveRecord(user_id, 0, 1, -userbat);
-        }
-        JLabel label = new JLabel(winorlose);
-        JButton mainButton = new JButton(new ImageIcon("src/asset/btn/main_btn.png"));
-
-        mainButton.setBorderPainted(false);
-        mainButton.setContentAreaFilled(false);
-        mainButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.dispose();
-                game.removeAll();
-                new MainScreen(user_id);
-                game.setVisible(false);
-            }
-        });
-
-        label.setPreferredSize(new Dimension(600, 110));
-        mainButton.setPreferredSize(new Dimension(100, 100));
-        button_panel.removeAll();
-        button_panel.add(label);
-        button_panel.add(mainButton);
-        repaintGUI();
-    }
-
     private void setButtonPanel() {
 
         JLabel header = new JLabel("배팅하세요! 컴퓨터 : $" + combat + "배팅, " + sql_manager.getNickname(user_id) + "님 $" + userbat + "배팅");
@@ -226,10 +223,10 @@ public class Game_2 extends GlobalGUI {
         addpoint_btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int num =  Integer.parseInt(pointfield.getText());
-                if(userbat + num > userpoint)
+                int num = Integer.parseInt(pointfield.getText());
+                if (userbat + num > userpoint)
                     userbat = userpoint;
-                else{
+                else {
                     userbat += num;
                     pointfield.setText("0");
                     userbatcnt++;
@@ -245,9 +242,9 @@ public class Game_2 extends GlobalGUI {
                 super.keyTyped(e);
                 if (!Character.isDigit(e.getKeyChar())) {
                     e.consume();
-                }else{
+                } else {
                     int num = Integer.parseInt(String.valueOf(e.getKeyChar()));
-                    if(userbat + num > userpoint)
+                    if (userbat + num > userpoint)
                         pointfield.setText(String.valueOf(userpoint - userbat));
                 }
             }
@@ -267,32 +264,26 @@ public class Game_2 extends GlobalGUI {
         });
     }
 
-    private void finish(){
-        if(comcard % 13 > usercard % 13){
+    private void finish() {
+        if (comcard % 13 > usercard % 13) {
             resultOut(false);
-        }else if (comcard % 13 == usercard % 13){
+        } else if (comcard % 13 == usercard % 13) {
             resultOut(comcard / 13 >= usercard / 13);
-        }else{
+        } else {
             resultOut(true);
         }
     }
 
-    private void computerBatting(){
+    private void computerBatting() {
         int card = usercard % 13;
         if (combat >= 9999)
             return;
-        if(card >= 9){
+        if (card >= 9) {
             combat += Math.random() * 50;
-        }else if (card > 5) {
+        } else if (card > 5) {
             if (rd.nextBoolean()) {
                 combat += Math.random() * 100;
             }
         }
-    }
-
-    private static void clearAllintButtonPanel() {
-        button_panel.removeAll();
-        button_panel.repaint();
-        button_panel.revalidate();
     }
 }

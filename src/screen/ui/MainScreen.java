@@ -15,8 +15,15 @@ import java.io.FileInputStream;
 import java.sql.SQLException;
 
 public class MainScreen extends GlobalGUI {
-    private InfoDialog settingScreen;
     private static String id = "";
+    private InfoDialog settingScreen;
+
+    public MainScreen(String id) {
+        super("Casino-J", "src/asset/bg/mainImg.jpg");
+        MainScreen.id = id;
+        makeMainUI();
+        repaintGUI();
+    }
 
     public static void Sound(String file, boolean Loop) {
         Clip clip;
@@ -29,13 +36,6 @@ public class MainScreen extends GlobalGUI {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public MainScreen(String id) {
-        super("Casino-J", "src/asset/bg/mainImg.jpg");
-        MainScreen.id = id;
-        makeMainUI();
-        repaintGUI();
     }
 
     private void makeMainUI() {

@@ -57,7 +57,7 @@ public class LoginScreen extends GlobalGUI {
         for (int i = 0; i < 2; i++)
             add(bt[i]);
         for (int i = 0; i < 3; i++)
-            if(i != 1) add(gameList[i]);
+            if (i != 1) add(gameList[i]);
         add(ID);
         add(PW);
         add(Coin);
@@ -65,7 +65,7 @@ public class LoginScreen extends GlobalGUI {
         ID.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if(ID.getText().equals("ID"))
+                if (ID.getText().equals("ID"))
                     ID.setText("");
             }
         });
@@ -73,7 +73,7 @@ public class LoginScreen extends GlobalGUI {
         PW.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                if(PW.getText().equals("PASS"))
+                if (PW.getText().equals("PASS"))
                     PW.setText("");
 
             }
@@ -106,6 +106,10 @@ public class LoginScreen extends GlobalGUI {
         repaintGUI();
     }
 
+    public static void main(String[] agrs) {
+        new LoginScreen();
+    }
+
     private void loginPerformed(String id, String pw) {
         SQLiteManager b = new SQLiteManager("", "", "");
         if (b.login(id, pw)) {
@@ -118,10 +122,6 @@ public class LoginScreen extends GlobalGUI {
             JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다.\n아이디와 패스워드를 다시 확인해주세요",
                     "로그인 실패", JOptionPane.WARNING_MESSAGE);
         }
-    }
-
-    public static void main(String[] agrs) {
-        new LoginScreen();
     }
 }
 

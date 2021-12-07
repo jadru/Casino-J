@@ -6,11 +6,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class GlobalGUI extends JFrame {
-    static JPanel panel;
     private final static int WINDOW_HEIGHT = 720;
     private final static int WINDOW_WIDTH = 1280;
     private final static String FONT_PATH = "src/asset/ui/neodgm.ttf";
     private final static String FONT_NAME = "Neo둥근모"; // 변경 금지!!
+    static JPanel panel;
 
     protected GlobalGUI(String title, String BG_IMG_URL) {
         super();
@@ -46,10 +46,6 @@ public class GlobalGUI extends JFrame {
         panel.repaint();
         panel.revalidate();
         System.out.println("GUI를 다시 그리는 중...");
-    }
-
-    public static String getFontName() {
-        return FONT_NAME;
     }
 
     private void setDefaultFont() {

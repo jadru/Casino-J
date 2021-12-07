@@ -1,7 +1,6 @@
 package support;
 
 import screen.game.Game_1;
-import screen.game.Game_2;
 
 public class ShuffleCard {
     public static Game_1 game;

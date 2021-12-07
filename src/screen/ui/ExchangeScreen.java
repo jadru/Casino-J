@@ -9,9 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ExchangeScreen extends GlobalGUI {
-    private Image card1_back, card2_back, card3_back, card4_back;
     public boolean checkFrontBack = true;
     JLabel userPoint;
+    private Image card1_back, card2_back, card3_back, card4_back;
+
     ExchangeScreen(String id) {
         super("상점", "src/asset/bg/exchangeImg.png"); //타이틀
 
@@ -43,7 +44,7 @@ public class ExchangeScreen extends GlobalGUI {
         JPanel jp = new JPanel() {
             @Override
             public void paint(Graphics g) {
-                if (checkFrontBack == true) {
+                if (checkFrontBack) {
                     g.drawImage(card1_back, 43, 0, 200, 270, this);
                     g.drawImage(card2_back, 323, 0, 200, 270, this);
                     g.drawImage(card3_back, 605, 0, 200, 270, this);
@@ -58,7 +59,6 @@ public class ExchangeScreen extends GlobalGUI {
         ImageIcon card3_backside = new ImageIcon("src/asset/theme/card_back_3.png");
         ImageIcon card4_backside = new ImageIcon("src/asset/theme/card_back_4.png");
 
-
         card1_back = card1_backside.getImage();
         card2_back = card2_backside.getImage();
         card3_back = card3_backside.getImage();
@@ -67,13 +67,6 @@ public class ExchangeScreen extends GlobalGUI {
 
         jp.setBounds(80, 270, 1200, 300);
         add(jp);
-
-
-        /*bt[0] = new JButton(backBt);
-        bt[1] = new JButton(frontBt);
-
-        bt[0].setBounds(100,200,285,65);
-        bt[1].setBounds(400,200,285,65);*/
 
         JButton bt[] = new JButton[4];
         for (int i = 0; i < 4; i++)
@@ -152,7 +145,7 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 2);
-                            userPoint.setText("$" +String.valueOf(b.getPoint(id)));
+                            userPoint.setText("$" + String.valueOf(b.getPoint(id)));
 
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -177,7 +170,7 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 3);
-                            userPoint.setText("$" +String.valueOf(b.getPoint(id)));
+                            userPoint.setText("$" + String.valueOf(b.getPoint(id)));
 
                         } else {
                             JOptionPane.showMessageDialog(null, "포인트가 부족합니다.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -202,7 +195,7 @@ public class ExchangeScreen extends GlobalGUI {
                     } else if (result == JOptionPane.YES_OPTION) {
                         if (b.getPoint(id) >= 1000) {
                             b.buySkin(id, 4);
-                            userPoint.setText("$" +String.valueOf(b.getPoint(id)));
+                            userPoint.setText("$" + String.valueOf(b.getPoint(id)));
 
 
                         } else {
@@ -213,7 +206,7 @@ public class ExchangeScreen extends GlobalGUI {
 
                     }
                 }
-             
+
             }
         });
         profile_bt.addActionListener(new ActionListener() {
@@ -223,24 +216,6 @@ public class ExchangeScreen extends GlobalGUI {
                 setVisible(false); // 창 안보이게 하기
             }
         });
-
-        /*bt[0].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                checkFrontBack = true;
-                revalidate();
-                repaint();
-            }
-        });
-        bt[1].addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                checkFrontBack = false;
-                revalidate();
-                repaint();
-            }
-        });*/
-
         repaintGUI();
     }
 }

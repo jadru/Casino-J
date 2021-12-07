@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 
 public class SQLiteManager {
 
+    private final static String UNSECURED_CHAR_REGULAR_EXPRESSION = "[^\\p{Alnum}]|select|delete|update|insert|create|alter|drop";
+    static String SQLURL = "jdbc:sqlite:src/database/userdb.db";
+    private final String GET_PLAYER_INFO_CMD = "get_player_info";
     String id;
     String nickname;
     String password;
@@ -16,20 +19,12 @@ public class SQLiteManager {
     int win;
     int lose;
     Connection con = null;
-
-    static String SQLURL = "jdbc:sqlite:src/database/userdb.db";
-
+    private Pattern unsecuredCharPattern;
     public SQLiteManager(String id, String nickname, String password) {
         this.id = id;
         this.nickname = nickname;
         this.password = password;
     }
-
-    private final String GET_PLAYER_INFO_CMD = "get_player_info";
-
-
-    private final static String UNSECURED_CHAR_REGULAR_EXPRESSION = "[^\\p{Alnum}]|select|delete|update|insert|create|alter|drop";
-    private Pattern unsecuredCharPattern;
 
     public void initialize() {
         unsecuredCharPattern = Pattern.compile(UNSECURED_CHAR_REGULAR_EXPRESSION, Pattern.CASE_INSENSITIVE);

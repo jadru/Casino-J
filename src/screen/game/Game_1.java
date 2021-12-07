@@ -1,7 +1,7 @@
 package screen.game;
 
-import screen.ui.MainScreen;
 import global.GlobalGUI;
+import screen.ui.MainScreen;
 import support.SQLiteManager;
 import support.ShuffleCard;
 
@@ -23,25 +23,21 @@ public class Game_1 extends GlobalGUI {
     private static final String COMPUTER_IMG_URL = "src/asset/game1/icons8-bot-96.png";
     private static final String USER_IMG_URL = "src/asset/game1/icons8-test-account-96.png";
     private static final int PADDING = 20;
-
+    static SQLiteManager sql_manager;
+    static JPanel com_card_panel;
+    static JPanel user_card_panel;
+    static JPanel button_panel;
     private static String[][] every_cards;
     private static boolean[] using_cards;
     private static ArrayList<Integer> user_cards_deck;
     private static ArrayList<Integer> com_cards_deck;
-
     private static int usercard_cnt;
     private static int comcard_cnt;
     private static JFrame game;
     private static Random rd = new Random();
-
     private static String user_id = "";
-    static SQLiteManager sql_manager;
-
     JPanel com_profile_panel;
     JPanel user_profile_panel;
-    static JPanel com_card_panel;
-    static JPanel user_card_panel;
-    static JPanel button_panel;
 
     public Game_1(String user_id) {
         super(COMPUTER_NAME, "src/asset/game1/game1_bg.png");
@@ -51,6 +47,140 @@ public class Game_1 extends GlobalGUI {
         setGameGUI();
         startGame();
         repaintGUI();
+    }
+
+    public static void addCardGUI(int pick, JPanel cardPanel) {
+        JButton btn = new JButton();
+        btn.setText(every_cards[pick / 13][pick % 13]);
+        btn.setBackground(Color.WHITE);
+        btn.setPreferredSize(new Dimension(120, 160));
+        btn.setMargin(new Insets(0, 0, 0, 0));
+        btn.setFont(new Font(Font.SERIF, BOLD, 30));
+        btn.setFocusable(false);
+        switch ((pick / 13)) {
+            case 1:
+                btn.setForeground(Color.RED);
+            case 2:
+                btn.setForeground(Color.RED);
+                break;
+            default:
+                btn.setForeground(Color.BLACK);
+        }
+        cardPanel.add(btn);
+    }
+
+    private static void addCardBack(JPanel cardPanel) {
+        JButton btn = new JButton();
+        btn.setFocusable(false);
+        btn.setIcon(new ImageIcon(support.ThemeManager.getCardBackImgURL(user_id)));
+//        btn.addActionListener(new cardActionListener());
+        btn.setBackground(Color.WHITE);
+        btn.setPreferredSize(new Dimension(120, 160));
+        btn.setMargin(new Insets(0, 0, 0, 0));
+        cardPanel.add(btn);
+    }
+
+    public static void resultOut(boolean iswin) {
+        com_card_panel.removeAll();
+        com_card_panel.setBackground(new Color(0, 0, 0, 0));
+        for (int card : com_cards_deck) {
+            addCardGUI(card, com_card_panel);
+        }
+        repaintGUI();
+        String winorlose = "";
+        if (iswin) {
+            winorlose = "WIN! 포인트 100점 적립!";
+            sql_manager.giveRecord(user_id, 1, 0, 100);
+        } else {
+            winorlose = "졌습니다...";
+            sql_manager.giveRecord(user_id, 0, 1, 0);
+        }
+        JLabel label = new JLabel(winorlose);
+        JButton mainButton = new JButton(new ImageIcon("src/asset/btn/main_btn.png"));
+        mainButton.setBorderPainted(false);
+        mainButton.setContentAreaFilled(false);
+        mainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                game.dispose();
+                game.removeAll();
+                new MainScreen(user_id);
+                game.setVisible(false);
+            }
+        });
+
+        label.setPreferredSize(new Dimension(600, 110));
+        mainButton.setPreferredSize(new Dimension(100, 100));
+        button_panel.add(label);
+        button_panel.add(mainButton);
+    }
+
+    public static void addUserCard() {
+        user_cards_deck.add(getCardFromDeck());
+        usercard_cnt++;
+        addCardGUI(user_cards_deck.get(usercard_cnt - 1), user_card_panel);
+        game.revalidate();
+        game.repaint();
+    }
+
+    private static void addComCardRandom() {
+        if (calculatePoint(com_cards_deck, comcard_cnt) <= 21 - 10) {
+            com_cards_deck.add(getCardFromDeck());
+            addCardBack(com_card_panel);
+            comcard_cnt++;
+        } else if (calculatePoint(com_cards_deck, comcard_cnt) < 21 - 3) {
+            if (rd.nextBoolean()) {
+                com_cards_deck.add(getCardFromDeck());
+                addCardBack(com_card_panel);
+                comcard_cnt++;
+            }
+        }
+        if (calculatePoint(com_cards_deck, comcard_cnt) > 21) {
+            resultOut(true);
+        }
+    }
+
+    public static void finishGame() {
+        int compoint = calculatePoint(com_cards_deck, comcard_cnt);
+        int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
+        if (userpoint > 21) {
+            resultOut(false);
+        } else if (compoint > 21) {
+            resultOut(true);
+        } else {
+            if (compoint > userpoint) {
+                resultOut(false);
+            } else {
+                resultOut(true);
+            }
+        }
+    }
+
+    public static int calculatePoint(ArrayList<Integer> list, int cnt) {
+        int getpoint = 0;
+        int hasA = 0;
+
+        for (int i = 0; i < cnt; i++) {
+            int point = list.get(i) % 13;
+            if (point > 9) point = 10;
+            else point++;
+            if (point == 0) hasA++;
+            getpoint += point;
+        }
+
+        if (getpoint > 21) {
+            while (hasA > 0) {
+                getpoint -= 10;
+                hasA--;
+            }
+        }
+        return getpoint;
+    }
+
+    private static void clearAllintButtonPanel() {
+        button_panel.removeAll();
+        button_panel.repaint();
+        button_panel.revalidate();
     }
 
     private void setScreenGUI() {
@@ -152,140 +282,12 @@ public class Game_1 extends GlobalGUI {
         revalidate();
     }
 
-    public static void addCardGUI(int pick, JPanel cardPanel) {
-        JButton btn = new JButton();
-        btn.setText(every_cards[pick / 13][pick % 13]);
-        btn.setBackground(Color.WHITE);
-        btn.setPreferredSize(new Dimension(120, 160));
-        btn.setMargin(new Insets(0, 0, 0, 0));
-        btn.setFont(new Font(Font.SERIF, BOLD, 30));
-        btn.setFocusable(false);
-        switch ((pick / 13)) {
-            case 1:
-                btn.setForeground(Color.RED);
-            case 2:
-                btn.setForeground(Color.RED);
-                break;
-            default:
-                btn.setForeground(Color.BLACK);
-        }
-        cardPanel.add(btn);
-    }
-
-    private static void addCardBack(JPanel cardPanel) {
-        JButton btn = new JButton();
-        btn.setFocusable(false);
-        btn.setIcon(new ImageIcon(support.ThemeManager.getCardBackImgURL(user_id)));
-//        btn.addActionListener(new cardActionListener());
-        btn.setBackground(Color.WHITE);
-        btn.setPreferredSize(new Dimension(120, 160));
-        btn.setMargin(new Insets(0, 0, 0, 0));
-        cardPanel.add(btn);
-    }
-
     public void setAtUsedCard(boolean status, int index) {
         using_cards[index] = status;
     }
 
     public boolean getAtUsedCard(int index) {
         return using_cards[index];
-    }
-
-    public static void resultOut(boolean iswin) {
-        com_card_panel.removeAll();
-        com_card_panel.setBackground(new Color(0, 0, 0, 0));
-        for (int card : com_cards_deck) {
-            addCardGUI(card, com_card_panel);
-        }
-        repaintGUI();
-        String winorlose = "";
-        if (iswin) {
-            winorlose = "WIN! 포인트 100점 적립!";
-            sql_manager.giveRecord(user_id, 1, 0, 100);
-        } else {
-            winorlose = "졌습니다...";
-            sql_manager.giveRecord(user_id, 0, 1, 0);
-        }
-        JLabel label = new JLabel(winorlose);
-        JButton mainButton = new JButton(new ImageIcon("src/asset/btn/main_btn.png"));
-        mainButton.setBorderPainted(false);
-        mainButton.setContentAreaFilled(false);
-        mainButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.dispose();
-                game.removeAll();
-                new MainScreen(user_id);
-                game.setVisible(false);
-            }
-        });
-
-        label.setPreferredSize(new Dimension(600, 110));
-        mainButton.setPreferredSize(new Dimension(100, 100));
-        button_panel.add(label);
-        button_panel.add(mainButton);
-    }
-
-    public static void addUserCard() {
-        user_cards_deck.add(getCardFromDeck());
-        usercard_cnt++;
-        addCardGUI(user_cards_deck.get(usercard_cnt - 1), user_card_panel);
-        game.revalidate();
-        game.repaint();
-    }
-
-    private static void addComCardRandom() {
-        if (calculatePoint(com_cards_deck, comcard_cnt) <= 21 - 10) {
-            com_cards_deck.add(getCardFromDeck());
-            addCardBack(com_card_panel);
-            comcard_cnt++;
-        } else if (calculatePoint(com_cards_deck, comcard_cnt) < 21 - 3) {
-            if (rd.nextBoolean()) {
-                com_cards_deck.add(getCardFromDeck());
-                addCardBack(com_card_panel);
-                comcard_cnt++;
-            }
-        }
-        if (calculatePoint(com_cards_deck, comcard_cnt) > 21) {
-            resultOut(true);
-        }
-    }
-
-    public static void finishGame() {
-        int compoint = calculatePoint(com_cards_deck, comcard_cnt);
-        int userpoint = calculatePoint(user_cards_deck, usercard_cnt);
-        if (userpoint > 21) {
-            resultOut(false);
-        } else if (compoint > 21) {
-            resultOut(true);
-        } else {
-            if (compoint > userpoint) {
-                resultOut(false);
-            } else {
-                resultOut(true);
-            }
-        }
-    }
-
-    public static int calculatePoint(ArrayList<Integer> list, int cnt) {
-        int getpoint = 0;
-        int hasA = 0;
-
-        for (int i = 0; i < cnt; i++) {
-            int point = list.get(i) % 13;
-            if (point > 9) point = 10;
-            else point++;
-            if (point == 0) hasA++;
-            getpoint += point;
-        }
-
-        if (getpoint > 21) {
-            while (hasA > 0) {
-                getpoint -= 10;
-                hasA--;
-            }
-        }
-        return getpoint;
     }
 
     private void setButtonPanel(int point) {
@@ -329,11 +331,5 @@ public class Game_1 extends GlobalGUI {
             }
         });
 
-    }
-
-    private static void clearAllintButtonPanel() {
-        button_panel.removeAll();
-        button_panel.repaint();
-        button_panel.revalidate();
     }
 }

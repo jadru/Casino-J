@@ -1,18 +1,13 @@
 package dialog;
 
-import screen.ui.MainScreen;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InfoDialog extends JDialog {
-    private ImageIcon settingbgImg = new ImageIcon("src/asset/bg/InfoDialog_bg.png");
     JButton okButton = new JButton("확인");
-    static boolean bgCheck = false;
-    static boolean efCheck = false;
-
+    private ImageIcon settingbgImg = new ImageIcon("src/asset/bg/InfoDialog_bg.png");
     private JLabel bg = new JLabel(settingbgImg);
 
     public InfoDialog(JFrame frame, String title) {
@@ -29,11 +24,8 @@ public class InfoDialog extends JDialog {
 
         add(okButton);
 
-
-
         bg.setBounds(0, 0, 844, 400);
         add(bg);
-
 
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -41,7 +33,6 @@ public class InfoDialog extends JDialog {
                 setVisible(false);
             }
         });
-        
 
 
     }

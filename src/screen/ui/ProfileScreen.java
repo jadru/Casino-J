@@ -7,18 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.util.Vector;
 
 public class ProfileScreen extends GlobalGUI {
-    private Image card0_back, card1_back, card2_back, card3_back, card4_back;
-
+    private static String id;
     public boolean checkFrontBack = true;
     JLabel select;
     int userskin;
     SQLiteManager b;
-    private static String id;
 
     ProfileScreen(String id) {
         super("프로필", "src/asset/bg/profileImg.png"); //타이틀
@@ -65,12 +61,6 @@ public class ProfileScreen extends GlobalGUI {
         select = new JLabel(
                 new ImageIcon(
                         "src/asset/ui/select_Img.png"));
-
-        card0_back = card0_backside.getImage();
-        card1_back = card1_backside.getImage();
-        card2_back = card2_backside.getImage();
-        card3_back = card3_backside.getImage();
-        card4_back = card4_backside.getImage();
 
         CardBt[0] = new JButton(card0_backside);
         CardBt[1] = new JButton(card1_backside);
@@ -164,27 +154,28 @@ public class ProfileScreen extends GlobalGUI {
         });
     }
 
-    private void setSkinChange(int index){
+    private void setSkinChange(int index) {
         b.SkinChange(id, index);
         setSelectedText();
     }
-    private void setSelectedText(){
+
+    private void setSelectedText() {
         userskin = b.getSkin(id);
         switch (userskin) {
             case 0:
-            select.setBounds(690, 220, 130, 30);
-            break;
+                select.setBounds(690, 220, 130, 30);
+                break;
             case 1:
-            select.setBounds(840, 220, 130, 30);
-            break;
+                select.setBounds(840, 220, 130, 30);
+                break;
             case 2:
-            select.setBounds(990, 220, 130, 30);
-            break;
+                select.setBounds(990, 220, 130, 30);
+                break;
             case 3:
-            select.setBounds(690, 420, 130, 30);
-            break;
+                select.setBounds(690, 420, 130, 30);
+                break;
             case 4:
-            select.setBounds(840, 420, 130, 30);
+                select.setBounds(840, 420, 130, 30);
         }
         revalidate();
         select.setVisible(true);
