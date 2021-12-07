@@ -41,8 +41,8 @@ public class Game_2 extends GlobalGUI {
     static JPanel user_card_panel;
     static JPanel button_panel;
 
-    static int combat = 0;
-    static int userbat = 0;
+    static int combat;
+    static int userbat;
 
     static int userpoint;
 
@@ -98,6 +98,9 @@ public class Game_2 extends GlobalGUI {
 
         user_profile_img.setHorizontalTextPosition(JLabel.LEFT);
 
+        combat = 0;
+        userbat = 0;
+
         add(com_profile_panel);
         add(user_profile_panel);
         add(com_card_panel);
@@ -125,6 +128,9 @@ public class Game_2 extends GlobalGUI {
 
         addCardGUI(usercard, user_card_panel);
         addCardBack(com_card_panel);
+
+        combat += 10;
+        userbat += 10;
 
         repaintGUI();
     }
@@ -256,11 +262,7 @@ public class Game_2 extends GlobalGUI {
         if(comcard % 13 > usercard % 13){
             resultOut(false);
         }else if (comcard % 13 == usercard % 13){
-            if(comcard / 13 > usercard / 13){
-                resultOut(false);
-            }else{
-                resultOut(true);
-            }
+            resultOut(comcard / 13 <= usercard / 13);
         }else{
             resultOut(true);
         }
