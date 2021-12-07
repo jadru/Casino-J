@@ -293,14 +293,24 @@ public class Game_1 extends GlobalGUI {
     private void setButtonPanel(int point) {
 
         JLabel header = new JLabel("현재 점수 " + point + "점입니다. 카드를 추가하시겠어요?");
-        JButton addcard_btn = new JButton("한장 더");
-        JButton lose_btn = new JButton("기권 패");
-        JButton finish_btn = new JButton("한판 승");
+
+        JButton addcard_btn = new JButton(new ImageIcon("src/asset/game1/icon_card.png"));
+        JButton lose_btn = new JButton(new ImageIcon("src/asset/game1/icon_lose.png"));
+        JButton finish_btn = new JButton(new ImageIcon("src/asset/game1/icon_play.png"));
 
         addcard_btn.setPreferredSize(new Dimension(110, 110));
         lose_btn.setPreferredSize(new Dimension(110, 110));
         finish_btn.setPreferredSize(new Dimension(110, 110));
         header.setPreferredSize(new Dimension(600, 110));
+
+        addcard_btn.setBorderPainted(false);
+        addcard_btn.setContentAreaFilled(false);
+
+        finish_btn.setBorderPainted(false);
+        finish_btn.setContentAreaFilled(false);
+
+        lose_btn.setBorderPainted(false);
+        lose_btn.setContentAreaFilled(false);
 
         button_panel.add(header);
         button_panel.add(lose_btn);

@@ -145,7 +145,6 @@ public class Game_2 extends GlobalGUI {
         user_profile_panel.setBackground(new Color(0, 0, 0, 0));
         com_card_panel.setBackground(new Color(0, 0, 0, 0));
         user_card_panel.setBackground(new Color(0, 0, 0, 0));
-        button_panel.setBackground(new Color(1f, 1f, 1f, .5f));
 
         JLabel com_profile_img = new JLabel(COMPUTER_NAME,
                 new ImageIcon(COMPUTER_IMG_URL),
@@ -203,10 +202,21 @@ public class Game_2 extends GlobalGUI {
     private void setButtonPanel() {
 
         JLabel header = new JLabel("배팅하세요! 컴퓨터 : $" + combat + "배팅, " + sql_manager.getNickname(user_id) + "님 $" + userbat + "배팅");
-        JButton addpoint_btn = new JButton("+");
+        JButton addpoint_btn = new JButton(new ImageIcon("src/asset/game1/icon_money.png"));
         JTextField pointfield = new JTextField("10");
-        JButton lose = new JButton("기권 패");
-        JButton finish_btn = new JButton("한판 승");
+        JButton lose = new JButton(new ImageIcon("src/asset/game1/icon_lose.png"));
+        JButton finish_btn = new JButton(new ImageIcon("src/asset/game1/icon_play.png"));
+
+        button_panel.setBackground(new Color(1f, 1f, 1f, .5f));
+
+        addpoint_btn.setBorderPainted(false);
+        addpoint_btn.setContentAreaFilled(false);
+
+        finish_btn.setBorderPainted(false);
+        finish_btn.setContentAreaFilled(false);
+
+        lose.setBorderPainted(false);
+        lose.setContentAreaFilled(false);
 
         addpoint_btn.setPreferredSize(new Dimension(110, 110));
         pointfield.setPreferredSize(new Dimension(210, 110));
